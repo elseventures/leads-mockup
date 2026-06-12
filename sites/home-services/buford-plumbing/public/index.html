@@ -1,0 +1,578 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Buford Plumbing Company — Plumbing &amp; Mechanical Contractors, Jackson MS — Since the 1960s</title>
+  <meta name="description" content="Buford Plumbing Company has kept Greater Jackson's water running for over 60 years. Licensed mechanical contractors. Water heaters, sewer &amp; drain, leak repair, gas lines, heating &amp; air. On call 24 hours a day. (601) 372-7676.">
+  <meta property="og:title" content="Buford Plumbing Company — Jackson, MS">
+  <meta property="og:description" content="Sixty years of stopping leaks in Greater Jackson. On call 24 hours a day.">
+  <meta name="theme-color" content="#142420">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,300..900,0..100,0..1;1,9..144,300..900,0..100,0..1&family=Libre+Franklin:ital,wght@0,300..800;1,300..800&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23142420'/%3E%3Ccircle cx='16' cy='16' r='9' fill='none' stroke='%23c9824e' stroke-width='2.5'/%3E%3Ccircle cx='16' cy='16' r='3.5' fill='%23c9824e'/%3E%3C/svg%3E">
+</head>
+<body>
+
+  <!-- ===== shared svg defs ===== -->
+  <svg class="svg-defs" aria-hidden="true" focusable="false">
+    <defs>
+      <linearGradient id="copperGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#d9905a"/>
+        <stop offset=".5" stop-color="#b16a3d"/>
+        <stop offset="1" stop-color="#8a4a26"/>
+      </linearGradient>
+      <linearGradient id="copperGradH" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="#d9905a"/>
+        <stop offset=".5" stop-color="#b16a3d"/>
+        <stop offset="1" stop-color="#8a4a26"/>
+      </linearGradient>
+      <linearGradient id="waterGrad" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#7fb5a8"/>
+        <stop offset="1" stop-color="#3c6b5e"/>
+      </linearGradient>
+      <filter id="grain">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch"/>
+        <feColorMatrix type="saturate" values="0"/>
+        <feComponentTransfer><feFuncA type="linear" slope="0.06"/></feComponentTransfer>
+        <feComposite operator="over" in2="SourceGraphic"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- ===== paper grain overlay ===== -->
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- ===== copper pipe scroll rail (desktop) ===== -->
+  <div class="pipe-rail" aria-hidden="true">
+    <div class="pipe-rail__valve">
+      <svg viewBox="0 0 40 40">
+        <circle cx="20" cy="20" r="17" fill="none" stroke="url(#copperGradH)" stroke-width="4"/>
+        <path d="M20 5 V35 M5 20 H35 M9.4 9.4 L30.6 30.6 M30.6 9.4 L9.4 30.6" stroke="url(#copperGradH)" stroke-width="3.4" stroke-linecap="round"/>
+        <circle cx="20" cy="20" r="5" fill="#8a4a26"/>
+      </svg>
+    </div>
+    <div class="pipe-rail__tube">
+      <div class="pipe-rail__water"></div>
+    </div>
+    <div class="pipe-rail__joints"></div>
+  </div>
+
+  <!-- ===== pressure gauge scroll indicator ===== -->
+  <button class="gauge" id="gauge" aria-label="Scroll progress gauge — click to return to top" title="Back to top">
+    <svg viewBox="0 0 100 100">
+      <circle cx="50" cy="50" r="47" fill="#f8f3e7" stroke="url(#copperGradH)" stroke-width="5"/>
+      <g class="gauge__ticks" stroke="#142420" stroke-width="2">
+        <line x1="50" y1="12" x2="50" y2="20" transform="rotate(-120 50 50)"/>
+        <line x1="50" y1="12" x2="50" y2="20" transform="rotate(-80 50 50)"/>
+        <line x1="50" y1="12" x2="50" y2="20" transform="rotate(-40 50 50)"/>
+        <line x1="50" y1="12" x2="50" y2="20" transform="rotate(0 50 50)"/>
+        <line x1="50" y1="12" x2="50" y2="20" transform="rotate(40 50 50)"/>
+        <line x1="50" y1="12" x2="50" y2="20" transform="rotate(80 50 50)"/>
+        <line x1="50" y1="12" x2="50" y2="20" transform="rotate(120 50 50)" stroke="#b8401f" stroke-width="3"/>
+      </g>
+      <text x="50" y="40" class="gauge__label">PSI</text>
+      <text x="50" y="78" class="gauge__value" id="gaugeValue">0</text>
+      <g class="gauge__needle" id="gaugeNeedle">
+        <line x1="50" y1="50" x2="50" y2="16" stroke="#b8401f" stroke-width="3" stroke-linecap="round"/>
+        <circle cx="50" cy="50" r="5" fill="#142420"/>
+      </g>
+    </svg>
+    <span class="gauge__steam" aria-hidden="true"></span>
+  </button>
+
+  <!-- ===== header ===== -->
+  <header class="site-head" id="top">
+    <div class="topline">
+      <p class="topline__left"><span class="blink-dot" aria-hidden="true"></span> 24-HOUR EMERGENCY SERVICE</p>
+      <p class="topline__right">GREATER JACKSON, MISSISSIPPI</p>
+    </div>
+    <div class="nav-wrap">
+      <nav class="nav" aria-label="Main">
+        <a class="nav__brand" href="#top" aria-label="Buford Plumbing Company — home">
+          <svg class="nav__mark" viewBox="0 0 44 44" aria-hidden="true">
+            <circle cx="22" cy="22" r="20" fill="none" stroke="url(#copperGradH)" stroke-width="3"/>
+            <circle cx="22" cy="22" r="12.5" fill="none" stroke="url(#copperGradH)" stroke-width="2"/>
+            <g fill="#8a4a26">
+              <circle cx="22" cy="5.5" r="2"/><circle cx="38.5" cy="22" r="2"/>
+              <circle cx="22" cy="38.5" r="2"/><circle cx="5.5" cy="22" r="2"/>
+              <circle cx="33.7" cy="10.3" r="2"/><circle cx="33.7" cy="33.7" r="2"/>
+              <circle cx="10.3" cy="33.7" r="2"/><circle cx="10.3" cy="10.3" r="2"/>
+            </g>
+            <circle cx="22" cy="22" r="6" fill="url(#copperGradH)"/>
+          </svg>
+          <span class="nav__name">Buford<em>Plumbing Co.</em></span>
+        </a>
+        <ul class="nav__links">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#standard">The Standard</a></li>
+          <li><a href="#process">How It Works</a></li>
+          <li><a href="#word">Word of Mouth</a></li>
+          <li><a href="#area">Service Area</a></li>
+        </ul>
+        <a class="nav__phone btn btn--copper" href="tel:+16013727676">
+          <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.7 1.5c.5-.5 1.3-.4 1.7.1l1.5 2c.4.5.3 1.2-.2 1.6l-.9.8c.5 1.2 1.9 2.6 3.1 3.1l.8-.9c.4-.5 1.1-.6 1.6-.2l2 1.5c.5.4.6 1.2.1 1.7l-1 1c-.5.5-1.3.7-2 .5-2-.6-3.9-1.8-5.5-3.4S2.1 5.7 1.5 3.7c-.2-.7 0-1.5.5-2l1.7-.2z" fill="currentColor"/></svg>
+          (601) 372-7676
+        </a>
+        <button class="nav__burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ===== mobile menu ===== -->
+  <div class="mobile-menu" id="mobileMenu" aria-hidden="true">
+    <ul>
+      <li><a href="#services"><span class="mobile-menu__no">01</span>Services</a></li>
+      <li><a href="#standard"><span class="mobile-menu__no">02</span>The Standard</a></li>
+      <li><a href="#process"><span class="mobile-menu__no">03</span>How It Works</a></li>
+      <li><a href="#word"><span class="mobile-menu__no">04</span>Word of Mouth</a></li>
+      <li><a href="#area"><span class="mobile-menu__no">05</span>Service Area</a></li>
+    </ul>
+    <a class="btn btn--copper mobile-menu__call" href="tel:+16013727676">Call (601) 372-7676</a>
+    <p class="mobile-menu__foot">Jackson, Mississippi — since the 1960s</p>
+  </div>
+
+  <main>
+    <!-- ===== hero ===== -->
+    <section class="hero">
+      <svg class="hero__schematic" viewBox="0 0 700 700" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+        <g fill="none" stroke="#142420" stroke-width="2">
+          <path d="M80 0 V180 Q80 200 100 200 H300 Q320 200 320 220 V420"/>
+          <path d="M460 0 V120 Q460 140 480 140 H660"/>
+          <path d="M320 420 Q320 440 340 440 H560 Q580 440 580 460 V700"/>
+          <path d="M140 700 V560 Q140 540 160 540 H300"/>
+          <circle cx="80" cy="100" r="14"/>
+          <path d="M66 100 l-12 -10 v20 z M94 100 l12 -10 v20 z"/>
+          <circle cx="580" cy="560" r="14"/>
+          <path d="M580 546 l-10 -12 h20 z M580 574 l-10 12 h20 z"/>
+          <circle cx="460" cy="60" r="10"/>
+          <rect x="290" y="310" width="60" height="26" rx="4"/>
+          <circle cx="220" cy="200" r="6"/>
+          <circle cx="320" cy="300" r="6"/>
+        </g>
+      </svg>
+
+      <div class="hero__inner">
+        <div class="hero__copy">
+          <p class="hero__eyebrow reveal-line"><span>Jackson, Mississippi</span><i class="pipe-dot"></i><span>Plumbing &amp; Mechanical</span><i class="pipe-dot"></i><span>Since the 1960s</span></p>
+          <h1 class="hero__title">
+            <span class="hero__line"><span>Water has</span></span>
+            <span class="hero__line"><span>rules<em class="hero__period">.</em></span></span>
+            <span class="hero__line hero__line--accent"><span><em>We enforce them.</em></span></span>
+          </h1>
+          <p class="hero__sub">Buford Plumbing has kept Greater Jackson's water running, draining, and behaving for over sixty years. Licensed mechanical contractors — on call <strong>24 hours a day</strong>.</p>
+          <div class="hero__cta">
+            <a class="btn btn--copper btn--lg" href="tel:+16013727676">
+              <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.7 1.5c.5-.5 1.3-.4 1.7.1l1.5 2c.4.5.3 1.2-.2 1.6l-.9.8c.5 1.2 1.9 2.6 3.1 3.1l.8-.9c.4-.5 1.1-.6 1.6-.2l2 1.5c.5.4.6 1.2.1 1.7l-1 1c-.5.5-1.3.7-2 .5-2-.6-3.9-1.8-5.5-3.4S2.1 5.7 1.5 3.7c-.2-.7 0-1.5.5-2l1.7-.2z" fill="currentColor"/></svg>
+              Call the shop
+            </a>
+            <a class="btn btn--ghost btn--lg" href="#services">See what we fix</a>
+          </div>
+          <div class="hero__drip" aria-hidden="true">
+            <svg viewBox="0 0 90 130">
+              <rect x="30" y="0" width="30" height="44" fill="url(#copperGradH)" rx="2"/>
+              <rect x="24" y="40" width="42" height="10" rx="3" fill="#8a4a26"/>
+              <rect x="24" y="2" width="42" height="8" rx="3" fill="#8a4a26"/>
+              <ellipse class="drip__drop" cx="45" cy="56" rx="5" ry="7" fill="url(#waterGrad)"/>
+              <ellipse class="drip__ripple" cx="45" cy="120" rx="4" ry="1.4" fill="none" stroke="#4e7d6d" stroke-width="1.5"/>
+              <ellipse class="drip__ripple drip__ripple--2" cx="45" cy="120" rx="4" ry="1.4" fill="none" stroke="#4e7d6d" stroke-width="1"/>
+            </svg>
+            <p class="hero__drip-note">that's $96 a year,<br>by the way</p>
+          </div>
+        </div>
+
+        <div class="hero__badge-wrap">
+          <div class="hero__badge" id="heroBadge">
+            <svg viewBox="0 0 220 220">
+              <defs>
+                <path id="badgeCircle" d="M110,110 m-86,0 a86,86 0 1,1 172,0 a86,86 0 1,1 -172,0"/>
+              </defs>
+              <circle cx="110" cy="110" r="104" fill="#f8f3e7" stroke="#142420" stroke-width="2"/>
+              <circle cx="110" cy="110" r="62" fill="none" stroke="url(#copperGradH)" stroke-width="3"/>
+              <g class="hero__badge-ring">
+                <text class="badge-ring-text">
+                  <textPath href="#badgeCircle">BUFORD PLUMBING COMPANY · JACKSON MISSISSIPPI · AT YOUR SERVICE ·</textPath>
+                </text>
+              </g>
+              <g fill="#8a4a26">
+                <circle cx="110" cy="55" r="3.4"/><circle cx="165" cy="110" r="3.4"/>
+                <circle cx="110" cy="165" r="3.4"/><circle cx="55" cy="110" r="3.4"/>
+                <circle cx="148.9" cy="71.1" r="3.4"/><circle cx="148.9" cy="148.9" r="3.4"/>
+                <circle cx="71.1" cy="148.9" r="3.4"/><circle cx="71.1" cy="71.1" r="3.4"/>
+              </g>
+              <text x="110" y="103" class="badge-est">EST.</text>
+              <text x="110" y="136" class="badge-year">60<tspan class="badge-plus">+</tspan></text>
+              <text x="110" y="152" class="badge-sub">YEARS</text>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__scrollcue" aria-hidden="true">
+        <span>scroll</span>
+        <div class="hero__scrollcue-pipe"></div>
+      </div>
+    </section>
+
+    <!-- ===== ticker ===== -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__track">
+        <span>Water Heaters</span><i>✚</i><span>Sewer &amp; Drain</span><i>✚</i><span>Leak Repair</span><i>✚</i><span>Gas Lines</span><i>✚</i><span>Heating &amp; Air</span><i>✚</i><span>Fixtures &amp; Repipes</span><i>✚</i><span>24-Hour Emergency</span><i>✚</i>
+        <span>Water Heaters</span><i>✚</i><span>Sewer &amp; Drain</span><i>✚</i><span>Leak Repair</span><i>✚</i><span>Gas Lines</span><i>✚</i><span>Heating &amp; Air</span><i>✚</i><span>Fixtures &amp; Repipes</span><i>✚</i><span>24-Hour Emergency</span><i>✚</i>
+      </div>
+    </div>
+
+    <!-- ===== services ===== -->
+    <section class="services section" id="services">
+      <header class="section__head reveal">
+        <p class="section__tag">SVC — INDEX</p>
+        <h2 class="section__title">If water, gas, or air<br>moves through it, <em>we work on it.</em></h2>
+      </header>
+      <div class="services__grid">
+
+        <article class="svc-card reveal" style="--d:0">
+          <div class="svc-card__top">
+            <span class="svc-card__no">SVC / 01</span>
+            <span class="svc-card__chip">SAME DAY</span>
+          </div>
+          <svg class="svc-card__icon icon-heater" viewBox="0 0 64 64" aria-hidden="true">
+            <rect x="18" y="6" width="28" height="42" rx="6" fill="none" stroke="currentColor" stroke-width="2.5"/>
+            <path d="M24 6 V2 M40 6 V2" stroke="currentColor" stroke-width="2.5"/>
+            <path d="M26 48 v8 M38 48 v8" stroke="currentColor" stroke-width="2.5"/>
+            <path class="icon-heater__flame" d="M32 38c-4-3-5-7-1.5-11 .3 2 1.2 3 2.7 3.6-1-3 .2-5.4 2.8-7.6-.4 3.4 2.2 4.5 2 8-1.5 5-4 6-6 7z" fill="currentColor" stroke="none"/>
+            <path d="M22 14 h8" stroke="currentColor" stroke-width="2" opacity=".5"/>
+          </svg>
+          <h3>Water Heaters</h3>
+          <p>Repair, replacement, tank or tankless. Cold showers end the day you call — most swaps done before supper.</p>
+        </article>
+
+        <article class="svc-card reveal" style="--d:1">
+          <div class="svc-card__top">
+            <span class="svc-card__no">SVC / 02</span>
+            <span class="svc-card__chip svc-card__chip--hot">24 HR</span>
+          </div>
+          <svg class="svc-card__icon icon-drain" viewBox="0 0 64 64" aria-hidden="true">
+            <path class="icon-drain__spiral" d="M32 32 m0 -2 a2 2 0 1 1 -2 2 a6 6 0 1 0 6 -6 a12 12 0 1 0 12 12 a18 18 0 1 1 -18 -18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <circle cx="32" cy="32" r="27" fill="none" stroke="currentColor" stroke-width="2.5" stroke-dasharray="4 5"/>
+          </svg>
+          <h3>Sewer &amp; Drain</h3>
+          <p>Clogs, roots, collapsed lines. We clear it, camera it, and tell you the truth about what we found down there.</p>
+        </article>
+
+        <article class="svc-card reveal" style="--d:2">
+          <div class="svc-card__top">
+            <span class="svc-card__no">SVC / 03</span>
+            <span class="svc-card__chip svc-card__chip--hot">24 HR</span>
+          </div>
+          <svg class="svc-card__icon icon-leak" viewBox="0 0 64 64" aria-hidden="true">
+            <path d="M6 26 h18 M40 26 h18" stroke="currentColor" stroke-width="2.5"/>
+            <path d="M6 20 v12 M58 20 v12 M24 18 v16 M40 18 v16" stroke="currentColor" stroke-width="2.5"/>
+            <path class="icon-leak__drop" d="M32 34c-4.2-4.6-4.2-8.2 0-12 4.2 3.8 4.2 7.4 0 12z" fill="currentColor" stroke="none" transform="translate(0,14)"/>
+          </svg>
+          <h3>Leak Repair</h3>
+          <p>Slab leaks, supply lines, mystery stains on the ceiling. We find it fast and fix it once.</p>
+        </article>
+
+        <article class="svc-card reveal" style="--d:3">
+          <div class="svc-card__top">
+            <span class="svc-card__no">SVC / 04</span>
+            <span class="svc-card__chip">LICENSED</span>
+          </div>
+          <svg class="svc-card__icon icon-gas" viewBox="0 0 64 64" aria-hidden="true">
+            <path d="M4 40 h20 a6 6 0 0 0 6 -6 v-8 a6 6 0 0 1 6 -6 h24" fill="none" stroke="currentColor" stroke-width="2.5"/>
+            <path d="M10 34 v12 M52 14 v12" stroke="currentColor" stroke-width="2.5"/>
+            <path class="icon-gas__flame" d="M46 52c-5-3.6-6.2-8.6-1.8-13.6.4 2.4 1.5 3.7 3.3 4.4-1.2-3.7.3-6.6 3.4-9.3-.5 4.2 2.8 5.5 2.5 9.9-.6 4.4-3.6 7-7.4 8.6z" fill="currentColor" stroke="none"/>
+          </svg>
+          <h3>Gas Lines</h3>
+          <p>Installation, repair, and leak testing — done by the book, because gas work is not a hobby.</p>
+        </article>
+
+        <article class="svc-card reveal" style="--d:4">
+          <div class="svc-card__top">
+            <span class="svc-card__no">SVC / 05</span>
+            <span class="svc-card__chip">HEAT + COOL</span>
+          </div>
+          <svg class="svc-card__icon icon-hvac" viewBox="0 0 64 64" aria-hidden="true">
+            <circle cx="32" cy="32" r="26" fill="none" stroke="currentColor" stroke-width="2.5"/>
+            <g class="icon-hvac__fan">
+              <path d="M32 32 C 26 20, 38 14, 34 8 C 46 14, 40 26, 32 32 Z" fill="currentColor"/>
+              <path d="M32 32 C 44 38, 50 26, 56 30 C 50 42, 38 36, 32 32 Z" fill="currentColor"/>
+              <path d="M32 32 C 26 44, 14 38, 10 44 C 16 32, 28 36, 32 32 Z" fill="currentColor" transform="rotate(14 32 32)"/>
+            </g>
+            <circle cx="32" cy="32" r="4" fill="currentColor"/>
+          </svg>
+          <h3>Heating &amp; Air</h3>
+          <p>AC repair and replacement, heating, ductwork, ventilation. One number for the whole mechanical room.</p>
+        </article>
+
+        <article class="svc-card reveal" style="--d:5">
+          <div class="svc-card__top">
+            <span class="svc-card__no">SVC / 06</span>
+            <span class="svc-card__chip">REMODEL</span>
+          </div>
+          <svg class="svc-card__icon icon-faucet" viewBox="0 0 64 64" aria-hidden="true">
+            <path d="M14 30 h14 v-8 a10 10 0 0 1 10 -10 h6" fill="none" stroke="currentColor" stroke-width="2.5"/>
+            <path d="M40 8 v8 M14 24 v12" stroke="currentColor" stroke-width="2.5"/>
+            <rect x="10" y="28" width="8" height="4" fill="currentColor"/>
+            <path d="M28 30 h8 v6 h-8 z" fill="none" stroke="currentColor" stroke-width="2.5"/>
+            <path class="icon-faucet__drop" d="M32 46c-3.4-3.8-3.4-6.6 0-9.6 3.4 3 3.4 5.8 0 9.6z" fill="currentColor" stroke="none"/>
+            <path d="M22 56 h20" stroke="currentColor" stroke-width="2.5" stroke-dasharray="3 4"/>
+          </svg>
+          <h3>Fixtures &amp; Repipes</h3>
+          <p>Faucets, toilets, full repipes. New construction or a house older than we are — we've piped both.</p>
+        </article>
+
+      </div>
+      <p class="services__foot reveal">Not sure which one you need? <a href="tel:+16013727676">Call and describe the noise.</a> We speak fluent “weird sound under the house.”</p>
+    </section>
+
+    <!-- ===== heritage / the standard ===== -->
+    <section class="standard section section--dark" id="standard">
+      <div class="standard__inner">
+        <div class="standard__left reveal">
+          <p class="section__tag section__tag--light">EST. — THE 1960s</p>
+          <h2 class="standard__quote">Three words have been painted on every truck we've ever owned: <em>“At&nbsp;Your&nbsp;Service.”</em></h2>
+        </div>
+        <div class="standard__right">
+          <p class="reveal">Plumbing companies come and go. Buford Plumbing has answered the same phone number in Jackson for over sixty years — through floods, freezes, and every August the Delta could throw at a compressor.</p>
+          <p class="reveal">We're licensed mechanical contractors, which is a long way of saying: water, gas, heat, and air, handled by people who've done it for decades and trained the next crew to do it right.</p>
+          <div class="standard__stats">
+            <div class="stat reveal" style="--d:0">
+              <span class="stat__num"><span class="count" data-count="60">0</span>+</span>
+              <span class="stat__label">years on the job in Greater Jackson</span>
+            </div>
+            <div class="stat reveal" style="--d:1">
+              <span class="stat__num">24<span class="stat__sep">/</span>7</span>
+              <span class="stat__label">emergency line, answered by a human</span>
+            </div>
+            <div class="stat reveal" style="--d:2">
+              <span class="stat__num"><span class="count" data-count="1">0</span></span>
+              <span class="stat__label">phone call to get it fixed</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="standard__years" aria-hidden="true">
+        <span>'60s</span><span>'70s</span><span>'80s</span><span>'90s</span><span>'00s</span><span>'10s</span><span>'20s</span><span class="standard__now">TODAY</span>
+      </div>
+    </section>
+
+    <!-- ===== process ===== -->
+    <section class="process section" id="process">
+      <header class="section__head reveal">
+        <p class="section__tag">PROCEDURE — STANDARD</p>
+        <h2 class="section__title">No mystery, no runaround.<br><em>Here's exactly how it goes.</em></h2>
+      </header>
+      <ol class="process__steps">
+        <li class="step reveal" style="--d:0">
+          <span class="step__no">01</span>
+          <h3>You call the shop</h3>
+          <p>Day or 2&nbsp;a.m. — a person answers. Tell us what's leaking, banging, or not blowing cold.</p>
+        </li>
+        <li class="step reveal" style="--d:1">
+          <span class="step__no">02</span>
+          <h3>We show up ready</h3>
+          <p>Trucks stocked with the parts that actually fail. Most jobs are fixed on the first visit.</p>
+        </li>
+        <li class="step reveal" style="--d:2">
+          <span class="step__no">03</span>
+          <h3>Straight price first</h3>
+          <p>You hear the number before we pick up a wrench. No “while we're in here” surprises.</p>
+        </li>
+        <li class="step reveal" style="--d:3">
+          <span class="step__no">04</span>
+          <h3>Fixed. Tested. Clean.</h3>
+          <p>We run it, we prove it, and we leave the place the way we found it — minus the problem.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ===== word of mouth ===== -->
+    <section class="word section" id="word">
+      <header class="section__head reveal">
+        <p class="section__tag">FILE — COMPLETED ORDERS</p>
+        <h2 class="section__title">Sixty years of word of mouth.<br><em>Pulled from the job file.</em></h2>
+      </header>
+      <div class="word__grid">
+        <figure class="ticket reveal" style="--d:0;--tilt:-1.2deg">
+          <div class="ticket__head">
+            <span>WORK ORDER</span><span>№ 4,816</span>
+          </div>
+          <blockquote>“Water heater died on a Friday night. They had hot water back by Saturday lunch. Didn't try to sell me a thing I didn't need.”</blockquote>
+          <figcaption>— Homeowner, Belhaven</figcaption>
+          <span class="ticket__stamp" aria-hidden="true">COMPLETED</span>
+        </figure>
+        <figure class="ticket reveal" style="--d:1;--tilt:0.8deg">
+          <div class="ticket__head">
+            <span>WORK ORDER</span><span>№ 5,203</span>
+          </div>
+          <blockquote>“Third plumber I called. First one to find the actual leak. It was under the slab, and the price he quoted was the price I paid.”</blockquote>
+          <figcaption>— Homeowner, Clinton</figcaption>
+          <span class="ticket__stamp" aria-hidden="true">COMPLETED</span>
+        </figure>
+        <figure class="ticket reveal" style="--d:2;--tilt:-0.6deg">
+          <div class="ticket__head">
+            <span>WORK ORDER</span><span>№ 5,581</span>
+          </div>
+          <blockquote>“They've done our restaurant's plumbing and AC for years. When your kitchen floods at 6 a.m., you learn who actually picks up the phone.”</blockquote>
+          <figcaption>— Restaurant owner, Fondren</figcaption>
+          <span class="ticket__stamp" aria-hidden="true">COMPLETED</span>
+        </figure>
+      </div>
+      <p class="word__note reveal">Sample testimonials for mockup purposes — to be replaced with the real thing. There are sixty years of it.</p>
+    </section>
+
+    <!-- ===== service area ===== -->
+    <section class="area section" id="area">
+      <div class="area__inner">
+        <div class="area__copy reveal">
+          <p class="section__tag">COVERAGE — METRO</p>
+          <h2 class="section__title">If you can see the<br>Jackson skyline, <em>we'll come.</em></h2>
+          <ul class="area__list">
+            <li>Jackson</li><li>Madison</li><li>Ridgeland</li><li>Clinton</li>
+            <li>Brandon</li><li>Flowood</li><li>Pearl</li><li>Byram</li>
+          </ul>
+          <p class="area__more">…and everywhere in between. Outside the loop? Call anyway — we've driven farther for less.</p>
+        </div>
+        <div class="area__map reveal">
+          <svg viewBox="0 0 600 540" role="img" aria-label="Stylized map of the Greater Jackson, Mississippi metro area">
+            <path class="map__river" d="M430 20 C 410 90, 370 150, 365 230 C 360 300, 330 330, 322 380 C 314 430, 305 470, 300 535" fill="none"/>
+            <ellipse class="map__lake" cx="438" cy="110" rx="52" ry="30"/>
+            <text x="438" y="74" class="map__water-label">ROSS BARNETT RES.</text>
+            <path class="map__road" d="M298 15 C 295 120, 300 220, 285 320 C 275 390, 272 450, 268 530"/>
+            <text x="312" y="48" class="map__road-label">I-55</text>
+            <path class="map__road" d="M15 338 C 110 332, 200 326, 290 322 C 390 318, 490 308, 585 302"/>
+            <text x="48" y="324" class="map__road-label">I-20</text>
+            <g class="map__city map__city--hq" style="--d:0" transform="translate(282,322)">
+              <circle class="map__ping" r="10"/><circle class="map__dot" r="7"/>
+              <text x="-14" y="26" class="map__label">JACKSON</text>
+              <text x="-14" y="40" class="map__label-sub">HOME BASE</text>
+            </g>
+            <g class="map__city" style="--d:1" transform="translate(330,92)">
+              <circle class="map__ping" r="8"/><circle class="map__dot" r="5"/>
+              <text x="12" y="4" class="map__label">MADISON</text>
+            </g>
+            <g class="map__city" style="--d:2" transform="translate(305,170)">
+              <circle class="map__ping" r="8"/><circle class="map__dot" r="5"/>
+              <text x="12" y="4" class="map__label">RIDGELAND</text>
+            </g>
+            <g class="map__city" style="--d:3" transform="translate(140,300)">
+              <circle class="map__ping" r="8"/><circle class="map__dot" r="5"/>
+              <text x="-8" y="-12" class="map__label">CLINTON</text>
+            </g>
+            <g class="map__city" style="--d:4" transform="translate(470,308)">
+              <circle class="map__ping" r="8"/><circle class="map__dot" r="5"/>
+              <text x="12" y="4" class="map__label">BRANDON</text>
+            </g>
+            <g class="map__city" style="--d:5" transform="translate(372,292)">
+              <circle class="map__ping" r="8"/><circle class="map__dot" r="5"/>
+              <text x="10" y="-8" class="map__label">FLOWOOD</text>
+            </g>
+            <g class="map__city" style="--d:6" transform="translate(352,360)">
+              <circle class="map__ping" r="8"/><circle class="map__dot" r="5"/>
+              <text x="12" y="14" class="map__label">PEARL</text>
+            </g>
+            <g class="map__city" style="--d:7" transform="translate(262,462)">
+              <circle class="map__ping" r="8"/><circle class="map__dot" r="5"/>
+              <text x="14" y="4" class="map__label">BYRAM</text>
+            </g>
+            <g class="map__compass" transform="translate(545,460)">
+              <circle r="22" fill="none"/>
+              <path d="M0 -14 L5 8 L0 4 L-5 8 Z"/>
+              <text y="-28">N</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== emergency cta ===== -->
+    <section class="emergency section--dark" id="contact">
+      <div class="emergency__inner">
+        <p class="section__tag section__tag--light reveal">EMERGENCY — LINE OPEN</p>
+        <h2 class="emergency__title">
+          <span class="reveal" style="--d:0">Burst pipe at 2 a.m.?</span>
+          <span class="reveal emergency__title-em" style="--d:1"><em>That's what the night crew is for.</em></span>
+        </h2>
+        <a class="emergency__phone reveal" style="--d:2" href="tel:+16013727676">
+          <span class="emergency__phone-ring" aria-hidden="true"></span>
+          (601) 372-7676
+        </a>
+        <p class="emergency__small reveal" style="--d:3">Answered by a human. 24 hours a day, 365 days a year.</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== footer ===== -->
+  <footer class="footer">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <svg class="footer__mark" viewBox="0 0 44 44" aria-hidden="true">
+          <circle cx="22" cy="22" r="20" fill="none" stroke="url(#copperGradH)" stroke-width="3"/>
+          <circle cx="22" cy="22" r="12.5" fill="none" stroke="url(#copperGradH)" stroke-width="2"/>
+          <circle cx="22" cy="22" r="6" fill="url(#copperGradH)"/>
+        </svg>
+        <p class="footer__name">Buford Plumbing Company, Inc.</p>
+        <p class="footer__tag">We are at your service. Since the 1960s.</p>
+      </div>
+      <div class="footer__col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+16013727676">(601) 372-7676</a></li>
+          <li><a href="mailto:info@bufordplumbing.net">info@bufordplumbing.net</a></li>
+          <li>P.O. Box 8601<br>Jackson, MS 39284</li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Water Heaters</a></li>
+          <li><a href="#services">Sewer &amp; Drain</a></li>
+          <li><a href="#services">Leak Repair</a></li>
+          <li><a href="#services">Gas Lines</a></li>
+          <li><a href="#services">Heating &amp; Air</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>Hours</h4>
+        <ul>
+          <li>Emergencies — 24/7</li>
+          <li>Office — Mon–Fri</li>
+          <li>Greater Jackson Metro</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__legal">
+      <p>© <span id="year">2026</span> Buford Plumbing Company, Inc. — Licensed &amp; Insured Mechanical Contractors, Jackson, MS</p>
+      <p class="footer__legal-right">MS MECHANICAL CONTRACTOR · DESIGN MOCKUP</p>
+    </div>
+    <div class="footer__water" aria-hidden="true">
+      <svg class="footer__waves" viewBox="0 0 1200 60" preserveAspectRatio="none">
+        <path class="wave wave--1" d="M0 30 Q 75 10 150 30 T 300 30 T 450 30 T 600 30 T 750 30 T 900 30 T 1050 30 T 1200 30 V 60 H 0 Z"/>
+        <path class="wave wave--2" d="M0 36 Q 100 18 200 36 T 400 36 T 600 36 T 800 36 T 1000 36 T 1200 36 V 60 H 0 Z"/>
+      </svg>
+      <button class="duck" id="duck" aria-label="A rubber duck. Click it. You know you want to.">
+        <svg viewBox="0 0 60 52">
+          <path d="M14 26 c0-8 6-14 13-14 5 0 9 3 11 7 l9-2 c2 0 3 2 1 3 l-7 5 c3 1 6 4 6 8 0 7-8 12-19 12 -10 0-17-5-17-12 0-3 1-5 3-7z" fill="#e8b830" stroke="#9b7714" stroke-width="2" stroke-linejoin="round"/>
+          <circle cx="31" cy="19" r="1.8" fill="#142420"/>
+          <path d="M38 21 l8 -1.5" stroke="#c46a1f" stroke-width="4" stroke-linecap="round"/>
+          <path d="M18 34 c4 3 16 3 22 0" fill="none" stroke="#9b7714" stroke-width="1.5"/>
+        </svg>
+      </button>
+    </div>
+  </footer>
+
+  <!-- ===== mobile sticky call bar ===== -->
+  <a class="call-bar" href="tel:+16013727676">
+    <span class="call-bar__pulse" aria-hidden="true"></span>
+    <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.7 1.5c.5-.5 1.3-.4 1.7.1l1.5 2c.4.5.3 1.2-.2 1.6l-.9.8c.5 1.2 1.9 2.6 3.1 3.1l.8-.9c.4-.5 1.1-.6 1.6-.2l2 1.5c.5.4.6 1.2.1 1.7l-1 1c-.5.5-1.3.7-2 .5-2-.6-3.9-1.8-5.5-3.4S2.1 5.7 1.5 3.7c-.2-.7 0-1.5.5-2l1.7-.2z" fill="currentColor"/></svg>
+    Call now — 24/7 <span class="call-bar__num">(601) 372-7676</span>
+  </a>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>
