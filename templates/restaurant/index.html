@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{BUSINESS_NAME}} | {{CITY}}, MS</title>
+  <meta name="description" content="{{BUSINESS_NAME}} — {{INDUSTRY}} in {{CITY}}, MS. View our menu and call {{PHONE}}.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '{{PRIMARY_COLOR}}',
+            secondary: '{{SECONDARY_COLOR}}',
+            accent: '{{ACCENT_COLOR}}'
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="assets/css/custom.css">
+</head>
+<body class="bg-white text-gray-800">
+
+  <!-- Header / Nav -->
+  <header class="bg-secondary text-white sticky top-0 z-50 shadow">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="#" class="text-xl md:text-2xl font-bold">{{BUSINESS_NAME}}</a>
+      <nav class="hidden md:flex gap-6 font-medium">
+        <a href="#menu" class="hover:text-accent">Menu</a>
+        <a href="#about" class="hover:text-accent">About</a>
+        <a href="#visit" class="hover:text-accent">Visit Us</a>
+      </nav>
+      <a href="tel:{{PHONE_TEL}}" class="bg-primary text-white font-bold px-4 py-2 rounded-full hover:opacity-90">Order: {{PHONE}}</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-secondary text-white">
+    <div class="max-w-6xl mx-auto px-4 py-20 md:py-32 text-center">
+      <p class="text-accent font-bold uppercase tracking-widest">{{CITY}}, Mississippi</p>
+      <h1 class="mt-4 text-4xl md:text-6xl font-extrabold leading-tight">{{BUSINESS_NAME}}</h1>
+      <p class="mt-6 text-lg md:text-xl text-white/80 max-w-2xl mx-auto">{{TAGLINE}}</p>
+      <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#menu" class="bg-primary font-bold px-8 py-4 rounded-full text-lg hover:opacity-90">See the Menu</a>
+        <a href="tel:{{PHONE_TEL}}" class="bg-accent text-secondary font-bold px-8 py-4 rounded-full text-lg hover:opacity-90">Call to Order</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu highlights -->
+  <section id="menu" class="py-16 md:py-24">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl md:text-4xl font-bold text-center text-secondary">Local Favorites</h2>
+      <p class="text-center text-gray-500 mt-2">A taste of what keeps {{CITY}} coming back.</p>
+      <div class="grid md:grid-cols-3 gap-8 mt-12">
+        <div class="rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
+          <div class="aspect-video bg-gray-300 flex items-center justify-center text-gray-500 font-medium">Dish Photo</div>
+          <div class="p-6"><h3 class="text-lg font-bold text-secondary">Signature Dish</h3><p class="mt-2 text-gray-600 text-sm">Made fresh daily with local ingredients.</p></div>
+        </div>
+        <div class="rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
+          <div class="aspect-video bg-gray-300 flex items-center justify-center text-gray-500 font-medium">Dish Photo</div>
+          <div class="p-6"><h3 class="text-lg font-bold text-secondary">Crowd Favorite</h3><p class="mt-2 text-gray-600 text-sm">The plate everyone orders twice.</p></div>
+        </div>
+        <div class="rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition">
+          <div class="aspect-video bg-gray-300 flex items-center justify-center text-gray-500 font-medium">Dish Photo</div>
+          <div class="p-6"><h3 class="text-lg font-bold text-secondary">Daily Special</h3><p class="mt-2 text-gray-600 text-sm">Ask what's cooking today.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section id="about" class="bg-gray-50 py-16 md:py-24">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-2xl md:text-4xl font-bold text-secondary">Our Story</h2>
+      <p class="mt-6 text-gray-600 text-lg leading-relaxed">{{BUSINESS_NAME}} has been serving the {{CITY}} community with food made the right way — fresh, generous, and full of flavor. Come hungry, leave happy.</p>
+    </div>
+  </section>
+
+  <!-- Visit / Contact -->
+  <section id="visit" class="bg-primary text-white py-16 md:py-24">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-2xl md:text-4xl font-bold">Visit Us Today</h2>
+      <p class="mt-4 text-white/80 text-lg">{{CITY}}, MS &middot; Dine-in &middot; Takeout</p>
+      <a href="tel:{{PHONE_TEL}}" class="inline-block mt-8 bg-accent text-secondary font-bold px-10 py-4 rounded-full text-xl hover:opacity-90">{{PHONE}}</a>
+      <p class="mt-6 text-white/70">{{EMAIL}}</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-black text-white/60 text-sm py-6">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between gap-2 text-center md:text-left">
+      <span>&copy; {{YEAR}} {{BUSINESS_NAME}}. All rights reserved.</span>
+      <span>{{CITY}}, MS &middot; {{PHONE}}</span>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

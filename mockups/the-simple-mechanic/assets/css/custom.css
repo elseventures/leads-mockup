@@ -1,0 +1,10 @@
+/* Brand colors (also available as Tailwind classes: bg-primary, text-accent, etc.) */
+:root {
+  --color-primary: #dc2626;
+  --color-secondary: #18181b;
+  --color-accent: #facc15;
+}
+
+html {
+  scroll-behavior: smooth;
+}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{BUSINESS_NAME}} | {{INDUSTRY}} in {{CITY}}, MS</title>
+  <meta name="description" content="{{BUSINESS_NAME}} — professional {{INDUSTRY}} serving {{CITY}}, MS and surrounding areas. Call {{PHONE}} for a free quote.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '{{PRIMARY_COLOR}}',
+            secondary: '{{SECONDARY_COLOR}}',
+            accent: '{{ACCENT_COLOR}}'
+          }
+        }
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="assets/css/custom.css">
+</head>
+<body class="bg-white text-gray-800">
+
+  <!-- Header / Nav -->
+  <header class="bg-white shadow sticky top-0 z-50">
+    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="#" class="text-xl md:text-2xl font-bold text-primary">{{BUSINESS_NAME}}</a>
+      <nav class="hidden md:flex gap-6 font-medium">
+        <a href="#services" class="hover:text-primary">Services</a>
+        <a href="#results" class="hover:text-primary">Our Work</a>
+        <a href="#contact" class="hover:text-primary">Free Quote</a>
+      </nav>
+      <a href="tel:{{PHONE_TEL}}" class="bg-primary text-white font-bold px-4 py-2 rounded-full hover:opacity-90">{{PHONE}}</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="bg-gradient-to-br from-primary to-secondary text-white">
+    <div class="max-w-6xl mx-auto px-4 py-20 md:py-28 text-center">
+      <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">A Beautiful Outdoors,<br class="hidden md:block"> Without the Work</h1>
+      <p class="mt-4 text-lg md:text-xl text-white/80 max-w-2xl mx-auto">Professional {{INDUSTRY}} for homes and businesses in {{CITY}}, MS. {{TAGLINE}}</p>
+      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="#contact" class="bg-accent text-secondary font-bold px-8 py-4 rounded-full text-lg hover:opacity-90">Get a Free Quote</a>
+        <a href="tel:{{PHONE_TEL}}" class="border-2 border-white font-bold px-8 py-4 rounded-full text-lg hover:bg-white hover:text-primary">Call {{PHONE}}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services -->
+  <section id="services" class="py-16 md:py-24">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-2xl md:text-4xl font-bold text-center text-secondary">Our Services</h2>
+      <p class="text-center text-gray-500 mt-2">Year-round care, one-time projects, and everything in between.</p>
+      <div class="grid md:grid-cols-3 gap-8 mt-12">
+        <div class="bg-gray-50 rounded-2xl p-8 hover:shadow-md transition">
+          <h3 class="text-xl font-bold text-primary">Routine Maintenance</h3>
+          <p class="mt-3 text-gray-600">Scheduled service that keeps your property looking its best all season.</p>
+        </div>
+        <div class="bg-gray-50 rounded-2xl p-8 hover:shadow-md transition">
+          <h3 class="text-xl font-bold text-primary">One-Time Projects</h3>
+          <p class="mt-3 text-gray-600">Cleanups, installs, and transformations — big or small.</p>
+        </div>
+        <div class="bg-gray-50 rounded-2xl p-8 hover:shadow-md transition">
+          <h3 class="text-xl font-bold text-primary">Commercial Properties</h3>
+          <p class="mt-3 text-gray-600">Reliable service contracts for businesses across the {{CITY}} metro.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Before / After placeholder -->
+  <section id="results" class="bg-gray-50 py-16 md:py-24">
+    <div class="max-w-6xl mx-auto px-4 text-center">
+      <h2 class="text-2xl md:text-4xl font-bold text-secondary">See the Difference</h2>
+      <div class="grid sm:grid-cols-2 gap-6 mt-12 max-w-3xl mx-auto">
+        <div class="aspect-video bg-gray-300 rounded-xl flex items-center justify-center text-gray-500 font-medium">Before</div>
+        <div class="aspect-video bg-primary/20 rounded-xl flex items-center justify-center text-primary font-bold">After</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / CTA -->
+  <section id="contact" class="bg-secondary text-white py-16 md:py-24">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <h2 class="text-2xl md:text-4xl font-bold">Get Your Free Quote</h2>
+      <p class="mt-4 text-white/80 text-lg">Fast response. Fair pricing. Local crew.</p>
+      <a href="tel:{{PHONE_TEL}}" class="inline-block mt-8 bg-accent text-secondary font-bold px-10 py-4 rounded-full text-xl hover:opacity-90">{{PHONE}}</a>
+      <p class="mt-6 text-white/60">{{EMAIL}}</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-black text-white/60 text-sm py-6">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between gap-2 text-center md:text-left">
+      <span>&copy; {{YEAR}} {{BUSINESS_NAME}}. All rights reserved.</span>
+      <span>{{CITY}}, MS &middot; {{PHONE}}</span>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "name": "leads-mockup",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Personalized website mockups for HOT leads, scaffolded from industry templates. Each mockup folder is a standalone static site deployable to Cloudflare Pages.",
+  "scripts": {
+    "scaffold": "node scripts/scaffold.js",
+    "serve": "npx serve mockups"
+  }
+}
