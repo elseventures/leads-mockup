@@ -53,9 +53,9 @@
   </div>
 
   <!-- ===== TAPE-MEASURE SCROLL PROGRESS ===== -->
+  <div class="tape-ticks" aria-hidden="true"></div>
   <div class="tape" id="tape" aria-hidden="true">
     <div class="tape-fill" id="tapeFill"></div>
-    <div class="tape-ticks"></div>
   </div>
 
   <!-- ===== HEADER ===== -->
@@ -315,13 +315,15 @@
           <h2 class="sec-title reveal"><span class="sec-index mono">02</span>THE DRAWING<em> SET</em></h2>
           <p class="sec-sub reveal">Sector capabilities, drawn to scale.<sup>†</sup></p>
           <div class="work-counter mono" aria-hidden="true">
-            <span id="workIdx">01</span> / 05
+            <span class="work-scrolldir">SCROLL ↓</span>
+            <span class="work-count">SHEET <span id="workIdx">01</span> / 05</span>
             <span class="work-counter-rule"><span id="workRule"></span></span>
+            <span class="work-dir">→</span>
           </div>
         </header>
 
         <div class="work-track" id="workTrack">
-          <article class="wcard" data-cursor="DRAG">
+          <article class="wcard">
             <div class="wcard-no mono" aria-hidden="true">A-201</div>
             <figure class="wcard-art"><!-- @svg:sheet-A-201 --></figure>
             <div class="wcard-block">
@@ -334,7 +336,7 @@
             </div>
           </article>
 
-          <article class="wcard" data-cursor="DRAG">
+          <article class="wcard">
             <div class="wcard-no mono" aria-hidden="true">A-202</div>
             <figure class="wcard-art"><!-- @svg:sheet-A-202 --></figure>
             <div class="wcard-block">
@@ -347,7 +349,7 @@
             </div>
           </article>
 
-          <article class="wcard" data-cursor="DRAG">
+          <article class="wcard">
             <div class="wcard-no mono" aria-hidden="true">A-203</div>
             <figure class="wcard-art"><!-- @svg:sheet-A-203 --></figure>
             <div class="wcard-block">
@@ -360,7 +362,7 @@
             </div>
           </article>
 
-          <article class="wcard" data-cursor="DRAG">
+          <article class="wcard">
             <div class="wcard-no mono" aria-hidden="true">A-204</div>
             <figure class="wcard-art"><!-- @svg:sheet-A-204 --></figure>
             <div class="wcard-block">
@@ -373,7 +375,7 @@
             </div>
           </article>
 
-          <article class="wcard" data-cursor="DRAG">
+          <article class="wcard">
             <div class="wcard-no mono" aria-hidden="true">A-205</div>
             <figure class="wcard-art"><!-- @svg:sheet-A-205 --></figure>
             <div class="wcard-block">
@@ -476,7 +478,7 @@
         <span class="sheet-name">FIELD RECORD</span>
       </div>
 
-      <blockquote class="bigquote" id="bigQuote">
+      <blockquote class="bigquote reveal" id="bigQuote">
         <p>WE’VE BEEN BUILDING<br>MISSISSIPPI SINCE<br><em>EISENHOWER</em> WAS<br>IN OFFICE.</p>
       </blockquote>
 
@@ -598,7 +600,7 @@
       </div>
       <div class="tb-cell"><span class="tb-k">PROJECT</span><span class="tb-v">MSCONST.COM — FULL REDESIGN</span></div>
       <div class="tb-cell"><span class="tb-k">CLIENT</span><span class="tb-v">MID-STATE CONSTRUCTION, JACKSON MS</span></div>
-      <div class="tb-cell"><span class="tb-k">DRAWN BY</span><span class="tb-v">AK CREATIVE</span></div>
+      <div class="tb-cell"><span class="tb-k">DRAWN BY</span><a class="tb-v" href="https://akcreativeco.com/" target="_blank" rel="noopener">AK CREATIVE CO. ↗</a></div>
       <div class="tb-cell"><span class="tb-k">DATE</span><span class="tb-v">06.12.2026</span></div>
       <div class="tb-cell"><span class="tb-k">SCALE</span><span class="tb-v">NTS</span></div>
       <div class="tb-cell"><span class="tb-k">SHEET</span><span class="tb-v tb-sheet">A-001</span></div>

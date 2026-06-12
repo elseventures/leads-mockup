@@ -175,13 +175,15 @@ body.has-xh, body.has-xh a, body.has-xh button, body.has-xh label, body.has-xh s
 body.has-xh input, body.has-xh textarea { cursor: text; }
 body.has-xh select { cursor: none; }
 
-.xh-v, .xh-h { position: absolute; background: var(--ink); opacity: 0.14; }
+/* difference blend keeps the crosshair legible on paper AND ink-dark sections */
+.xh-v, .xh-h { position: absolute; background: #c4c1ba; mix-blend-mode: difference; }
 .xh-v { top: 0; bottom: 0; width: 1px; left: 0; }
 .xh-h { left: 0; right: 0; height: 1px; top: 0; }
 .xh-dot { position: absolute; left: 0; top: 0; }
 .xh-ring {
   position: absolute; left: 0; top: 0; width: 10px; height: 10px;
-  border: 1.5px solid var(--ink);
+  border: 1.5px solid #fff;
+  mix-blend-mode: difference;
   transform: translate(-50%, -50%);
   transition: width 0.28s var(--ease-out), height 0.28s var(--ease-out),
               border-color 0.28s, transform 0.28s var(--ease-out), background-color .28s;
@@ -191,6 +193,7 @@ body.has-xh select { cursor: none; }
 .xh.is-act .xh-ring {
   width: 44px; height: 44px;
   border-color: var(--accent);
+  mix-blend-mode: normal;
   transform: translate(-50%, -50%) rotate(45deg);
 }
 .xh-label {
@@ -207,19 +210,25 @@ body.has-xh select { cursor: none; }
   position: absolute; left: 0; top: 0;
   font-size: 9px; letter-spacing: 0.1em;
   color: var(--ink-2);
-  background: color-mix(in srgb, var(--paper) 82%, transparent);
+  background: color-mix(in srgb, var(--paper) 88%, transparent);
   border: 1px solid var(--line);
   padding: 3px 7px;
   transform: translate(16px, 20px);
   white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.25s;
 }
+/* X/Y readout only where it means something: the cover sheet + the drawings */
+.xh.coords-on .xh-coords { opacity: 1; }
 
 /* ============================================================
    TAPE-MEASURE SCROLL PROGRESS
    ============================================================ */
-.tape { position: fixed; top: 0; left: 0; right: 0; height: 26px; z-index: 8000; pointer-events: none; }
+.tape { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 8000; pointer-events: none; }
+/* ruler ticks sit BELOW the header so they never punch a gap into it */
 .tape-ticks {
-  position: absolute; inset: 0 0 auto 0; height: 7px;
+  position: fixed; top: 0; left: 0; right: 0; height: 7px;
+  z-index: 6900; pointer-events: none;
   background-image:
     repeating-linear-gradient(90deg, var(--line) 0 1px, transparent 1px 12.5%),
     repeating-linear-gradient(90deg, var(--line-soft) 0 1px, transparent 1px 2.5%);
@@ -245,7 +254,7 @@ body.has-xh select { cursor: none; }
   border-bottom: 1px solid transparent;
 }
 .hdr.scrolled {
-  background: color-mix(in srgb, var(--paper) 90%, transparent);
+  background: color-mix(in srgb, var(--paper) 97%, transparent);
   -webkit-backdrop-filter: blur(10px);
   backdrop-filter: blur(10px);
   border-bottom-color: var(--line);
@@ -310,6 +319,19 @@ body.has-xh select { cursor: none; }
 .mob-nav a:hover { color: var(--accent); padding-left: 10px; }
 .mob-nav a sup { font-family: var(--mono); font-weight: 500; font-size: 12px; color: var(--accent); margin-right: 14px; }
 .mob-foot { display: flex; justify-content: space-between; font-size: 11px; opacity: 0.6; }
+
+/* menu open: lift the header above the sheet so the X stays visible & tappable */
+body.menu-open .hdr,
+body.menu-open .hdr.scrolled {
+  z-index: 9100;
+  background: transparent;
+  border-bottom-color: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+body.menu-open .brand, body.menu-open .brand-stamp { color: var(--paper); }
+body.menu-open .nav, body.menu-open .hdr-cta { opacity: 0; pointer-events: none; }
+body.menu-open .menu-btn span { background: var(--paper); }
 
 /* ============================================================
    SHARED SECTION FURNITURE
@@ -406,7 +428,8 @@ body.has-xh select { cursor: none; }
   grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
   gap: clamp(24px, 4vw, 72px);
   align-items: end;
-  padding: clamp(8px, 1.6vh, 20px) var(--pad-x) clamp(14px, 2.6vh, 30px);
+  /* bottom clearance is the scroll cue's lane — keep content out of it */
+  padding: clamp(8px, 1.6vh, 20px) var(--pad-x) clamp(44px, 6.5vh, 72px);
   flex: 1;
   min-height: 0;
 }
@@ -480,17 +503,18 @@ body.has-xh select { cursor: none; }
 }
 
 .hero-scrollcue {
-  position: absolute; left: var(--pad-x); bottom: 72px;
-  display: flex; align-items: center; gap: 10px;
+  position: absolute; left: var(--pad-x); bottom: 64px;
+  display: flex; align-items: center; gap: 12px;
   font-size: 9px; letter-spacing: 0.22em; color: var(--ink-2);
 }
-.scrollcue-bar { width: 32px; height: 1px; background: var(--ink-2); position: relative; overflow: visible; }
+/* vertical bar + falling dot — the cue points the way you actually scroll */
+.scrollcue-bar { width: 1px; height: 30px; background: var(--ink-2); position: relative; overflow: visible; }
 .scrollcue-bar::after {
-  content: ''; position: absolute; top: -2.5px; left: 0;
+  content: ''; position: absolute; left: -2.5px; top: 0;
   width: 6px; height: 6px; background: var(--accent);
   animation: cue 2.2s var(--ease-out) infinite;
 }
-@keyframes cue { 0% { left: 0; opacity: 0; } 25% { opacity: 1; } 100% { left: calc(100% - 6px); opacity: 0; } }
+@keyframes cue { 0% { top: 0; opacity: 0; } 25% { opacity: 1; } 100% { top: calc(100% - 6px); opacity: 0; } }
 
 /* marquee */
 .marquee {
@@ -623,31 +647,38 @@ body.has-xh select { cursor: none; }
   height: 100svh;
   overflow: hidden;
   display: flex; flex-direction: column; justify-content: center;
-  gap: clamp(18px, 3vh, 36px);
+  gap: clamp(14px, 2.4vh, 28px);
 }
-.work-head { padding-top: clamp(60px, 9vh, 90px); }
+/* head stays compact here — the sheets are the show on this screen */
+.work-head { padding-top: clamp(54px, 7.5vh, 76px); }
+.work .sec-title { font-size: clamp(34px, 4.8vw, 78px); }
+.work .sec-sub { margin-top: 10px; }
 .work-counter {
-  position: absolute; right: var(--pad-x); bottom: 6px;
-  display: flex; align-items: center; gap: 14px;
+  position: absolute; right: var(--pad-x); bottom: 14px;
+  display: flex; align-items: center; gap: 16px;
   font-size: 11px; letter-spacing: 0.2em; color: rgba(242,239,232,0.7);
 }
+.work-scrolldir { color: rgba(242,239,232,0.45); }
 .work-counter #workIdx { color: var(--accent); }
-.work-counter-rule { width: clamp(60px, 9vw, 140px); height: 1px; background: rgba(242,239,232,0.25); position: relative; }
+.work-counter-rule { width: clamp(80px, 12vw, 200px); height: 1px; background: rgba(242,239,232,0.25); position: relative; }
 .work-counter-rule span { position: absolute; inset: 0 auto 0 0; width: 100%; background: var(--accent); transform-origin: left; transform: scaleX(0); }
+.work-dir { color: var(--accent); font-size: 14px; animation: nudge 1.8s var(--ease-out) infinite; }
+@keyframes nudge { 0%, 100% { transform: translateX(0); } 50% { transform: translateX(6px); } }
 
 .work-track {
-  display: flex; gap: clamp(20px, 2.6vw, 44px);
+  display: flex; gap: clamp(24px, 3vw, 56px);
   padding: 0 var(--pad-x);
   will-change: transform;
   width: max-content;
 }
 .wcard {
   position: relative;
-  width: clamp(310px, 36vw, 560px);
+  /* as wide as the viewport HEIGHT allows — sheets fill the pinned screen without clipping */
+  width: clamp(320px, min(44vw, (100svh - 470px) * 1.38), 720px);
   flex: 0 0 auto;
   background: color-mix(in srgb, var(--paper) 5%, transparent);
   border: 1px solid rgba(242,239,232,0.22);
-  padding: clamp(18px, 2.2vw, 30px);
+  padding: clamp(18px, 2.2vw, 32px);
   transition: border-color 0.35s, transform 0.5s var(--ease-out), background-color .35s;
 }
 .wcard:hover { border-color: var(--accent); transform: translateY(-8px); background: color-mix(in srgb, var(--paper) 8%, transparent); }
@@ -768,8 +799,8 @@ body.has-xh select { cursor: none; }
 .bigquote { margin: clamp(20px, 4vh, 50px) 0 clamp(60px, 9vh, 110px); }
 .bigquote p {
   font-size: clamp(38px, 6.6vw, 104px);
-  font-weight: 700; font-stretch: 100%;
-  line-height: 1.02; letter-spacing: -0.01em;
+  font-weight: 870; font-stretch: 118%;
+  line-height: 0.98; letter-spacing: -0.014em;
   text-transform: uppercase;
 }
 .bigquote em { font-style: normal; color: var(--accent); }
@@ -881,6 +912,8 @@ a.rfp-line:hover { padding-left: 12px; color: var(--accent); }
 .tb-cell:last-child { border-right: 0; }
 .tb-k { color: rgba(242,239,232,0.42); font-size: 8px; }
 .tb-v { color: rgba(242,239,232,0.88); }
+a.tb-v { width: fit-content; transition: color 0.25s; }
+a.tb-v:hover { color: var(--accent); }
 .tb-sheet { color: var(--accent); font-size: 15px; font-weight: 700; }
 .tb-logo { flex-direction: row; align-items: center; gap: 12px; font-weight: 700; line-height: 1.25; letter-spacing: 0.1em; font-size: 9.5px; }
 .brand-stamp-lg { width: 34px; height: 34px; color: var(--accent); cursor: pointer; transition: transform .3s var(--ease-out); }
@@ -907,16 +940,21 @@ a.rfp-line:hover { padding-left: 12px; color: var(--accent); }
    ============================================================ */
 .toast {
   position: fixed; bottom: 28px; left: 50%; z-index: 9600;
-  transform: translate(-50%, 140%) rotate(-2deg);
+  transform: translate(-50%, calc(100% + 48px)) rotate(-2deg);
+  visibility: hidden;
   background: var(--paper); color: var(--accent-ink);
   border: 3px double var(--accent-ink);
   padding: 13px 24px;
   font-size: 11px; font-weight: 700; letter-spacing: 0.2em;
-  transition: transform 0.5s cubic-bezier(0.2, 1.4, 0.4, 1);
+  transition: transform 0.5s cubic-bezier(0.2, 1.4, 0.4, 1), visibility 0s 0.5s;
   pointer-events: none;
   text-transform: uppercase;
 }
-.toast.show { transform: translate(-50%, 0) rotate(-2deg); }
+.toast.show {
+  transform: translate(-50%, 0) rotate(-2deg);
+  visibility: visible;
+  transition: transform 0.5s cubic-bezier(0.2, 1.4, 0.4, 1), visibility 0s 0s;
+}
 
 .hats { position: fixed; inset: 0; pointer-events: none; z-index: 9400; overflow: hidden; }
 .hat {
@@ -953,6 +991,9 @@ a.rfp-line:hover { padding-left: 12px; color: var(--accent); }
 @media (max-width: 760px) {
   :root { --hdr-h: 60px; }
   .hdr-tel { display: none; }
+  /* sheet tags flow with the content on small screens — no more overlapping titles */
+  .sheet-tag { position: static; display: inline-flex; margin: 0 0 18px; }
+  .hero .sheet-tag { margin: 0 0 16px var(--pad-x); }
   .stats-grid { grid-template-columns: 1fr 1fr; }
   .stat { border-bottom: 1px solid var(--line); }
   .stat:nth-child(even) { border-right: 0; }
@@ -964,6 +1005,7 @@ a.rfp-line:hover { padding-left: 12px; color: var(--accent); }
   .work-counter { display: none; }
   .ftr-titleblock { grid-template-columns: 1fr 1fr; }
   .hero-scrollcue { display: none; }
+  .hero-grid { padding-bottom: clamp(14px, 2.6vh, 30px); } /* no cue lane needed */
 }
 
 /* mobile / no-pin fallback for the drawing set */

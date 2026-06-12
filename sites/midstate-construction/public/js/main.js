@@ -221,8 +221,12 @@
     mob.classList.toggle('open', open);
     mob.setAttribute('aria-hidden', !open);
     document.body.classList.toggle('no-scroll', open);
+    document.body.classList.toggle('menu-open', open);
   });
   $$('.mob-nav a').forEach((a) => a.addEventListener('click', () => menuBtn.click()));
+  addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mob.classList.contains('open')) menuBtn.click();
+  });
 
   const spyIO = new IntersectionObserver((entries) => {
     entries.forEach((e) => {
@@ -259,7 +263,6 @@
   const workIdx = $('#workIdx');
   const workRule = $('#workRule');
   const procSteps = $('#procSteps');
-  const quote = $('#bigQuote p');
 
   const COARSE = matchMedia('(pointer: coarse)').matches;
   let noPin = false;
@@ -287,7 +290,6 @@
 
   const docH = () => document.documentElement.scrollHeight - innerHeight;
 
-  let quoteSet = false;
   const frame = () => {
     const y = scrollY;
 
@@ -315,19 +317,6 @@
       steps.forEach((s, i) => {
         s.classList.toggle('on', p >= (i + 0.45) / steps.length);
       });
-    }
-
-    // kinetic quote — width/weight scrub (a 2026 indulgence, used once)
-    if (quote) {
-      if (RM) {
-        if (!quoteSet) { quote.style.fontVariationSettings = `'wght' 860, 'wdth' 118`; quoteSet = true; }
-      } else {
-        const r = quote.getBoundingClientRect();
-        const p = clamp(1 - (r.top + r.height * 0.4) / innerHeight, 0, 1);
-        const wght = Math.round(lerp(430, 900, p));
-        const wdth = (lerp(78, 122, p)).toFixed(1);
-        quote.style.fontVariationSettings = `'wght' ${wght}, 'wdth' ${wdth}`;
-      }
     }
 
     requestAnimationFrame(frame);
@@ -365,10 +354,13 @@
     requestAnimationFrame(loop);
 
     const ACT = 'a, button, label, select, input, textarea, [data-cursor]';
+    // X/Y readout only over the cover sheet and the drawings — noise anywhere else
+    const COORD_ZONES = '#top, .iso, .wcard-art, .about-map';
     document.addEventListener('mouseover', (e) => {
       const t = e.target.closest(ACT);
       xh.classList.toggle('is-act', !!t);
       label.textContent = t?.dataset?.cursor || t?.closest('[data-cursor]')?.dataset.cursor || '';
+      xh.classList.toggle('coords-on', !!e.target.closest(COORD_ZONES));
     });
     document.addEventListener('mouseleave', () => xh.classList.remove('is-act'));
   }

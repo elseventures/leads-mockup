@@ -30,12 +30,13 @@ guided scroll progress, grain + texture, editorial broken grids, motion with a j
   (healthcare, education, civic, retail, worship), each a generated technical drawing;
   swipeable snap carousel on touch
 - **Critical Path** — scroll-filled construction schedule with phase nodes
-- **Field Record** — kinetic width/weight pull-quote, Mississippi map with Jackson
+- **Field Record** — heavyweight display pull-quote, Mississippi map with Jackson
   crosshair + radius rings
 - **Transmittal** — RFP form styled like a construction document (corner-bracket focus
   states, stamped RECEIVED state on submit — front-end demo only)
 - **Title-block footer** — a real drawing title block (PROJECT / CLIENT / SHEET / SCALE / DATE)
-- **CAD cursor** — full-viewport crosshair with live X/Y readout; context labels (OPEN, CALL…)
+- **CAD cursor** — full-viewport crosshair, legible on light & dark (difference blend);
+  X/Y readout appears over the cover sheet and the drawings; context labels (OPEN, CALL…)
 - **404** — "RFI-404: sheet not in set" + SUPERSEDED stamp
 
 ### Easter eggs
