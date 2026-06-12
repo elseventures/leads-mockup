@@ -79,25 +79,20 @@ its neighbor, **do not let other designs leak into yours:**
   **never off another design branch**, and don't merge sibling design work into
   yours. This keeps each agent's context clean by construction.
 
-## Archetypes
+## What's been built
 
-| Archetype | Lead | Design concept | Status |
-|---|---|---|---|
-| `home-services` | Buford Plumbing Company, Jackson MS (lead score 9) | "The Copper Standard" — heritage trade-craft: cream paper / pine ink / copper-pipe accents, Fraunces + Libre Franklin + IBM Plex Mono, scroll-driven copper pipe that fills with water, pressure-gauge scroll indicator, work-order testimonial tickets, hand-drawn SVG metro map | Built ✔ |
-| `construction` | Mid-State Construction, Jackson MS (lead score 9) | "The Working Drawing" — the whole site is art-directed as a set of construction documents: numbered sheets, drafting-paper palette, ink hairlines, safety-orange accents, self-drawing isometric buildings (30° geometry), pinned horizontal drawing-set scrub, rubber stamps with ink-bleed, CAD crosshair cursor. Has a generator step (`tools/build.mjs` + `tools/iso-art.mjs`). | Built ✔ |
+Two archetype templates exist; each has only its flagship lead built so far.
+Design direction for each lives in that site's own `README.md`, not here.
 
-Each archetype is designed to re-skin for the other HOT leads in its category —
-swap the copy, service cards, map labels, and accent hue; the structure, motion,
-and component system carry over. (home-services → electrical, HVAC, pest control,
-roofing, lawn care…; construction → GCs, roofing, masonry, paving, concrete…)
+| Archetype | Reference template (built lead) | Status |
+|---|---|---|
+| `home-services` | `buford-plumbing` — Buford Plumbing Company, Inc., Jackson MS (lead score 9) | Template built ✔ |
+| `construction` | `midstate-construction` — Mid State Construction, Jackson MS (lead score 9) | Template built ✔ |
 
-### Easter eggs (home-services)
-
-- Click the rubber duck in the footer waves — it squeaks (WebAudio, no assets).
-  Five squeaks summon the flotilla.
-- Type `leak` anywhere — it rains; check the console.
-- The pressure gauge (bottom right) tracks scroll PSI; clicking it vents
-  pressure and returns to top. It trembles at 100 PSI.
+Archetypes defined in `data/leads.json` but **not yet started**:
+`outdoor-services`, `auto-services`, `restaurant`. Each archetype is meant to
+re-skin for the other HOT leads in its category (see `coversIndustries` in
+`data/leads.json`).
 
 ## Standardized workflow
 
