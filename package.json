@@ -1,0 +1,17 @@
+{
+  "name": "leads-mockup",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Website mockups for hot leads — one folder per lead, standardized build/dev/deploy across all sites.",
+  "scripts": {
+    "sites": "node tools/site.mjs list",
+    "dev": "node tools/site.mjs dev",
+    "build": "node tools/site.mjs build",
+    "deploy": "node tools/site.mjs deploy",
+
+    "dev:buford-plumbing": "node tools/site.mjs dev buford-plumbing",
+    "build:buford-plumbing": "node tools/site.mjs build buford-plumbing",
+    "deploy:buford-plumbing": "node tools/site.mjs deploy buford-plumbing"
+  }
+}
