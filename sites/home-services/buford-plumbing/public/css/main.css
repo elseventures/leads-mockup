@@ -620,7 +620,13 @@ body.loaded .hero__badge { opacity: 1; transform: scale(1) rotate(0deg); }
   text-anchor: middle;
   fill: var(--ink);
 }
-.badge-plus { fill: var(--copper); font-size: 30px; }
+.badge-plus {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 640;
+  fill: var(--copper);
+  text-anchor: start;
+}
 .badge-sub {
   font-family: var(--font-mono);
   font-size: 10px;
@@ -1271,7 +1277,7 @@ body.loaded .hero__scrollcue { opacity: .8; }
 }
 .duck {
   position: absolute;
-  bottom: 26px;
+  bottom: 15px;
   right: 12%;
   width: 54px;
   animation: duck-bob 3.2s ease-in-out infinite;
@@ -1346,7 +1352,8 @@ body.loaded .hero__scrollcue { opacity: .8; }
   text-shadow: 0 1px 0 rgb(20 36 32 / .35);
   overflow: hidden;
 }
-body.past-hero:not(.menu-open) .call-bar { transform: translateY(0); }
+/* the bar yields at the very bottom so the footer water (and duck) stay clear */
+body.past-hero:not(.menu-open):not(.at-footer) .call-bar { transform: translateY(0); }
 .call-bar svg { width: 1.05em; height: 1.05em; flex: none; }
 .call-bar__num { font-weight: 600; opacity: .92; }
 .call-bar__pulse {
@@ -1400,13 +1407,25 @@ body.past-hero:not(.menu-open) .call-bar { transform: translateY(0); }
   .hero {
     min-height: calc(100svh - var(--head-h, 92px));
     padding-top: 1rem;
-    padding-bottom: 4.5rem;
+    padding-bottom: 1.6rem;
     justify-content: center;
   }
-  .hero__title { font-size: clamp(2.7rem, 13vw, 4rem); }
-  .hero__eyebrow { font-size: .62rem; letter-spacing: .18em; gap: .55rem; margin-bottom: 1.2rem; }
-  .hero__badge { width: 118px; }
+  /* cue flows after the CTAs instead of floating over them */
+  .hero__scrollcue {
+    position: static;
+    left: auto;
+    transform: none;
+    align-self: center;
+    margin-top: clamp(1.2rem, 3.5vh, 2.2rem);
+  }
+  .hero__scrollcue-pipe { height: 34px; }
+  .hero__title { font-size: clamp(2.6rem, 12.4vw, 3.8rem); margin-bottom: 1.2rem; }
+  .hero__eyebrow { font-size: .62rem; letter-spacing: .18em; gap: .55rem; margin-bottom: 1rem; }
+  .hero__badge { width: 104px; }
   .hero__badge-wrap { margin-bottom: .2rem; }
+  .hero__sub { font-size: .97rem; margin-bottom: 1.6rem; }
+  .hero__cta { gap: .7rem; }
+  .hero__cta .btn--lg { font-size: .84rem; padding: .95em 1.25em; }
   .hero__drip { display: none; }
   .ticker__track { animation-duration: 18s; }
 
@@ -1419,9 +1438,10 @@ body.past-hero:not(.menu-open) .call-bar { transform: translateY(0); }
 
   .services__grid { grid-template-columns: 1fr; }
 
-  .standard__stats { grid-template-columns: 1fr; gap: 1.6rem; }
-  .stat { display: flex; align-items: baseline; gap: 1rem; }
-  .stat__num { margin-bottom: 0; }
+  .standard__stats { grid-template-columns: 1fr; gap: 1.5rem; }
+  .stat { display: flex; align-items: center; gap: 1.3rem; }
+  .stat__num { margin-bottom: 0; min-width: 4.8ch; flex: none; }
+  .stat__label { max-width: none; flex: 1; }
   .standard__years span:nth-child(even):not(.standard__now) { display: none; }
   .process__steps { grid-template-columns: 1fr; }
   .step { padding-left: 1.2rem; border-left: 2.5px dashed rgb(20 36 32 / .25); }
@@ -1429,20 +1449,40 @@ body.past-hero:not(.menu-open) .call-bar { transform: translateY(0); }
   .footer__grid { grid-template-columns: 1fr; gap: 2rem; }
   .footer__legal { padding-bottom: 7.5rem; flex-direction: column; gap: .4rem; }
   .call-bar { display: flex; }
+  /* gauge stays out of the way until the hero is behind you */
   .gauge {
     width: 54px; height: 54px;
     right: .8rem;
     bottom: calc(.9rem + env(safe-area-inset-bottom));
-    transition: bottom .45s var(--ease-out), transform .3s var(--ease-spring);
+    opacity: 0;
+    pointer-events: none;
+    transition: bottom .45s var(--ease-out), opacity .35s, transform .3s var(--ease-spring);
   }
-  body.past-hero:not(.menu-open) .gauge { bottom: calc(5.2rem + env(safe-area-inset-bottom)); }
-  .duck { right: 34%; bottom: 84px; width: 46px; }
-  .footer__water { height: 50px; }
+  body.past-hero .gauge { opacity: 1; pointer-events: auto; }
+  body.past-hero:not(.menu-open):not(.at-footer) .gauge { bottom: calc(5.2rem + env(safe-area-inset-bottom)); }
+  .duck { right: 30%; bottom: 22px; width: 46px; }
+  .footer__water { height: 76px; }
   .mobile-menu { display: flex; }
 }
 
 @media (hover: none) {
   .svc-card:hover { transform: none; box-shadow: var(--shadow-press); }
+}
+
+/* short phones: tighten the hero so it actually fits one screen */
+@media (max-width: 720px) and (max-height: 720px) {
+  .hero { padding-top: .4rem; }
+  .hero__badge { width: 80px; }
+  .hero__eyebrow { margin-bottom: .7rem; }
+  .hero__title { font-size: clamp(2.2rem, 11vw, 3rem); margin-bottom: .9rem; }
+  .hero__sub { font-size: .9rem; margin-bottom: 1.3rem; }
+  .hero__scrollcue { margin-top: 1.1rem; }
+  .hero__scrollcue-pipe { height: 24px; }
+}
+
+/* very short screens: the badge yields its seat */
+@media (max-width: 720px) and (max-height: 648px) {
+  .hero__badge-wrap { display: none; }
 }
 
 /* ---------- reduced motion ---------- */

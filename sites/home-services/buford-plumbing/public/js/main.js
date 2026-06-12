@@ -96,6 +96,14 @@
     ).observe(heroEl);
   }
 
+  /* ---------- and while the footer water (duck habitat) is on screen ---------- */
+  const waterEl = $(".footer__water");
+  if (waterEl) {
+    new IntersectionObserver(
+      ([en]) => document.body.classList.toggle("at-footer", en.isIntersecting)
+    ).observe(waterEl);
+  }
+
   /* ---------- hero schematic mouse parallax ---------- */
   const hero = $(".hero");
   if (hero && matchMedia("(hover: hover)").matches && !reducedMotion) {
