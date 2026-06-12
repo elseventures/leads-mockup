@@ -1,0 +1,631 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mid-State Construction — Commercial General Contractor, Jackson, MS. Since 1958.</title>
+  <meta name="description" content="Mid-State Construction is one of Mississippi's oldest locally-owned commercial builders. Preconstruction, design-build, construction management and general contracting — Jackson, MS, since 1958.">
+  <!-- Design mockup by AK Creative. Not the live site. -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#F2EFE8">
+  <meta property="og:title" content="Mid-State Construction — Built in Mississippi since 1958">
+  <meta property="og:description" content="Preconstruction to closeout. Commercial, institutional, industrial. Jackson, MS.">
+  <meta property="og:type" content="website">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preload" href="assets/fonts/archivo-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/jetbrains-mono-var.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <!-- shared SVG defs: rubber-stamp ink bleed -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <filter id="inkbleed" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="n" seed="7"/>
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="1.6"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ===== PRELOADER — site mobilization ===== -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader-inner">
+      <div class="loader-row mono">
+        <span class="loader-tag">MID-STATE CONSTRUCTION</span>
+        <span class="loader-pct" id="loaderPct">0%</span>
+      </div>
+      <div class="loader-bar"><div class="loader-fill" id="loaderFill"></div></div>
+      <div class="loader-row mono loader-foot">
+        <span id="loaderMsg">MOBILIZING SITE…</span>
+        <span>EST. 1958</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CAD CURSOR ===== -->
+  <div class="xh" id="xh" aria-hidden="true">
+    <div class="xh-v" id="xhV"></div>
+    <div class="xh-h" id="xhH"></div>
+    <div class="xh-dot" id="xhDot"><span class="xh-ring"></span><span class="xh-label" id="xhLabel"></span></div>
+    <div class="xh-coords mono" id="xhCoords">X 0000 — Y 0000</div>
+  </div>
+
+  <!-- ===== TAPE-MEASURE SCROLL PROGRESS ===== -->
+  <div class="tape" id="tape" aria-hidden="true">
+    <div class="tape-fill" id="tapeFill"></div>
+    <div class="tape-ticks"></div>
+  </div>
+
+  <!-- ===== HEADER ===== -->
+  <header class="hdr" id="hdr">
+    <a class="brand" href="#top" aria-label="Mid-State Construction — home">
+      <span class="brand-stamp" id="brandStamp">
+        <svg viewBox="0 0 34 34" aria-hidden="true"><rect x="1.5" y="1.5" width="31" height="31"/><path d="M7 25V9l5 8 5-8v16"/><path d="M27 11.5c0-1.8-1.6-2.9-3.4-2.9-1.9 0-3.3 1.1-3.3 2.7 0 4 6.9 2.4 6.9 6.6 0 1.9-1.7 3.1-3.6 3.1-2 0-3.6-1.2-3.6-3.2"/></svg>
+      </span>
+      <span class="brand-name">MID-STATE<br>CONSTRUCTION</span>
+    </a>
+    <nav class="nav mono" aria-label="Primary">
+      <a href="#services"><sup>01</sup>SCOPE</a>
+      <a href="#work"><sup>02</sup>WORK</a>
+      <a href="#process"><sup>03</sup>PROCESS</a>
+      <a href="#about"><sup>04</sup>SINCE ’58</a>
+      <a href="#contact"><sup>05</sup>CONTACT</a>
+    </nav>
+    <div class="hdr-cta">
+      <a class="hdr-tel mono" href="tel:+16019569500">(601) 956-9500</a>
+      <a class="btn btn-sm magnetic" href="#contact"><span class="btn-ink"></span><span class="btn-label">START A PROJECT</span></a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="mobNav" aria-label="Menu">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <!-- mobile nav sheet -->
+  <div class="mob" id="mobNav" aria-hidden="true">
+    <nav class="mob-nav mono" aria-label="Mobile">
+      <a href="#services"><sup>01</sup>SCOPE OF WORK</a>
+      <a href="#work"><sup>02</sup>THE DRAWING SET</a>
+      <a href="#process"><sup>03</sup>CRITICAL PATH</a>
+      <a href="#about"><sup>04</sup>SINCE 1958</a>
+      <a href="#contact"><sup>05</sup>CONTACT</a>
+    </nav>
+    <div class="mob-foot mono">
+      <a href="tel:+16019569500">(601) 956-9500</a>
+      <span>JACKSON, MISSISSIPPI</span>
+    </div>
+  </div>
+
+  <main id="main">
+    <!-- ================= G-000 — COVER SHEET / HERO ================= -->
+    <section class="hero" id="top" data-sheet="G-000">
+      <div class="sheet-tag mono" aria-hidden="true">
+        <span class="sheet-no">SHEET G-000</span>
+        <span class="sheet-name">COVER SHEET</span>
+      </div>
+
+      <div class="hero-top">
+        <p class="kicker mono reveal">
+          <span class="kicker-dot" aria-hidden="true"></span>
+          JACKSON, MISSISSIPPI — COMMERCIAL GENERAL CONTRACTOR
+        </p>
+
+        <h1 class="hero-title" id="heroTitle">
+          <span class="line"><span class="word" data-text="MID-STATE">MID-STATE</span></span>
+          <span class="line"><span class="word word-accent" data-text="CONSTRUCTION">CONSTRUCTION</span></span>
+        </h1>
+
+        <!-- dimension line measuring the wordmark -->
+        <div class="dimline" aria-hidden="true">
+          <span class="dimline-tick"></span>
+          <span class="dimline-rule"></span>
+          <span class="dimline-label mono">EST. 1958 — 68 YEARS ON THE JOB</span>
+          <span class="dimline-rule"></span>
+          <span class="dimline-tick"></span>
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div class="hero-left">
+          <p class="hero-sub reveal">
+            Mississippi’s builder of record. Preconstruction, design-build,
+            construction management and general contracting — priced honestly,
+            documented from the field, and built to outlast the loan.
+          </p>
+
+          <div class="hero-ctas reveal">
+            <a class="btn magnetic" href="#contact"><span class="btn-ink"></span><span class="btn-label">PUT US ON YOUR BID LIST</span></a>
+            <a class="btn btn-ghost magnetic" href="#work"><span class="btn-ink"></span><span class="btn-label">SEE THE DRAWINGS ↓</span></a>
+          </div>
+        </div>
+
+        <div class="hero-right" aria-hidden="true">
+          <div class="stamp" id="heroStamp">
+            <span>ISSUED FOR</span>
+            <strong>CONSTRUCTION</strong>
+            <span class="stamp-date mono">06.12.2026 — REV 01</span>
+          </div>
+          <figure class="hero-art" id="heroArt">
+            <!-- @svg:hero-building -->
+          </figure>
+        </div>
+      </div>
+
+      <div class="hero-scrollcue mono" aria-hidden="true">
+        <span class="scrollcue-bar"></span> SCROLL FOR DRAWINGS
+      </div>
+
+      <!-- marquee -->
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track" id="marqueeTrack">
+          <span class="marquee-seg">
+            GENERAL CONTRACTING <i>✦</i> CONSTRUCTION MANAGEMENT <i>✦</i> DESIGN-BUILD <i>✦</i>
+            PRECONSTRUCTION <i>✦</i> ESTIMATING <i>✦</i> SINCE 1958 <i>✦</i>
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= STATS BAND ================= -->
+    <section class="stats" aria-label="Company facts">
+      <div class="stats-grid">
+        <div class="stat reveal">
+          <span class="stat-num"><span class="count" data-to="1958" data-from="1900">1900</span></span>
+          <span class="stat-label mono">FOUNDED IN JACKSON</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat-num"><span class="count" data-to="68">0</span></span>
+          <span class="stat-label mono">YEARS ON THE JOB</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat-num"><span class="count" data-to="100">0</span>%</span>
+          <span class="stat-label mono">LOCALLY OWNED</span>
+        </div>
+        <div class="stat reveal">
+          <span class="stat-num">0<span class="count" data-to="5">0</span></span>
+          <span class="stat-label mono">SERVICES, ONE CONTRACT</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= A-101 — SCOPE OF WORK / SERVICES ================= -->
+    <section class="svc" id="services" data-sheet="A-101">
+      <header class="sec-head">
+        <div class="sheet-tag mono" aria-hidden="true">
+          <span class="sheet-no">SHEET A-101</span>
+          <span class="sheet-name">SPECIFICATIONS</span>
+        </div>
+        <h2 class="sec-title reveal"><span class="sec-index mono">01</span>SCOPE OF<em> WORK</em></h2>
+        <p class="sec-sub reveal">Five ways to engage us. One standard of work.</p>
+      </header>
+
+      <div class="svc-list" id="svcList">
+        <div class="svc-row" data-open="false">
+          <button class="svc-btn" aria-expanded="false" data-cursor="OPEN">
+            <span class="svc-idx mono">01</span>
+            <span class="svc-name">PRECONSTRUCTION</span>
+            <span class="svc-ref mono">SOW-01</span>
+            <span class="svc-plus" aria-hidden="true"></span>
+          </button>
+          <div class="svc-panel">
+            <div class="svc-panel-in">
+              <p>The cheapest place to fix a building is on paper. We price, schedule and
+              value-engineer your project before a shovel hits dirt — so the number you
+              approve is the number you pay.</p>
+              <ul class="mono">
+                <li>CONCEPTUAL &amp; HARD BUDGETS</li>
+                <li>CONSTRUCTABILITY REVIEW</li>
+                <li>MASTER SCHEDULE + LONG-LEAD BUYOUT</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="svc-row" data-open="false">
+          <button class="svc-btn" aria-expanded="false" data-cursor="OPEN">
+            <span class="svc-idx mono">02</span>
+            <span class="svc-name">ESTIMATING</span>
+            <span class="svc-ref mono">SOW-02</span>
+            <span class="svc-plus" aria-hidden="true"></span>
+          </button>
+          <div class="svc-panel">
+            <div class="svc-panel-in">
+              <p>Open-book numbers from estimators who have actually built what they price.
+              Sixty-eight years of cost history in this market keeps the guesswork out.</p>
+              <ul class="mono">
+                <li>QUANTITY TAKEOFFS</li>
+                <li>BID-DAY SUBCONTRACTOR LEVELING</li>
+                <li>LIFE-CYCLE COST COMPARISONS</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="svc-row" data-open="false">
+          <button class="svc-btn" aria-expanded="false" data-cursor="OPEN">
+            <span class="svc-idx mono">03</span>
+            <span class="svc-name">DESIGN-BUILD</span>
+            <span class="svc-ref mono">SOW-03</span>
+            <span class="svc-plus" aria-hidden="true"></span>
+          </button>
+          <div class="svc-panel">
+            <div class="svc-panel-in">
+              <p>One contract, one team, one throat to choke. Architect and builder at the
+              same table from day one — faster delivery, fewer change orders, no finger-pointing.</p>
+              <ul class="mono">
+                <li>SINGLE-SOURCE ACCOUNTABILITY</li>
+                <li>GUARANTEED MAXIMUM PRICE</li>
+                <li>DESIGN-PHASE COST CONTROL</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="svc-row" data-open="false">
+          <button class="svc-btn" aria-expanded="false" data-cursor="OPEN">
+            <span class="svc-idx mono">04</span>
+            <span class="svc-name">CONSTRUCTION MGMT</span>
+            <span class="svc-ref mono">SOW-04</span>
+            <span class="svc-plus" aria-hidden="true"></span>
+          </button>
+          <div class="svc-panel">
+            <div class="svc-panel-in">
+              <p>Your advocate on the owner’s side of the table. Real-time field reporting,
+              weekly aerial photos, and a budget you can read without a translator.</p>
+              <ul class="mono">
+                <li>AGENCY &amp; AT-RISK CM</li>
+                <li>LIVE SCHEDULE + BUDGET DASHBOARDS</li>
+                <li>WEEKLY AERIAL DOCUMENTATION</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="svc-row" data-open="false">
+          <button class="svc-btn" aria-expanded="false" data-cursor="OPEN">
+            <span class="svc-idx mono">05</span>
+            <span class="svc-name">GENERAL CONTRACTING</span>
+            <span class="svc-ref mono">SOW-05</span>
+            <span class="svc-plus" aria-hidden="true"></span>
+          </button>
+          <div class="svc-panel">
+            <div class="svc-panel-in">
+              <p>The trade we were founded on. Hard-bid or negotiated, our superintendents
+              run a tight site: clean, safe, on schedule, and documented every single day.</p>
+              <ul class="mono">
+                <li>LUMP-SUM &amp; NEGOTIATED WORK</li>
+                <li>SELF-PERFORMED SUPERVISION</li>
+                <li>CLOSEOUT IN WEEKS, NOT MONTHS</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= A-201 — THE DRAWING SET / WORK ================= -->
+    <section class="work" id="work" data-sheet="A-201">
+      <div class="work-pin" id="workPin">
+        <header class="sec-head work-head">
+          <div class="sheet-tag mono" aria-hidden="true">
+            <span class="sheet-no">SHEETS A-201–205</span>
+            <span class="sheet-name">DRAWING SET</span>
+          </div>
+          <h2 class="sec-title reveal"><span class="sec-index mono">02</span>THE DRAWING<em> SET</em></h2>
+          <p class="sec-sub reveal">Sector capabilities, drawn to scale.<sup>†</sup></p>
+          <div class="work-counter mono" aria-hidden="true">
+            <span id="workIdx">01</span> / 05
+            <span class="work-counter-rule"><span id="workRule"></span></span>
+          </div>
+        </header>
+
+        <div class="work-track" id="workTrack">
+          <article class="wcard" data-cursor="DRAG">
+            <div class="wcard-no mono" aria-hidden="true">A-201</div>
+            <figure class="wcard-art"><!-- @svg:sheet-A-201 --></figure>
+            <div class="wcard-block">
+              <h3>HEALTHCARE</h3>
+              <dl class="mono">
+                <div><dt>TYPE</dt><dd>MEDICAL OFFICE / CLINIC</dd></div>
+                <div><dt>DELIVERY</dt><dd>CM AT-RISK</dd></div>
+                <div><dt>SCALE</dt><dd>15–60,000 SF</dd></div>
+              </dl>
+            </div>
+          </article>
+
+          <article class="wcard" data-cursor="DRAG">
+            <div class="wcard-no mono" aria-hidden="true">A-202</div>
+            <figure class="wcard-art"><!-- @svg:sheet-A-202 --></figure>
+            <div class="wcard-block">
+              <h3>EDUCATION</h3>
+              <dl class="mono">
+                <div><dt>TYPE</dt><dd>K-12 / HIGHER-ED</dd></div>
+                <div><dt>DELIVERY</dt><dd>HARD BID / CMAR</dd></div>
+                <div><dt>SCALE</dt><dd>CLASSROOM WINGS TO CAMPUSES</dd></div>
+              </dl>
+            </div>
+          </article>
+
+          <article class="wcard" data-cursor="DRAG">
+            <div class="wcard-no mono" aria-hidden="true">A-203</div>
+            <figure class="wcard-art"><!-- @svg:sheet-A-203 --></figure>
+            <div class="wcard-block">
+              <h3>CIVIC &amp; INSTITUTIONAL</h3>
+              <dl class="mono">
+                <div><dt>TYPE</dt><dd>MUNICIPAL / JUSTICE / LIBRARY</dd></div>
+                <div><dt>DELIVERY</dt><dd>PUBLIC BID</dd></div>
+                <div><dt>SCALE</dt><dd>BOND-PROGRAM READY</dd></div>
+              </dl>
+            </div>
+          </article>
+
+          <article class="wcard" data-cursor="DRAG">
+            <div class="wcard-no mono" aria-hidden="true">A-204</div>
+            <figure class="wcard-art"><!-- @svg:sheet-A-204 --></figure>
+            <div class="wcard-block">
+              <h3>RETAIL &amp; COMMERCIAL</h3>
+              <dl class="mono">
+                <div><dt>TYPE</dt><dd>GROUND-UP SHELL / BUILD-OUT</dd></div>
+                <div><dt>DELIVERY</dt><dd>DESIGN-BUILD</dd></div>
+                <div><dt>SCALE</dt><dd>PAD SITES TO POWER CENTERS</dd></div>
+              </dl>
+            </div>
+          </article>
+
+          <article class="wcard" data-cursor="DRAG">
+            <div class="wcard-no mono" aria-hidden="true">A-205</div>
+            <figure class="wcard-art"><!-- @svg:sheet-A-205 --></figure>
+            <div class="wcard-block">
+              <h3>WORSHIP</h3>
+              <dl class="mono">
+                <div><dt>TYPE</dt><dd>SANCTUARY / FELLOWSHIP / FLC</dd></div>
+                <div><dt>DELIVERY</dt><dd>NEGOTIATED</dd></div>
+                <div><dt>SCALE</dt><dd>RENOVATION &amp; GROUND-UP</dd></div>
+              </dl>
+            </div>
+          </article>
+        </div>
+
+        <p class="work-note mono">† SHEETS SHOWN ARE REPRESENTATIVE SECTOR CAPABILITIES, NOT SPECIFIC PROJECTS.</p>
+      </div>
+    </section>
+
+    <!-- ================= S-301 — CRITICAL PATH / PROCESS ================= -->
+    <section class="proc" id="process" data-sheet="S-301">
+      <div class="proc-grid">
+        <div class="proc-left">
+          <div class="proc-sticky">
+            <div class="sheet-tag mono" aria-hidden="true">
+              <span class="sheet-no">SHEET S-301</span>
+              <span class="sheet-name">SEQUENCE</span>
+            </div>
+            <h2 class="sec-title reveal"><span class="sec-index mono">03</span>CRITICAL<em> PATH</em></h2>
+            <p class="sec-sub reveal">How a Mid-State job runs — and how you’ll always
+            know where it stands.</p>
+            <div class="proc-tech reveal">
+              <p class="mono proc-tech-head">FIELD REPORTING, STANDARD ON EVERY JOB:</p>
+              <ul class="mono">
+                <li>— WEEKLY AERIAL PHOTOGRAPHY</li>
+                <li>— REAL-TIME DAILY LOGS FROM THE FIELD</li>
+                <li>— OPEN-BOOK BUDGET &amp; SCHEDULE UPDATES</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <ol class="proc-steps" id="procSteps">
+          <li class="pstep">
+            <span class="pstep-node" aria-hidden="true"></span>
+            <div class="pstep-head">
+              <span class="pstep-idx mono">PH-01</span>
+              <h3>PRECONSTRUCTION &amp; BUDGET</h3>
+              <span class="pstep-wk mono">WK 00–06</span>
+            </div>
+            <p>Scope, budget and schedule locked together. You sign off on a real number,
+            not a hopeful one.</p>
+          </li>
+          <li class="pstep">
+            <span class="pstep-node" aria-hidden="true"></span>
+            <div class="pstep-head">
+              <span class="pstep-idx mono">PH-02</span>
+              <h3>PERMITS &amp; PROCUREMENT</h3>
+              <span class="pstep-wk mono">WK 04–12</span>
+            </div>
+            <p>Long-lead steel, switchgear and rooftop units bought early. Paperwork moves
+            while the market can’t move on you.</p>
+          </li>
+          <li class="pstep">
+            <span class="pstep-node" aria-hidden="true"></span>
+            <div class="pstep-head">
+              <span class="pstep-idx mono">PH-03</span>
+              <h3>SITEWORK &amp; FOUNDATIONS</h3>
+              <span class="pstep-wk mono">WK 10–20</span>
+            </div>
+            <p>Dirt, utilities, concrete. The part nobody photographs and everybody
+            regrets rushing. We don’t rush it.</p>
+          </li>
+          <li class="pstep">
+            <span class="pstep-node" aria-hidden="true"></span>
+            <div class="pstep-head">
+              <span class="pstep-idx mono">PH-04</span>
+              <h3>VERTICAL CONSTRUCTION</h3>
+              <span class="pstep-wk mono">WK 18–44</span>
+            </div>
+            <p>Steel up, dried-in, trades sequenced tight. A superintendent on site every
+            day — the same one who started the job.</p>
+          </li>
+          <li class="pstep">
+            <span class="pstep-node" aria-hidden="true"></span>
+            <div class="pstep-head">
+              <span class="pstep-idx mono">PH-05</span>
+              <h3>CLOSEOUT &amp; WARRANTY</h3>
+              <span class="pstep-wk mono">WK 44–52</span>
+            </div>
+            <p>Punch list measured in days. O&amp;M manuals, as-builts and keys handed over
+            — then we answer the phone for years after.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ================= A-401 — FIELD RECORD / ABOUT ================= -->
+    <section class="about" id="about" data-sheet="A-401">
+      <div class="sheet-tag mono" aria-hidden="true">
+        <span class="sheet-no">SHEET A-401</span>
+        <span class="sheet-name">FIELD RECORD</span>
+      </div>
+
+      <blockquote class="bigquote" id="bigQuote">
+        <p>WE’VE BEEN BUILDING<br>MISSISSIPPI SINCE<br><em>EISENHOWER</em> WAS<br>IN OFFICE.</p>
+      </blockquote>
+
+      <div class="about-grid">
+        <div class="about-copy">
+          <p class="reveal"><strong>Founded in Jackson in 1958,</strong> Mid-State Construction is one
+          of Mississippi’s oldest and largest locally-owned construction firms. Three
+          generations of owners, architects and subcontractors have trusted us with
+          their buildings — many of them twice.</p>
+          <p class="reveal">The reason is boring, and we’re proud of that: an almost unheard-of
+          consistency in quality and efficiency, job after job, decade after decade.
+          No drama. No surprises. No excuses riding on the invoice.</p>
+          <p class="reveal">Today the toolbox includes jobsite technology our founders couldn’t have
+          imagined — live field updates, weekly aerial photography, real-time budget
+          and schedule reporting — but the handshake works exactly like it did in 1958.</p>
+          <div class="about-creds mono reveal">
+            <span>AGC OF MISSISSIPPI</span>
+            <span>ABC MISSISSIPPI</span>
+            <span>GREATER JACKSON CHAMBER</span>
+          </div>
+        </div>
+        <figure class="about-map reveal" id="aboutMap">
+          <!-- @svg:map-mississippi -->
+          <figcaption class="mono">HQ — 300 BRIARWOOD WEST DR, JACKSON, MS<br>CLIENTS THROUGHOUT THE SOUTHEAST</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- ================= A-501 — RFP / CONTACT ================= -->
+    <section class="rfp" id="contact" data-sheet="A-501">
+      <div class="rfp-grid">
+        <div class="rfp-left">
+          <div class="sheet-tag mono sheet-tag-inv" aria-hidden="true">
+            <span class="sheet-no">SHEET A-501</span>
+            <span class="sheet-name">TRANSMITTAL</span>
+          </div>
+          <h2 class="sec-title reveal"><span class="sec-index mono">05</span>PUT US ON<br>YOUR BID<em> LIST.</em></h2>
+          <p class="sec-sub reveal">Tell us what you’re building. We’ll come back with
+          straight answers and a real number.</p>
+
+          <address class="rfp-direct mono">
+            <a class="rfp-line" href="tel:+16019569500" data-cursor="CALL">
+              <span>T</span>(601) 956-9500
+            </a>
+            <a class="rfp-line" href="mailto:pgb@msconst.com" data-cursor="WRITE">
+              <span>E</span>PGB@MSCONST.COM
+            </a>
+            <span class="rfp-line">
+              <span>A</span>300 BRIARWOOD WEST DR<br>JACKSON, MS 39206
+            </span>
+          </address>
+        </div>
+
+        <form class="rfp-form" id="rfpForm" novalidate>
+          <p class="rfp-form-tag mono">REQUEST FOR PROPOSAL — NO OBLIGATION, NO SALES CALL SCRIPT</p>
+          <div class="ff">
+            <label class="mono" for="f-name">01 — YOUR NAME</label>
+            <input id="f-name" name="name" type="text" autocomplete="name" required>
+            <i class="ff-c ff-tl"></i><i class="ff-c ff-br"></i>
+          </div>
+          <div class="ff-row">
+            <div class="ff">
+              <label class="mono" for="f-email">02 — EMAIL</label>
+              <input id="f-email" name="email" type="email" autocomplete="email" required>
+              <i class="ff-c ff-tl"></i><i class="ff-c ff-br"></i>
+            </div>
+            <div class="ff">
+              <label class="mono" for="f-phone">03 — PHONE</label>
+              <input id="f-phone" name="phone" type="tel" autocomplete="tel">
+              <i class="ff-c ff-tl"></i><i class="ff-c ff-br"></i>
+            </div>
+          </div>
+          <div class="ff-row">
+            <div class="ff">
+              <label class="mono" for="f-type">04 — PROJECT TYPE</label>
+              <select id="f-type" name="type">
+                <option>NEW CONSTRUCTION</option>
+                <option>RENOVATION / ADDITION</option>
+                <option>TENANT BUILD-OUT</option>
+                <option>PRECONSTRUCTION ONLY</option>
+                <option>NOT SURE YET</option>
+              </select>
+              <i class="ff-c ff-tl"></i><i class="ff-c ff-br"></i>
+            </div>
+            <div class="ff">
+              <label class="mono" for="f-sf">05 — APPROX. SIZE (SF)</label>
+              <input id="f-sf" name="sf" type="text" inputmode="numeric" placeholder="e.g. 24,000">
+              <i class="ff-c ff-tl"></i><i class="ff-c ff-br"></i>
+            </div>
+          </div>
+          <div class="ff">
+            <label class="mono" for="f-msg">06 — SCOPE, SITE &amp; TIMELINE</label>
+            <textarea id="f-msg" name="message" rows="4"></textarea>
+            <i class="ff-c ff-tl"></i><i class="ff-c ff-br"></i>
+          </div>
+          <button class="btn btn-paper magnetic rfp-submit" type="submit">
+            <span class="btn-ink"></span><span class="btn-label">TRANSMIT RFP →</span>
+          </button>
+          <div class="rfp-done" id="rfpDone" hidden>
+            <div class="stamp stamp-done">
+              <span>RECEIVED</span>
+              <strong>06.12.2026</strong>
+              <span class="stamp-date mono">WE’LL CALL WITHIN 1 BUSINESS DAY</span>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <!-- ================= A-001 — TITLE BLOCK / FOOTER ================= -->
+  <footer class="ftr" data-sheet="A-001">
+    <div class="ftr-titleblock mono" role="contentinfo">
+      <div class="tb-cell tb-logo">
+        <span class="brand-stamp brand-stamp-lg" id="hatTrigger" title="">
+          <svg viewBox="0 0 34 34" aria-hidden="true"><path d="M8 22c0-6 4-11 9-11s9 5 9 11" /><path d="M4 22h26v3H4z"/><path d="M14 11h6v4h-6z"/></svg>
+        </span>
+        <span>MID-STATE<br>CONSTRUCTION</span>
+      </div>
+      <div class="tb-cell"><span class="tb-k">PROJECT</span><span class="tb-v">MSCONST.COM — FULL REDESIGN</span></div>
+      <div class="tb-cell"><span class="tb-k">CLIENT</span><span class="tb-v">MID-STATE CONSTRUCTION, JACKSON MS</span></div>
+      <div class="tb-cell"><span class="tb-k">DRAWN BY</span><span class="tb-v">AK CREATIVE</span></div>
+      <div class="tb-cell"><span class="tb-k">DATE</span><span class="tb-v">06.12.2026</span></div>
+      <div class="tb-cell"><span class="tb-k">SCALE</span><span class="tb-v">NTS</span></div>
+      <div class="tb-cell"><span class="tb-k">SHEET</span><span class="tb-v tb-sheet">A-001</span></div>
+    </div>
+    <div class="ftr-main">
+      <p class="ftr-tag">MEASURE TWICE.<br>BUILD ONCE.<br><em>SINCE 1958.</em></p>
+      <nav class="ftr-nav mono" aria-label="Footer">
+        <a href="#services">SCOPE OF WORK</a>
+        <a href="#work">THE DRAWING SET</a>
+        <a href="#process">CRITICAL PATH</a>
+        <a href="#about">SINCE 1958</a>
+        <a href="#contact">CONTACT</a>
+      </nav>
+      <div class="ftr-meta mono">
+        <a href="https://www.facebook.com/midstateconstructionofmsllc/" rel="noopener" target="_blank">FACEBOOK ↗</a>
+        <a href="https://www.instagram.com/midstate_construction/" rel="noopener" target="_blank">INSTAGRAM ↗</a>
+        <a href="tel:+16019569500">(601) 956-9500</a>
+        <span>© 2026 MID-STATE CONSTRUCTION</span>
+        <span class="ftr-egghint" title="Field note">FIELD NOTE: ↑↑↓↓←→←→BA — FOR THE BLUE SET</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ===== EGG LAYERS ===== -->
+  <div class="toast mono" id="toast" role="status" aria-live="polite"></div>
+  <div class="hats" id="hats" aria-hidden="true"></div>
+
+  <script src="js/main.js" defer></script>
+</body>
+</html>

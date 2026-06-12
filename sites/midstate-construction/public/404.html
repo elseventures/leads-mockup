@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sheet not found — Mid-State Construction</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/css/main.css">
+  <style>
+    .nf {
+      min-height: 100svh; display: grid; place-items: center;
+      text-align: center; padding: 24px; position: relative; z-index: 1;
+    }
+    .nf-code {
+      font-size: clamp(90px, 22vw, 280px); font-weight: 880; font-stretch: 122%;
+      line-height: 0.9; letter-spacing: -0.02em;
+    }
+    .nf-code em { font-style: normal; color: var(--accent); }
+    .nf-tag { margin: 10px 0 6px; font-size: 11px; letter-spacing: 0.22em; color: var(--ink-2); }
+    .nf-sub { color: var(--ink-2); max-width: 44ch; margin: 0 auto 34px; }
+    .nf .stamp { position: absolute; top: 16vh; right: 12vw; opacity: 0.9; }
+    @media (max-width: 700px) { .nf .stamp { display: none; } }
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <filter id="inkbleed" x="-5%" y="-5%" width="110%" height="110%">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" result="n" seed="7"/>
+        <feDisplacementMap in="SourceGraphic" in2="n" scale="1.6"/>
+      </filter>
+    </defs>
+  </svg>
+  <main class="nf">
+    <div>
+      <p class="nf-tag mono">RFI No. 404 — RESPONSE: SHEET NOT IN SET</p>
+      <h1 class="nf-code">4<em>0</em>4</h1>
+      <p class="nf-sub">The drawing you requested isn’t in this set. It may have been
+      superseded, voided, or never issued for construction.</p>
+      <a class="btn" href="/"><span class="btn-ink"></span><span class="btn-label">BACK TO THE COVER SHEET</span></a>
+      <div class="stamp" aria-hidden="true">
+        <span>VOID</span>
+        <strong>SUPERSEDED</strong>
+        <span class="stamp-date mono">SEE SHEET G-000</span>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

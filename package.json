@@ -1,0 +1,19 @@
+{
+  "name": "leads-mockup",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Website mockups for hot leads — one folder per lead, deployable to Cloudflare Pages",
+  "type": "module",
+  "scripts": {
+    "build:midstate": "node sites/midstate-construction/tools/build.mjs",
+    "shoot:midstate": "node tools/shoot.mjs sites/midstate-construction/public shots",
+    "deploy:midstate": "npx wrangler pages deploy sites/midstate-construction/public --project-name=midstate-construction-mockup"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://local_proxy@127.0.0.1:36321/git/elseventures/leads-mockup"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.55.0"
+  }
+}
