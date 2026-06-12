@@ -36,8 +36,10 @@
 /* ---------- reset & base ---------- */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; overflow-x: clip; }
 html:focus-within { scroll-behavior: smooth; }
+
+main { overflow-x: clip; }
 
 section[id] { scroll-margin-top: 92px; }
 
@@ -1326,6 +1328,8 @@ body.loaded .hero__scrollcue { opacity: .8; }
   left: .8rem; right: .8rem;
   bottom: calc(.8rem + env(safe-area-inset-bottom));
   z-index: 950;
+  transform: translateY(calc(100% + 1.8rem));
+  transition: transform .45s var(--ease-out);
   background: linear-gradient(180deg, var(--copper-bright), var(--copper-deep));
   color: var(--paper);
   border: 2px solid var(--ink);
@@ -1342,6 +1346,7 @@ body.loaded .hero__scrollcue { opacity: .8; }
   text-shadow: 0 1px 0 rgb(20 36 32 / .35);
   overflow: hidden;
 }
+body.past-hero:not(.menu-open) .call-bar { transform: translateY(0); }
 .call-bar svg { width: 1.05em; height: 1.05em; flex: none; }
 .call-bar__num { font-weight: 600; opacity: .92; }
 .call-bar__pulse {
@@ -1376,7 +1381,7 @@ body.loaded .hero__scrollcue { opacity: .8; }
   .hero__inner { grid-template-columns: 1fr; }
   .hero__badge-wrap { justify-content: flex-start; order: -1; }
   .hero__badge { width: 150px; }
-  .hero__schematic { width: 100vw; opacity: .04; }
+  .hero__schematic { right: 0; width: 100%; opacity: .04; }
   .services__grid { grid-template-columns: repeat(2, 1fr); }
   .process__steps { grid-template-columns: repeat(2, 1fr); row-gap: 2.6rem; }
   .process__steps::before { display: none; }
@@ -1390,31 +1395,29 @@ body.loaded .hero__scrollcue { opacity: .8; }
   .topline { letter-spacing: .12em; font-size: .6rem; }
   .topline__right { display: none; }
   .nav__phone { display: none; }
-  .hero { min-height: auto; padding-top: 2.2rem; }
+
+  /* hero fills the viewport below the header; scroll cue invites onward */
+  .hero {
+    min-height: calc(100svh - var(--head-h, 92px));
+    padding-top: 1rem;
+    padding-bottom: 4.5rem;
+    justify-content: center;
+  }
   .hero__title { font-size: clamp(2.7rem, 13vw, 4rem); }
   .hero__eyebrow { font-size: .62rem; letter-spacing: .18em; gap: .55rem; margin-bottom: 1.2rem; }
-  .hero__badge { width: 122px; }
-  .hero__badge-wrap { margin-bottom: .4rem; }
+  .hero__badge { width: 118px; }
+  .hero__badge-wrap { margin-bottom: .2rem; }
   .hero__drip { display: none; }
-  .hero__scrollcue { display: none; }
   .ticker__track { animation-duration: 18s; }
 
-  /* services become a snap-scroll rail with a peeking next card */
-  .services__grid {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    gap: 1rem;
-    margin-inline: calc(var(--pad-x) * -1);
-    padding-inline: var(--pad-x);
-    padding-bottom: 1rem;
-    scrollbar-width: none;
+  /* no scroll-based loading on mobile — content is simply there */
+  .reveal {
+    opacity: 1;
+    transform: rotate(var(--tilt, 0deg));
+    transition: none;
   }
-  .services__grid::-webkit-scrollbar { display: none; }
-  .svc-card {
-    flex: 0 0 78%;
-    scroll-snap-align: center;
-  }
+
+  .services__grid { grid-template-columns: 1fr; }
 
   .standard__stats { grid-template-columns: 1fr; gap: 1.6rem; }
   .stat { display: flex; align-items: baseline; gap: 1rem; }
@@ -1426,7 +1429,13 @@ body.loaded .hero__scrollcue { opacity: .8; }
   .footer__grid { grid-template-columns: 1fr; gap: 2rem; }
   .footer__legal { padding-bottom: 7.5rem; flex-direction: column; gap: .4rem; }
   .call-bar { display: flex; }
-  .gauge { width: 54px; height: 54px; right: .8rem; bottom: calc(5.2rem + env(safe-area-inset-bottom)); }
+  .gauge {
+    width: 54px; height: 54px;
+    right: .8rem;
+    bottom: calc(.9rem + env(safe-area-inset-bottom));
+    transition: bottom .45s var(--ease-out), transform .3s var(--ease-spring);
+  }
+  body.past-hero:not(.menu-open) .gauge { bottom: calc(5.2rem + env(safe-area-inset-bottom)); }
   .duck { right: 34%; bottom: 84px; width: 46px; }
   .footer__water { height: 50px; }
   .mobile-menu { display: flex; }

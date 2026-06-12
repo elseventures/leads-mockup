@@ -10,9 +10,12 @@
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
   /* ---------- page-load choreography ---------- */
-  window.addEventListener("load", () => document.body.classList.add("loaded"));
-  // fallback if load stalls on slow fonts
-  setTimeout(() => document.body.classList.add("loaded"), 1800);
+  // wait for fonts so the entrance plays on settled layout (no mid-animation reflow)
+  const fontsReady = document.fonts ? document.fonts.ready : Promise.resolve();
+  const windowLoaded = new Promise((r) => window.addEventListener("load", r, { once: true }));
+  Promise.all([fontsReady, windowLoaded]).then(() => document.body.classList.add("loaded"));
+  // fallback if either stalls
+  setTimeout(() => document.body.classList.add("loaded"), 2500);
 
   /* ---------- header / scroll state ---------- */
   const head = $(".site-head");
@@ -23,6 +26,11 @@
   const badge = $(".hero__badge-wrap");
 
   let joints = [];
+
+  // expose real header height so the mobile hero can fill the rest of the viewport
+  const measureHead = () =>
+    document.documentElement.style.setProperty("--head-h", `${head.offsetHeight}px`);
+  measureHead();
 
   const buildJoints = () => {
     const holder = $(".pipe-rail__joints");
@@ -77,7 +85,16 @@
     clearTimeout(resizeT);
     resizeT = setTimeout(() => { buildJoints(); onScroll(); }, 200);
   });
-  window.addEventListener("load", () => { buildJoints(); onScroll(); });
+  window.addEventListener("load", () => { measureHead(); buildJoints(); onScroll(); });
+
+  /* ---------- hide the call bar while the hero is on screen ---------- */
+  const heroEl = $(".hero");
+  if (heroEl) {
+    new IntersectionObserver(
+      ([en]) => document.body.classList.toggle("past-hero", !en.isIntersecting),
+      { threshold: 0.25 }
+    ).observe(heroEl);
+  }
 
   /* ---------- hero schematic mouse parallax ---------- */
   const hero = $(".hero");
@@ -132,6 +149,7 @@
     menu.classList.toggle("open", open);
     burger.setAttribute("aria-expanded", open);
     menu.setAttribute("aria-hidden", !open);
+    document.body.classList.toggle("menu-open", open);
     document.body.style.overflow = open ? "hidden" : "";
   };
   burger.addEventListener("click", () => setMenu(!menu.classList.contains("open")));
