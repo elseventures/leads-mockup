@@ -15,7 +15,8 @@ sites/
 tools/
   site.mjs                # standardized build / dev / deploy CLI for every site
 data/
-  source/                 # the AK Creative lead list (.xlsx) — the source of lead facts
+  leads.json              # parsed lead facts, grouped by archetype + per-lead status/branch
+  source/                 # the original AK Creative lead list (.xlsx)
 ```
 
 Every site is driven by the same three verbs (`build`, `dev`, `deploy`) via
@@ -49,10 +50,12 @@ An agent is normally spun up to do **exactly one of them, on its own branch.**
   `"not_found_handling": "single-page-application"` and a current
   `compatibility_date` in `wrangler.jsonc`.
 - **Local preview.** `npm run dev -- <slug>` — see the CLI section below.
-- **Facts only.** Use a lead's *real, given* facts (the lead list in `data/source/`,
-  or the brief you're handed). Never invent reviews, ratings, awards, dates,
-  certifications, or claims — list the grounded facts you used (see each site's
-  `README.md` for the pattern).
+- **Facts only.** Pull your lead's *real* facts from `data/leads.json` (parsed,
+  grouped by archetype; carries per-lead `status`/`siteSlug`/`branch` and a
+  `branchKey` explaining what every branch is). It contains **no design direction**
+  on purpose — that's yours to invent. Never fabricate reviews, ratings, awards,
+  dates, certifications, or claims — list the grounded facts you used (see each
+  site's `README.md` for the pattern).
 - **One branch per piece of work, branched off `main`.** Name it
   `template/<archetype>` or `mockup/<lead-slug>`.
 - **Quality bar & skills.** Distinctive, hand-crafted, a *named* design concept,
