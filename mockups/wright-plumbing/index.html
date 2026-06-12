@@ -6,16 +6,20 @@
   <title>Wright Plumbing, Inc. — Plumbing in Madison, MS</title>
   <meta name="description" content="Wright Plumbing, Inc. — Plumbing serving Madison, MS and the surrounding metro. Upfront pricing, tidy workmanship, guaranteed. Call (601) 898-3223.">
   <meta name="theme-color" content="#1d4ed8">
+  <meta property="og:title" content="Wright Plumbing, Inc. — Plumbing in Madison, MS">
+  <meta property="og:description" content="Straight answers, tidy work, and a price agreed before we start. Call (601) 898-3223.">
+  <meta property="og:type" content="website">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="assets/css/custom.css">
 </head>
 <body data-name="Wright Plumbing, Inc.">
 
   <a class="skip-link" href="#services">Skip to content</a>
+  <div class="progress" aria-hidden="true"><span></span></div>
 
   <!-- ============ HEADER ============ -->
   <header class="site-header" id="top">
@@ -47,7 +51,7 @@
             <span class="line"><span>Done right,</span></span>
             <span class="line"><span><em>the first time.</em></span></span>
           </h1>
-          <div class="hero-lede" data-reveal>
+          <div class="hero-lede">
             <p>Straight answers, tidy work, and a price agreed before we start. Serving Madison and the surrounding metro.</p>
             <div class="hero-actions">
               <a class="btn btn-fill btn-lg magnetic" href="tel:6018983223">Call (601) 898-3223</a>
@@ -55,13 +59,29 @@
             </div>
           </div>
         </div>
-        <figure class="plate hero-plate" data-reveal style="--i:1">
+        <figure class="plate hero-plate" data-tilt>
+          <!-- Technical schematic — placeholder artwork until client photography lands -->
+          <svg class="plate-art" viewBox="0 0 400 500" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+            <g class="plate-frame">
+              <path d="M14 34 V14 H34 M366 14 H386 V34 M386 466 V486 H366 M34 486 H14 V466"/>
+            </g>
+            <g class="plate-lines">
+              <line x1="200" y1="14" x2="200" y2="486" stroke-dasharray="1 6"/>
+              <line x1="14" y1="232" x2="386" y2="232" stroke-dasharray="1 6"/>
+              <circle cx="200" cy="232" r="148"/>
+              <circle cx="200" cy="232" r="104" stroke-dasharray="2 7" class="plate-spin"/>
+              <circle cx="200" cy="232" r="56"/>
+              <circle cx="200" cy="232" r="3" class="plate-dot"/>
+              <path d="M52 444 H348" class="plate-dim"/>
+              <path d="M52 438 V450 M348 438 V450"/>
+            </g>
+            <text x="200" y="468" text-anchor="middle" class="plate-text">REF 01 — SERVICE, TESTED &amp; SEALED</text>
+          </svg>
           <span class="plate-monogram" aria-hidden="true"></span>
-          <!-- Replace with client photography: crew, van, or work in progress -->
           <figcaption class="plate-caption mono">Fig. 01 — On site, Madison</figcaption>
         </figure>
       </div>
-      <div class="container spec-strip mono" data-reveal style="--i:2">
+      <div class="container spec-strip mono">
         <!-- Hours are placeholder — confirm with client -->
         <span>Licensed &amp; insured</span>
         <span>Locally owned &amp; operated</span>
@@ -82,7 +102,7 @@
     <section class="section" id="services">
       <div class="container">
         <header class="section-head" data-reveal>
-          <p class="eyebrow mono">What we do</p>
+          <p class="eyebrow mono"><span>What we do</span><i class="rule"></i><span>01</span></p>
           <h2>Four things,<br><em>done properly.</em></h2>
         </header>
         <div class="svc-list">
@@ -101,13 +121,13 @@
           <a class="svc" href="#contact" data-reveal style="--i:2">
             <span class="svc-num mono">03</span>
             <span class="svc-name">Maintenance</span>
-            <span class="svc-desc">Scheduled check-ups that catch small problems while they're still small.</span>
+            <span class="svc-desc">Scheduled check-ups that catch small problems while they’re still small.</span>
             <span class="svc-arrow" aria-hidden="true">&rarr;</span>
           </a>
           <a class="svc" href="#contact" data-reveal style="--i:3">
             <span class="svc-num mono">04</span>
             <span class="svc-name">Emergencies</span>
-            <span class="svc-desc">Same-day response when something can't wait until Monday.</span>
+            <span class="svc-desc">Same-day response when something can’t wait until Monday.</span>
             <span class="svc-arrow" aria-hidden="true">&rarr;</span>
           </a>
         </div>
@@ -118,21 +138,24 @@
     <section class="section section-tint" id="process">
       <div class="container">
         <header class="section-head" data-reveal>
-          <p class="eyebrow mono">How we work</p>
-          <h2>No surprises.<br><em>That's the job.</em></h2>
+          <p class="eyebrow mono"><span>How we work</span><i class="rule"></i><span>02</span></p>
+          <h2>No surprises.<br><em>That’s the job.</em></h2>
         </header>
         <ol class="steps">
           <li class="step" data-reveal>
+            <span class="step-ghost" aria-hidden="true">1</span>
             <span class="step-num mono">Step 01</span>
             <h3>Call us</h3>
-            <p>Tell us what's wrong. A real person answers, and we book a time that suits you — not a four-hour window.</p>
+            <p>Tell us what’s wrong. A real person answers, and we book a time that suits you — not a four-hour window.</p>
           </li>
           <li class="step" data-reveal style="--i:1">
+            <span class="step-ghost" aria-hidden="true">2</span>
             <span class="step-num mono">Step 02</span>
             <h3>Get a flat quote</h3>
             <p>We diagnose on-site and agree a price before any work begins. The number we quote is the number you pay.</p>
           </li>
           <li class="step" data-reveal style="--i:2">
+            <span class="step-ghost" aria-hidden="true">3</span>
             <span class="step-num mono">Step 03</span>
             <h3>Fixed &amp; guaranteed</h3>
             <p>Tidy workmanship, tested before we leave, and backed by our written guarantee.</p>
@@ -156,9 +179,9 @@
     <section class="section section-tint" id="areas">
       <div class="container area-grid">
         <div data-reveal>
-          <p class="eyebrow mono">Service area</p>
+          <p class="eyebrow mono"><span>Service area</span><i class="rule"></i><span>03</span></p>
           <h2>Close by,<br><em>on time.</em></h2>
-          <p class="area-copy">Based in Madison, we cover the wider Jackson metro — usually within the hour. If you're nearby, you're in range.</p>
+          <p class="area-copy">Based in Madison, we cover the wider Jackson metro — usually within the hour. If you’re nearby, you’re in range.</p>
         </div>
         <ul class="area-list mono" data-reveal style="--i:1">
           <li>Madison</li>
@@ -176,12 +199,13 @@
     <!-- ============ CTA ============ -->
     <section class="cta" id="contact">
       <div class="container">
-        <p class="eyebrow mono" data-reveal>Get in touch</p>
+        <p class="eyebrow mono" data-reveal><span>Get in touch</span></p>
         <h2 class="cta-title" data-reveal style="--i:1">Something<br>need <em>fixing?</em></h2>
-        <p class="cta-sub" data-reveal style="--i:2">Call now, or send a note and we'll call you back the same day.</p>
+        <p class="cta-sub" data-reveal style="--i:2">Call now, or send a note and we’ll call you back the same day.</p>
         <div class="cta-actions" data-reveal style="--i:3">
           <a class="btn btn-paper btn-xl magnetic" href="tel:6018983223">(601) 898-3223</a>
           <a class="cta-email link-arrow" href="mailto:"><span aria-hidden="true">&nbsp;&rarr;</span></a>
+          <p class="cta-hours mono">Mon–Sat &middot; 7am–6pm &middot; Emergency call-outs available</p>
         </div>
       </div>
     </section>
@@ -211,6 +235,7 @@
         <p>Madison, MS &amp; the<br>greater Jackson metro</p>
       </div>
     </div>
+    <div class="footer-mark" aria-hidden="true"><span>Wright Plumbing, Inc.</span></div>
     <div class="container footer-base mono">
       <span>&copy; 2026 Wright Plumbing, Inc. &middot; Licensed &amp; insured</span>
       <span>Site concept — AK Creative</span>
