@@ -12,6 +12,10 @@
 
     "dev:buford-plumbing": "node tools/site.mjs dev buford-plumbing",
     "build:buford-plumbing": "node tools/site.mjs build buford-plumbing",
-    "deploy:buford-plumbing": "node tools/site.mjs deploy buford-plumbing"
+    "deploy:buford-plumbing": "node tools/site.mjs deploy buford-plumbing",
+
+    "dev:midstate-construction": "node tools/site.mjs dev midstate-construction",
+    "build:midstate-construction": "node tools/site.mjs build midstate-construction",
+    "deploy:midstate-construction": "node tools/site.mjs deploy midstate-construction"
   }
 }

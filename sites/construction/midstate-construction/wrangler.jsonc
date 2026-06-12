@@ -1,0 +1,11 @@
+{
+  // Mid-State Construction mockup — Cloudflare Workers static assets
+  // Deploy: npx wrangler deploy   (from this directory, or `npm run deploy -- midstate-construction`)
+  // First time: npx wrangler login
+  "name": "midstate-construction",
+  "compatibility_date": "2026-06-12",
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "single-page-application"
+  }
+}

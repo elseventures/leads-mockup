@@ -9,13 +9,17 @@
  *
  * Commands:
  *   node tools/site.mjs list
- *   node tools/site.mjs build  <slug>
- *   node tools/site.mjs dev    <slug> [--port 8741]
- *   node tools/site.mjs deploy <slug>
+ *   node tools/site.mjs build  [<slug> …]
+ *   node tools/site.mjs dev    [<slug> …] [--port 8741]   # no slug → interactive picker
+ *   node tools/site.mjs deploy [<slug> …]
+ *
+ * `dev` runs every selected site at once, each on its own port (8741, 8742, …),
+ * in a single process. Ctrl+C stops them all.
  */
 import { readdirSync, statSync, existsSync } from 'node:fs';
 import { readFile as readFileAsync } from 'node:fs/promises';
 import { createServer } from 'node:http';
+import { createInterface } from 'node:readline';
 import { spawnSync } from 'node:child_process';
 import { networkInterfaces } from 'node:os';
 import { join, extname, resolve, dirname } from 'node:path';
@@ -67,7 +71,7 @@ function discoverSites() {
       });
     }
   }
-  return out;
+  return out.sort((a, b) => a.slug.localeCompare(b.slug));
 }
 
 function findSite(slug) {
@@ -87,6 +91,12 @@ function findSite(slug) {
     );
   }
   return match;
+}
+
+/** Resolve explicit slugs to sites; with none, fall back to the single-site rule. */
+function sitesFromSlugs(slugs) {
+  if (!slugs.length) return [findSite(undefined)];
+  return slugs.map((s) => findSite(s));
 }
 
 function fail(msg) {
@@ -116,7 +126,8 @@ function build(site) {
   if (r.status !== 0) fail(`build failed for ${site.slug}`);
 }
 
-function dev(site, port) {
+/** Start one static server (with SPA fallback) for a site. Resolves to the server. */
+function startServer(site, port) {
   build(site);
   const root = site.public;
   const indexPath = join(root, 'index.html');
@@ -143,14 +154,86 @@ function dev(site, port) {
     }
   });
 
-  server.listen(port, '0.0.0.0', () => {
-    const lan = lanAddress();
-    console.log(`\n  ${site.slug} — serving ${root}\n`);
-    console.log(`  Local:   http://localhost:${port}`);
-    if (lan) console.log(`  Network: http://${lan}:${port}   ← open this on your phone (same Wi-Fi)`);
-    console.log(`\n  Ctrl+C to stop.\n`);
+  return new Promise((resolveServer, rejectServer) => {
+    server.once('error', rejectServer);
+    server.listen(port, '0.0.0.0', () => resolveServer(server));
   });
-  server.on('error', (e) => fail(`could not start server on port ${port}: ${e.message}`));
+}
+
+/** Run one or more sites concurrently, each on its own port starting at basePort. */
+async function dev(sites, basePort) {
+  const started = [];
+  let port = basePort;
+  for (const site of sites) {
+    try {
+      await startServer(site, port);
+    } catch (e) {
+      fail(`could not start ${site.slug} on port ${port}: ${e.message}` +
+        (e.code === 'EADDRINUSE' ? `  (try --port <free-port>)` : ''));
+    }
+    started.push({ site, port });
+    port++;
+  }
+
+  const lan = lanAddress();
+  const label = started.length === 1 ? 'site' : 'sites';
+  console.log(`\n  Serving ${started.length} ${label}:\n`);
+  for (const { site, port } of started) {
+    const local = `http://localhost:${port}`;
+    const net = lan ? `http://${lan}:${port}` : '';
+    console.log(`  ${site.slug.padEnd(24)} ${local.padEnd(26)} ${net}`);
+  }
+  if (lan) {
+    console.log(`\n  Network URLs (right) open on a phone on the same Wi-Fi.`);
+  }
+  console.log(`\n  Ctrl+C to stop${started.length > 1 ? ' all' : ''}.\n`);
+}
+
+/** Interactive picker when `dev` is run with no slugs. Returns chosen sites. */
+async function pickSites(sites) {
+  console.log(`\n  Which site(s) do you want to run?\n`);
+  sites.forEach((s, i) => {
+    console.log(`  ${String(i + 1).padStart(2)}.  ${s.slug.padEnd(24)} ${s.category}`);
+  });
+  console.log(
+    `\n  Enter numbers ("1 3"), a range ("1-2"), names, or "all".` +
+      `  Empty = all.\n`
+  );
+  const rl = createInterface({ input: process.stdin, output: process.stdout });
+  const answer = await new Promise((res) =>
+    rl.question('  > ', (a) => {
+      rl.close();
+      res(a.trim());
+    })
+  );
+  return resolveSelection(answer, sites);
+}
+
+/** Parse a picker/CLI selection string into a de-duped, ordered site list. */
+function resolveSelection(input, sites) {
+  if (!input || input.toLowerCase() === 'all') return sites;
+  const picked = new Map();
+  for (const tok of input.split(/[\s,]+/).filter(Boolean)) {
+    const range = tok.match(/^(\d+)-(\d+)$/);
+    if (range) {
+      let [a, b] = [Number(range[1]), Number(range[2])];
+      if (a > b) [a, b] = [b, a];
+      for (let i = a; i <= b; i++) {
+        const s = sites[i - 1];
+        if (s) picked.set(s.slug, s);
+      }
+    } else if (/^\d+$/.test(tok)) {
+      const s = sites[Number(tok) - 1];
+      if (!s) fail(`No site #${tok}.`);
+      picked.set(s.slug, s);
+    } else {
+      const s = sites.find((x) => x.slug === tok);
+      if (!s) fail(`No site named "${tok}".`);
+      picked.set(s.slug, s);
+    }
+  }
+  if (!picked.size) fail('No sites selected.');
+  return [...picked.values()];
 }
 
 function deploy(site) {
@@ -173,32 +256,46 @@ function list() {
 }
 
 // --- arg parsing ---------------------------------------------------------
-const [cmd, ...rest] = process.argv.slice(2);
-const slug = rest.find((a) => !a.startsWith('-'));
-const portFlagIdx = rest.indexOf('--port');
-const port = portFlagIdx >= 0 ? Number(rest[portFlagIdx + 1]) : Number(process.env.PORT) || DEFAULT_PORT;
+const cmd = process.argv[2];
+const rest = process.argv.slice(3);
+let port = Number(process.env.PORT) || DEFAULT_PORT;
+const slugs = [];
+for (let i = 0; i < rest.length; i++) {
+  const a = rest[i];
+  if (a === '--port' || a === '-p') {
+    port = Number(rest[++i]);
+    continue;
+  }
+  if (a.startsWith('-')) continue;
+  slugs.push(a);
+}
+
+const usage =
+  `Usage:\n` +
+  `  node tools/site.mjs list\n` +
+  `  node tools/site.mjs build  [<slug> …]\n` +
+  `  node tools/site.mjs dev    [<slug> …] [--port ${DEFAULT_PORT}]   (no slug → picker)\n` +
+  `  node tools/site.mjs deploy [<slug> …]\n`;
 
 switch (cmd) {
   case 'list':
     list();
     break;
   case 'build':
-    build(findSite(slug));
+    for (const s of sitesFromSlugs(slugs)) build(s);
     break;
   case 'dev':
-  case 'serve':
-    dev(findSite(slug), port);
+  case 'serve': {
+    const all = discoverSites();
+    if (!all.length) fail('No sites found under sites/.');
+    const chosen = slugs.length ? slugs.map((s) => findSite(s)) : await pickSites(all);
+    await dev(chosen, port);
     break;
+  }
   case 'deploy':
-    deploy(findSite(slug));
+    for (const s of sitesFromSlugs(slugs)) deploy(s);
     break;
   default:
-    console.log(
-      `Usage:\n` +
-        `  node tools/site.mjs list\n` +
-        `  node tools/site.mjs build  <slug>\n` +
-        `  node tools/site.mjs dev    <slug> [--port ${DEFAULT_PORT}]\n` +
-        `  node tools/site.mjs deploy <slug>\n`
-    );
+    console.log(usage);
     process.exit(cmd ? 1 : 0);
 }

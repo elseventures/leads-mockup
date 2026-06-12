@@ -25,11 +25,12 @@ HTML or has a generator step.
 | Archetype | Lead | Design concept | Status |
 |---|---|---|---|
 | `home-services` | Buford Plumbing Company, Jackson MS (lead score 9) | "The Copper Standard" — heritage trade-craft: cream paper / pine ink / copper-pipe accents, Fraunces + Libre Franklin + IBM Plex Mono, scroll-driven copper pipe that fills with water, pressure-gauge scroll indicator, work-order testimonial tickets, hand-drawn SVG metro map | Built ✔ |
+| `construction` | Mid-State Construction, Jackson MS (lead score 9) | "The Working Drawing" — the whole site is art-directed as a set of construction documents: numbered sheets, drafting-paper palette, ink hairlines, safety-orange accents, self-drawing isometric buildings (30° geometry), pinned horizontal drawing-set scrub, rubber stamps with ink-bleed, CAD crosshair cursor. Has a generator step (`tools/build.mjs` + `tools/iso-art.mjs`). | Built ✔ |
 
-The home-services template is designed to re-skin for the other home-services
-HOT leads (electrical, HVAC, pest control, roofing, lawn care…): swap the copy,
-service cards, map labels, and accent hue — the structure, motion, and
-component system carry over.
+Each archetype is designed to re-skin for the other HOT leads in its category —
+swap the copy, service cards, map labels, and accent hue; the structure, motion,
+and component system carry over. (home-services → electrical, HVAC, pest control,
+roofing, lawn care…; construction → GCs, roofing, masonry, paving, concrete…)
 
 ### Easter eggs (home-services)
 
@@ -47,10 +48,20 @@ All commands run from the repo root. `<slug>` is the lead folder name
 ```sh
 npm run sites                       # list every site
 
-npm run build  -- <slug>            # regenerate public/ (no-op for static sites)
-npm run dev    -- <slug>            # local + LAN preview (phone-ready) on :8741
-npm run deploy -- <slug>            # build, then wrangler deploy to Cloudflare
+npm run build  -- <slug> [<slug>…]  # regenerate public/ (no-op for static sites)
+npm run dev                         # interactive picker → run one or several at once
+npm run dev    -- <slug> [<slug>…]  # local + LAN preview (phone-ready), :8741, :8742…
+npm run deploy -- <slug> [<slug>…]  # build, then wrangler deploy to Cloudflare
 ```
+
+### Pick what to run locally (one or many)
+
+`npm run dev` with **no slug** prints a numbered menu of every site and waits for
+a selection — type numbers (`1 3`), a range (`1-2`), names, or `all` (empty =
+all). Each selected site runs in the **same process** on its own port starting at
+`:8741` (`:8742`, `:8743`, …); one `Ctrl+C` stops them all. Pass slugs directly to
+skip the menu: `npm run dev -- buford-plumbing midstate-construction`. Change the
+base port with `--port 9000`.
 
 Per-site shortcuts mirror the same verbs (add three lines to `package.json`
 when you add a lead):
