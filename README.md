@@ -26,6 +26,8 @@ templates/
                         #   septic, locksmith, garage doors, security, cleaning, moving
   construction/         # builders, GCs, roofing, masonry, paving, foundation, fence,
                         #   flooring, windows/doors, drywall, painting, demo, gutters
+  construction-v1/      # original construction starter, kept as version 1
+                        #   (not assigned to leads; they use construction/)
   outdoor-services/     # lawn care, landscaping, irrigation, tree service,
                         #   pressure washing, pool service
   restaurant/           # restaurants, food truck, catering

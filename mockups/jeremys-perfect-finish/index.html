@@ -3,103 +3,292 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jeremy's Perfect Finish | Drywall Contractor in Jackson, MS</title>
-  <meta name="description" content="Jeremy's Perfect Finish — quality Drywall Contractor serving Jackson, MS and surrounding areas. Call (662) 934-0062 for a free estimate.">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#b45309',
-            secondary: '#1c1917',
-            accent: '#eab308'
-          }
-        }
-      }
-    };
-  </script>
+  <title>Jeremy's Perfect Finish — Drywall Contractor in Jackson, MS</title>
+  <meta name="description" content="Jeremy's Perfect Finish — Drywall Contractor serving Jackson, MS and the greater Jackson metro. Written scopes, real schedules, clean handovers. Call (662) 934-0062 for a free estimate.">
+  <meta name="theme-color" content="#b45309">
+  <meta property="og:title" content="Jeremy's Perfect Finish — Drywall Contractor in Jackson, MS">
+  <meta property="og:description" content="Built to spec, built to last. Free estimates in the Jackson metro — call (662) 934-0062.">
+  <meta property="og:type" content="website">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="assets/css/custom.css">
 </head>
-<body class="bg-white text-gray-800">
+<body data-name="Jeremy's Perfect Finish">
 
-  <!-- Header / Nav -->
-  <header class="bg-secondary text-white sticky top-0 z-50 shadow">
-    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-      <a href="#" class="text-xl md:text-2xl font-bold">Jeremy's Perfect Finish</a>
-      <nav class="hidden md:flex gap-6 font-medium">
-        <a href="#services" class="hover:text-accent">What We Do</a>
-        <a href="#projects" class="hover:text-accent">Projects</a>
-        <a href="#contact" class="hover:text-accent">Free Estimate</a>
+  <a class="skip-link" href="#services">Skip to content</a>
+  <div class="progress" aria-hidden="true"><span></span></div>
+
+  <!-- ============ HEADER ============ -->
+  <header class="site-header" id="top">
+    <div class="container header-grid">
+      <a href="#top" class="logotype">
+        <span class="logomark" aria-hidden="true"></span>
+        <span class="logotype-text">
+          <span class="logotype-name">Jeremy's Perfect Finish</span>
+          <span class="logotype-place mono">Jackson, MS</span>
+        </span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#services">Services</a>
+        <a href="#process">Process</a>
+        <a href="#projects">Projects</a>
+        <a href="#areas">Area</a>
       </nav>
-      <a href="tel:6629340062" class="bg-accent text-secondary font-bold px-4 py-2 rounded hover:opacity-90">(662) 934-0062</a>
+      <div class="header-actions">
+        <a class="header-phone mono" href="tel:6629340062">(662) 934-0062</a>
+        <a class="btn btn-fill" href="#contact">Free estimate</a>
+      </div>
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="bg-secondary text-white">
-    <div class="max-w-6xl mx-auto px-4 py-20 md:py-32">
-      <p class="text-accent font-bold uppercase tracking-widest">Drywall Contractor &middot; Jackson, MS</p>
-      <h1 class="mt-4 text-3xl md:text-6xl font-extrabold leading-tight max-w-3xl">Built Right.<br>Built to Last.</h1>
-      <p class="mt-6 text-lg md:text-xl text-white/70 max-w-2xl">Proudly serving Jackson and the surrounding area.</p>
-      <div class="mt-10 flex flex-col sm:flex-row gap-4">
-        <a href="#contact" class="bg-accent text-secondary font-bold px-8 py-4 rounded text-lg text-center hover:opacity-90">Get a Free Estimate</a>
-        <a href="tel:6629340062" class="border-2 border-white/40 font-bold px-8 py-4 rounded text-lg text-center hover:border-accent hover:text-accent">Call (662) 934-0062</a>
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="hero-grid-bg" aria-hidden="true"></div>
+      <div class="container hero-grid">
+        <div class="hero-main">
+          <p class="eyebrow mono hero-eyebrow"><span class="line"><span>Drywall Contractor — Jackson, Mississippi</span></span></p>
+          <h1 class="hero-title">
+            <span class="line"><span>Built to spec.</span></span>
+            <span class="line"><span><b>Built to last.</b></span></span>
+          </h1>
+          <div class="hero-dim mono" aria-hidden="true">
+            <i class="dim-tick"></i><i class="dim-line"></i>
+            <span>Est. on the job — Jackson, MS</span>
+            <i class="dim-line"></i><i class="dim-tick"></i>
+          </div>
+          <div class="hero-lede">
+            <p>Written scopes, real schedules, and a site left clean every day. Jeremy's Perfect Finish serves Jackson and the greater Jackson metro.</p>
+            <div class="hero-actions">
+              <a class="btn btn-fill btn-lg magnetic" href="tel:6629340062">Call (662) 934-0062</a>
+              <a class="link-arrow" href="#contact">Get a free estimate<span aria-hidden="true">&nbsp;&rarr;</span></a>
+            </div>
+          </div>
+        </div>
+        <figure class="board hero-board" data-tilt>
+          <!-- Elevation drawing — placeholder artwork until project photography lands -->
+          <svg class="board-art" viewBox="0 0 460 560" fill="none" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
+            <g class="board-frame">
+              <path d="M16 38 V16 H38 M422 16 H444 V38 M444 522 V544 H422 M38 544 H16 V522"/>
+            </g>
+            <g class="board-grid">
+              <path d="M16 130 H444 M16 230 H444 M16 330 H444 M16 430 H444 M115 16 V544 M230 16 V544 M345 16 V544" stroke-dasharray="1 7"/>
+            </g>
+            <g class="board-lines">
+              <!-- ground line -->
+              <path class="draw" d="M40 430 H420"/>
+              <!-- main structure: gabled elevation -->
+              <path class="draw" d="M88 430 V270 L196 196 L304 270 V430"/>
+              <path class="draw" d="M88 270 H304"/>
+              <!-- door + windows -->
+              <path class="draw" d="M168 430 V340 H224 V430"/>
+              <path class="draw" d="M112 300 H148 V348 H112 Z M244 300 H280 V348 H244 Z"/>
+              <path class="draw" d="M130 300 V348 M262 300 V348"/>
+              <!-- secondary flat-roof structure -->
+              <path class="draw" d="M304 430 V312 H396 V430"/>
+              <path class="draw" d="M304 312 L396 312"/>
+              <path class="draw" d="M324 344 H376 V392 H324 Z"/>
+              <!-- crane mast + jib -->
+              <path class="draw" d="M64 430 V96 M44 96 H236 M64 76 V96 M236 96 V130 M64 116 L104 96 M64 136 L124 116"/>
+              <circle class="board-dot" cx="236" cy="138" r="4"/>
+            </g>
+            <g class="board-dims">
+              <path class="draw" d="M88 470 H304 M88 462 V478 M304 462 V478"/>
+              <text x="196" y="494" text-anchor="middle" class="board-text">ELEVATION A — Jackson, MS</text>
+            </g>
+            <text x="230" y="60" text-anchor="middle" class="board-text board-ref">REF 01 — SCOPED, SCHEDULED &amp; SIGNED OFF</text>
+          </svg>
+          <figcaption class="board-caption mono">Fig. 01 — On site, Jackson</figcaption>
+        </figure>
+      </div>
+      <div class="container spec-strip mono">
+        <!-- Hours are placeholder — confirm with client -->
+        <span>Licensed &amp; insured</span>
+        <span>Free written estimates</span>
+        <span>Residential &amp; commercial</span>
+        <span>Mon–Sat &middot; 7am–6pm</span>
+      </div>
+    </section>
+
+    <!-- ============ SERVICES (bento) ============ -->
+    <section class="section" id="services">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow mono"><span>What we build</span><i class="rule"></i><span>01</span></p>
+          <h2>The work,<br><b>in writing.</b></h2>
+        </header>
+        <div class="bento">
+          <a class="cell cell-wide" href="#contact" data-reveal>
+            <span class="cell-num mono">01</span>
+            <h3 class="cell-name">New construction</h3>
+            <p class="cell-desc">From dirt work to final walkthrough — one crew, one written scope, one number you can hold us to.</p>
+            <span class="cell-tag mono">Ground-up builds</span>
+            <span class="cell-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          <a class="cell" href="#contact" data-reveal style="--i:1">
+            <span class="cell-num mono">02</span>
+            <h3 class="cell-name">Renovation &amp; remodeling</h3>
+            <p class="cell-desc">Upgrades planned around how you actually live and work in the space.</p>
+            <span class="cell-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          <a class="cell" href="#contact" data-reveal style="--i:2">
+            <span class="cell-num mono">03</span>
+            <h3 class="cell-name">Repairs &amp; restoration</h3>
+            <p class="cell-desc">Diagnosed at the source and fixed properly — not patched over.</p>
+            <span class="cell-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          <a class="cell cell-wide" href="#contact" data-reveal style="--i:3">
+            <span class="cell-num mono">04</span>
+            <h3 class="cell-name">Commercial &amp; residential</h3>
+            <p class="cell-desc">Homeowners, builders, and businesses across the Jackson metro — same standard on every site.</p>
+            <span class="cell-tag mono">Jackson metro</span>
+            <span class="cell-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROCESS ============ -->
+    <section class="section section-tint" id="process">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow mono"><span>How a job runs</span><i class="rule"></i><span>02</span></p>
+          <h2>No surprises<br><b>on site.</b></h2>
+        </header>
+        <ol class="steps">
+          <li class="step" data-reveal>
+            <span class="step-node" aria-hidden="true"></span>
+            <span class="step-num mono">Phase 01</span>
+            <h3>Walk the site</h3>
+            <p>We meet you on site, measure it ourselves, and talk through what you’re after. The estimate is free and it’s in writing.</p>
+          </li>
+          <li class="step" data-reveal style="--i:1">
+            <span class="step-node" aria-hidden="true"></span>
+            <span class="step-num mono">Phase 02</span>
+            <h3>Scope &amp; schedule</h3>
+            <p>You get a fixed scope, a real start date, and a timeline we actually keep. Changes get priced before they happen — never after.</p>
+          </li>
+          <li class="step" data-reveal style="--i:2">
+            <span class="step-node" aria-hidden="true"></span>
+            <span class="step-num mono">Phase 03</span>
+            <h3>Build &amp; hand over</h3>
+            <p>A tidy site every evening, straight answers every week, and a final walkthrough before we call it done.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ PULL QUOTE ============ -->
+    <section class="section quote-section">
+      <div class="container">
+        <!-- Representative copy — replace with the client's own customer review before presenting as final -->
+        <blockquote class="pull-quote" data-reveal>
+          <p>&ldquo;They told us what it would cost, when it would be done, and then did exactly that. You don&rsquo;t forget a contractor like&nbsp;that.&rdquo;</p>
+          <footer class="mono">Project client — Jackson, MS</footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section class="section section-tint" id="projects">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow mono"><span>Recent work</span><i class="rule"></i><span>03</span></p>
+          <h2>Proof,<br><b>poured &amp; framed.</b></h2>
+        </header>
+        <div class="projects-grid">
+          <!-- Placeholder plates — drop real project photos into assets/img/ and swap these in -->
+          <figure class="project" data-reveal>
+            <div class="project-frame" aria-hidden="true"><span>Photo<br>to come</span></div>
+            <figcaption class="mono">Project 01 — Jackson, MS</figcaption>
+          </figure>
+          <figure class="project" data-reveal style="--i:1">
+            <div class="project-frame" aria-hidden="true"><span>Photo<br>to come</span></div>
+            <figcaption class="mono">Project 02 — Jackson metro</figcaption>
+          </figure>
+          <figure class="project" data-reveal style="--i:2">
+            <div class="project-frame" aria-hidden="true"><span>Photo<br>to come</span></div>
+            <figcaption class="mono">Project 03 — Jackson metro</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SERVICE AREA ============ -->
+    <section class="section" id="areas">
+      <div class="container area-grid">
+        <div data-reveal>
+          <p class="eyebrow mono"><span>Service area</span><i class="rule"></i><span>04</span></p>
+          <h2>Local crew,<br><b>local jobs.</b></h2>
+          <p class="area-copy">Based in Jackson, we work across the greater Jackson metro. If your lot is nearby, we’ll come walk it.</p>
+        </div>
+        <ul class="area-list mono" data-reveal style="--i:1">
+          <li>Jackson</li>
+          <li>Madison</li>
+          <li>Ridgeland</li>
+          <li>Brandon</li>
+          <li>Flowood</li>
+          <li>Clinton</li>
+          <li>Pearl</li>
+          <li>Byram</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="cta" id="contact">
+      <div class="container">
+        <p class="eyebrow mono" data-reveal><span>Get in touch</span></p>
+        <h2 class="cta-title" data-reveal style="--i:1">Let&rsquo;s break<br><b>ground.</b></h2>
+        <p class="cta-sub" data-reveal style="--i:2">Call now, or send the plans over and we’ll get back to you with a written estimate.</p>
+        <div class="cta-actions" data-reveal style="--i:3">
+          <a class="btn btn-paper btn-xl magnetic" href="tel:6629340062">(662) 934-0062</a>
+          <a class="cta-email link-arrow" href="mailto:"><span aria-hidden="true">&nbsp;&rarr;</span></a>
+          <p class="cta-hours mono">Mon–Sat &middot; 7am–6pm &middot; Free estimates</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <p class="logotype-name">Jeremy's Perfect Finish</p>
+        <p class="footer-tag">Proudly serving Jackson and the surrounding area.</p>
+      </div>
+      <div>
+        <p class="footer-label mono">Contact</p>
+        <a href="tel:6629340062">(662) 934-0062</a>
+        <a href="mailto:"></a>
+      </div>
+      <div>
+        <p class="footer-label mono">Hours</p>
+        <!-- Placeholder hours — confirm with client -->
+        <p>Mon–Sat &middot; 7am–6pm</p>
+        <p>Free written estimates</p>
+      </div>
+      <div>
+        <p class="footer-label mono">Area</p>
+        <p>Jackson, MS &amp; the<br>greater Jackson metro</p>
       </div>
     </div>
-  </section>
-
-  <!-- Services -->
-  <section id="services" class="py-16 md:py-24">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-2xl md:text-4xl font-bold text-secondary">What We Do</h2>
-      <div class="grid md:grid-cols-3 gap-8 mt-12">
-        <div class="border-t-4 border-primary bg-gray-50 p-8">
-          <h3 class="text-xl font-bold text-secondary">New Construction</h3>
-          <p class="mt-3 text-gray-600">From the ground up — quality craftsmanship on every project.</p>
-        </div>
-        <div class="border-t-4 border-primary bg-gray-50 p-8">
-          <h3 class="text-xl font-bold text-secondary">Renovation &amp; Repair</h3>
-          <p class="mt-3 text-gray-600">Skilled work that restores, upgrades, and adds value.</p>
-        </div>
-        <div class="border-t-4 border-primary bg-gray-50 p-8">
-          <h3 class="text-xl font-bold text-secondary">Commercial &amp; Residential</h3>
-          <p class="mt-3 text-gray-600">Trusted by homeowners and businesses across the Jackson metro.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects placeholder -->
-  <section id="projects" class="bg-gray-100 py-16 md:py-24">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-2xl md:text-4xl font-bold text-secondary">Recent Projects</h2>
-      <p class="text-gray-500 mt-2">A few examples of our work in and around Jackson, MS.</p>
-      <div class="grid sm:grid-cols-3 gap-6 mt-12">
-        <div class="aspect-video bg-gray-300 rounded flex items-center justify-center text-gray-500 font-medium">Project Photo</div>
-        <div class="aspect-video bg-gray-300 rounded flex items-center justify-center text-gray-500 font-medium">Project Photo</div>
-        <div class="aspect-video bg-gray-300 rounded flex items-center justify-center text-gray-500 font-medium">Project Photo</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact / CTA -->
-  <section id="contact" class="bg-primary text-white py-16 md:py-24">
-    <div class="max-w-4xl mx-auto px-4 text-center">
-      <h2 class="text-2xl md:text-4xl font-bold">Start Your Project Today</h2>
-      <p class="mt-4 text-white/80 text-lg">Free estimates. Honest answers. Quality work.</p>
-      <a href="tel:6629340062" class="inline-block mt-8 bg-accent text-secondary font-bold px-10 py-4 rounded text-xl hover:opacity-90">(662) 934-0062</a>
-      <p class="mt-6 text-white/70"></p>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-black text-white/60 text-sm py-6">
-    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between gap-2 text-center md:text-left">
-      <span>&copy; 2026 Jeremy's Perfect Finish. All rights reserved.</span>
-      <span>Jackson, MS &middot; (662) 934-0062</span>
+    <div class="footer-mark" aria-hidden="true"><span>Jeremy's Perfect Finish</span></div>
+    <div class="container footer-base mono">
+      <span>&copy; 2026 Jeremy's Perfect Finish &middot; Licensed &amp; insured</span>
+      <span>Site concept — AK Creative</span>
     </div>
   </footer>
+
+  <!-- Mobile call bar -->
+  <div class="call-bar">
+    <a class="btn btn-fill btn-lg" href="tel:6629340062">Call (662) 934-0062</a>
+  </div>
 
   <script src="assets/js/main.js"></script>
 </body>
