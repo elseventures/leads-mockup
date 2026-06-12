@@ -1,0 +1,17 @@
+{
+  "name": "leads-mockup",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Industry-archetype website templates for HOT leads. Each template is a standalone static site served with Vite and deployed to Cloudflare Workers static assets.",
+  "scripts": {
+    "dev:outdoor-services": "vite templates/outdoor-services --host",
+    "build:outdoor-services": "vite build templates/outdoor-services",
+    "preview:outdoor-services": "vite preview templates/outdoor-services --host",
+    "deploy:outdoor-services": "npm run build:outdoor-services && wrangler deploy -c templates/outdoor-services/wrangler.jsonc"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5",
+    "wrangler": "^4.20.0"
+  }
+}

@@ -1,0 +1,10 @@
+{
+  // Cloudflare Workers static-assets deployment for the outdoor-services template.
+  // Deploy with: npm run deploy:outdoor-services  (requires `wrangler login` once)
+  "name": "outdoor-services-template",
+  "compatibility_date": "2026-06-01",
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  }
+}
