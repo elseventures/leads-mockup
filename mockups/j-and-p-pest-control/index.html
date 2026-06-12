@@ -3,110 +3,224 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>J&P Pest Control Inc. | Pest Control in Brandon, MS</title>
-  <meta name="description" content="J&P Pest Control Inc. — trusted Pest Control serving Brandon, MS and surrounding areas. Call (601) 824-1039 today.">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#1d4ed8',
-            secondary: '#0f172a',
-            accent: '#f59e0b'
-          }
-        }
-      }
-    };
-  </script>
+  <title>J&P Pest Control Inc. — Pest Control in Brandon, MS</title>
+  <meta name="description" content="J&P Pest Control Inc. — Pest Control serving Brandon, MS and the surrounding metro. Upfront pricing, tidy workmanship, guaranteed. Call (601) 824-1039.">
+  <meta name="theme-color" content="#1d4ed8">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&display=swap" rel="stylesheet">
+
   <link rel="stylesheet" href="assets/css/custom.css">
 </head>
-<body class="bg-white text-gray-800">
+<body data-name="J&P Pest Control Inc.">
 
-  <!-- Top bar -->
-  <div class="bg-secondary text-white text-sm py-2">
-    <div class="max-w-6xl mx-auto px-4 flex justify-between items-center">
-      <span>Serving Brandon, MS &amp; Surrounding Areas</span>
-      <a href="tel:6018241039" class="font-semibold hover:text-accent">(601) 824-1039</a>
-    </div>
-  </div>
+  <a class="skip-link" href="#services">Skip to content</a>
 
-  <!-- Header / Nav -->
-  <header class="bg-white shadow sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
-      <a href="#" class="text-xl md:text-2xl font-bold text-primary">J&P Pest Control Inc.</a>
-      <nav class="hidden md:flex gap-6 font-medium">
-        <a href="#services" class="hover:text-primary">Services</a>
-        <a href="#why-us" class="hover:text-primary">Why Us</a>
-        <a href="#contact" class="hover:text-primary">Contact</a>
+  <!-- ============ HEADER ============ -->
+  <header class="site-header" id="top">
+    <div class="container header-grid">
+      <a href="#top" class="logotype">
+        <span class="logotype-name">J&P Pest Control Inc.</span>
+        <span class="logotype-place mono">Brandon, MS</span>
+      </a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="#services">Services</a>
+        <a href="#process">How we work</a>
+        <a href="#areas">Service area</a>
       </nav>
-      <a href="tel:6018241039" class="bg-accent text-secondary font-bold px-4 py-2 rounded-lg hover:opacity-90">Call Now</a>
+      <div class="header-actions">
+        <a class="header-phone mono" href="tel:6018241039">(601) 824-1039</a>
+        <a class="btn btn-fill" href="#contact">Request service</a>
+      </div>
     </div>
   </header>
 
-  <!-- Hero -->
-  <section class="bg-primary text-white">
-    <div class="max-w-6xl mx-auto px-4 py-20 md:py-28 text-center">
-      <h1 class="text-3xl md:text-5xl font-extrabold leading-tight">Fast, Reliable Pest Control<br class="hidden md:block"> in Brandon, MS</h1>
-      <p class="mt-4 text-lg md:text-xl text-white/80 max-w-2xl mx-auto">Proudly serving Brandon and the surrounding area.</p>
-      <div class="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="tel:6018241039" class="bg-accent text-secondary font-bold px-8 py-4 rounded-lg text-lg hover:opacity-90">Call (601) 824-1039</a>
-        <a href="#contact" class="border-2 border-white font-bold px-8 py-4 rounded-lg text-lg hover:bg-white hover:text-primary">Request Service</a>
+  <main>
+
+    <!-- ============ HERO ============ -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-main">
+          <p class="eyebrow mono hero-eyebrow"><span class="line"><span>Pest Control — Brandon, Mississippi</span></span></p>
+          <h1 class="hero-title">
+            <span class="line"><span>Done right,</span></span>
+            <span class="line"><span><em>the first time.</em></span></span>
+          </h1>
+          <div class="hero-lede" data-reveal>
+            <p>Straight answers, tidy work, and a price agreed before we start. Serving Brandon and the surrounding metro.</p>
+            <div class="hero-actions">
+              <a class="btn btn-fill btn-lg magnetic" href="tel:6018241039">Call (601) 824-1039</a>
+              <a class="link-arrow" href="#contact">Request service<span aria-hidden="true">&nbsp;&rarr;</span></a>
+            </div>
+          </div>
+        </div>
+        <figure class="plate hero-plate" data-reveal style="--i:1">
+          <span class="plate-monogram" aria-hidden="true"></span>
+          <!-- Replace with client photography: crew, van, or work in progress -->
+          <figcaption class="plate-caption mono">Fig. 01 — On site, Brandon</figcaption>
+        </figure>
+      </div>
+      <div class="container spec-strip mono" data-reveal style="--i:2">
+        <!-- Hours are placeholder — confirm with client -->
+        <span>Licensed &amp; insured</span>
+        <span>Locally owned &amp; operated</span>
+        <span>Upfront, flat-rate pricing</span>
+        <span>Mon–Sat &middot; 7am–6pm</span>
+      </div>
+    </section>
+
+    <!-- ============ TICKER ============ -->
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>Repairs <i>&middot;</i> Installations <i>&middot;</i> Maintenance <i>&middot;</i> Emergency call-outs <i>&middot;</i> </span>
+        <span>Repairs <i>&middot;</i> Installations <i>&middot;</i> Maintenance <i>&middot;</i> Emergency call-outs <i>&middot;</i> </span>
       </div>
     </div>
-  </section>
 
-  <!-- Services -->
-  <section id="services" class="py-16 md:py-24">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-2xl md:text-4xl font-bold text-center text-secondary">Our Services</h2>
-      <p class="text-center text-gray-500 mt-2">Professional service you can count on, every time.</p>
-      <div class="grid md:grid-cols-3 gap-8 mt-12">
-        <div class="border rounded-xl p-8 shadow-sm hover:shadow-md transition">
-          <h3 class="text-xl font-bold text-primary">Repairs</h3>
-          <p class="mt-3 text-gray-600">Prompt diagnosis and lasting repairs, done right the first time.</p>
-        </div>
-        <div class="border rounded-xl p-8 shadow-sm hover:shadow-md transition">
-          <h3 class="text-xl font-bold text-primary">Installation</h3>
-          <p class="mt-3 text-gray-600">Quality installations with professional-grade equipment and materials.</p>
-        </div>
-        <div class="border rounded-xl p-8 shadow-sm hover:shadow-md transition">
-          <h3 class="text-xl font-bold text-primary">Maintenance</h3>
-          <p class="mt-3 text-gray-600">Preventive maintenance plans that save you money down the road.</p>
+    <!-- ============ SERVICES ============ -->
+    <section class="section" id="services">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow mono">What we do</p>
+          <h2>Four things,<br><em>done properly.</em></h2>
+        </header>
+        <div class="svc-list">
+          <a class="svc" href="#contact" data-reveal>
+            <span class="svc-num mono">01</span>
+            <span class="svc-name">Repairs</span>
+            <span class="svc-desc">Diagnosed properly, fixed once, and guaranteed in writing.</span>
+            <span class="svc-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          <a class="svc" href="#contact" data-reveal style="--i:1">
+            <span class="svc-num mono">02</span>
+            <span class="svc-name">Installations</span>
+            <span class="svc-desc">New fixtures and systems, fitted to spec — never rushed.</span>
+            <span class="svc-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          <a class="svc" href="#contact" data-reveal style="--i:2">
+            <span class="svc-num mono">03</span>
+            <span class="svc-name">Maintenance</span>
+            <span class="svc-desc">Scheduled check-ups that catch small problems while they're still small.</span>
+            <span class="svc-arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          <a class="svc" href="#contact" data-reveal style="--i:3">
+            <span class="svc-num mono">04</span>
+            <span class="svc-name">Emergencies</span>
+            <span class="svc-desc">Same-day response when something can't wait until Monday.</span>
+            <span class="svc-arrow" aria-hidden="true">&rarr;</span>
+          </a>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- Why Us -->
-  <section id="why-us" class="bg-gray-50 py-16 md:py-24">
-    <div class="max-w-6xl mx-auto px-4 text-center">
-      <h2 class="text-2xl md:text-4xl font-bold text-secondary">Why Brandon Trusts J&P Pest Control Inc.</h2>
-      <div class="grid sm:grid-cols-3 gap-8 mt-12">
-        <div><div class="text-4xl font-extrabold text-primary">Local</div><p class="mt-2 text-gray-600">Locally owned &amp; operated in Brandon, MS</p></div>
-        <div><div class="text-4xl font-extrabold text-primary">Licensed</div><p class="mt-2 text-gray-600">Licensed &amp; insured professionals</p></div>
-        <div><div class="text-4xl font-extrabold text-primary">Upfront</div><p class="mt-2 text-gray-600">Honest pricing — no surprises</p></div>
+    <!-- ============ PROCESS ============ -->
+    <section class="section section-tint" id="process">
+      <div class="container">
+        <header class="section-head" data-reveal>
+          <p class="eyebrow mono">How we work</p>
+          <h2>No surprises.<br><em>That's the job.</em></h2>
+        </header>
+        <ol class="steps">
+          <li class="step" data-reveal>
+            <span class="step-num mono">Step 01</span>
+            <h3>Call us</h3>
+            <p>Tell us what's wrong. A real person answers, and we book a time that suits you — not a four-hour window.</p>
+          </li>
+          <li class="step" data-reveal style="--i:1">
+            <span class="step-num mono">Step 02</span>
+            <h3>Get a flat quote</h3>
+            <p>We diagnose on-site and agree a price before any work begins. The number we quote is the number you pay.</p>
+          </li>
+          <li class="step" data-reveal style="--i:2">
+            <span class="step-num mono">Step 03</span>
+            <h3>Fixed &amp; guaranteed</h3>
+            <p>Tidy workmanship, tested before we leave, and backed by our written guarantee.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ PULL QUOTE ============ -->
+    <section class="section quote-section">
+      <div class="container">
+        <!-- Representative copy — replace with the client's own customer review before presenting as final -->
+        <blockquote class="pull-quote" data-reveal>
+          <p>&ldquo;They showed up when they said they would, charged exactly what they quoted, and left the place cleaner than they found&nbsp;it.&rdquo;</p>
+          <footer class="mono">Homeowner — Brandon, MS</footer>
+        </blockquote>
+      </div>
+    </section>
+
+    <!-- ============ SERVICE AREA ============ -->
+    <section class="section section-tint" id="areas">
+      <div class="container area-grid">
+        <div data-reveal>
+          <p class="eyebrow mono">Service area</p>
+          <h2>Close by,<br><em>on time.</em></h2>
+          <p class="area-copy">Based in Brandon, we cover the wider Jackson metro — usually within the hour. If you're nearby, you're in range.</p>
+        </div>
+        <ul class="area-list mono" data-reveal style="--i:1">
+          <li>Brandon</li>
+          <li>Madison</li>
+          <li>Ridgeland</li>
+          <li>Brandon</li>
+          <li>Flowood</li>
+          <li>Clinton</li>
+          <li>Pearl</li>
+          <li>Byram</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="cta" id="contact">
+      <div class="container">
+        <p class="eyebrow mono" data-reveal>Get in touch</p>
+        <h2 class="cta-title" data-reveal style="--i:1">Something<br>need <em>fixing?</em></h2>
+        <p class="cta-sub" data-reveal style="--i:2">Call now, or send a note and we'll call you back the same day.</p>
+        <div class="cta-actions" data-reveal style="--i:3">
+          <a class="btn btn-paper btn-xl magnetic" href="tel:6018241039">(601) 824-1039</a>
+          <a class="cta-email link-arrow" href="mailto:information@jppestcontrol.com">information@jppestcontrol.com<span aria-hidden="true">&nbsp;&rarr;</span></a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <p class="logotype-name">J&P Pest Control Inc.</p>
+        <p class="footer-tag">Proudly serving Brandon and the surrounding area.</p>
+      </div>
+      <div>
+        <p class="footer-label mono">Contact</p>
+        <a href="tel:6018241039">(601) 824-1039</a>
+        <a href="mailto:information@jppestcontrol.com">information@jppestcontrol.com</a>
+      </div>
+      <div>
+        <p class="footer-label mono">Hours</p>
+        <!-- Placeholder hours — confirm with client -->
+        <p>Mon–Sat &middot; 7am–6pm</p>
+        <p>Emergency call-outs available</p>
+      </div>
+      <div>
+        <p class="footer-label mono">Area</p>
+        <p>Brandon, MS &amp; the<br>greater Jackson metro</p>
       </div>
     </div>
-  </section>
-
-  <!-- Contact / CTA -->
-  <section id="contact" class="bg-secondary text-white py-16 md:py-24">
-    <div class="max-w-4xl mx-auto px-4 text-center">
-      <h2 class="text-2xl md:text-4xl font-bold">Ready to Get Started?</h2>
-      <p class="mt-4 text-white/80 text-lg">Call us today for a fast, free estimate.</p>
-      <a href="tel:6018241039" class="inline-block mt-8 bg-accent text-secondary font-bold px-10 py-4 rounded-lg text-xl hover:opacity-90">(601) 824-1039</a>
-      <p class="mt-6 text-white/60">information@jppestcontrol.com</p>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-black text-white/60 text-sm py-6">
-    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between gap-2 text-center md:text-left">
-      <span>&copy; 2026 J&P Pest Control Inc.. All rights reserved.</span>
-      <span>Brandon, MS &middot; (601) 824-1039</span>
+    <div class="container footer-base mono">
+      <span>&copy; 2026 J&P Pest Control Inc. &middot; Licensed &amp; insured</span>
+      <span>Site concept — AK Creative</span>
     </div>
   </footer>
+
+  <!-- Mobile call bar -->
+  <div class="call-bar">
+    <a class="btn btn-fill btn-lg" href="tel:6018241039">Call (601) 824-1039</a>
+  </div>
 
   <script src="assets/js/main.js"></script>
 </body>
