@@ -358,6 +358,7 @@ html.classList.add("js");
    Service-area list ↔ map sync
    ------------------------------------------------------------ */
 (() => {
+  if (!finePointer) return;
   document.querySelectorAll(".areas__list li").forEach((li) => {
     const city = document.querySelector(`.map__city[data-city="${li.dataset.city}"]`);
     if (!city) return;

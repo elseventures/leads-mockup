@@ -21,8 +21,8 @@ Serif italic accents, Spline Sans Mono survey labels — all self-hosted, zero e
 requests. The magnolia line-mark is a Mississippi emblem, not a brand name.
 
 2026 trends in play: kinetic variable-font type (hero letters gain weight near the cursor),
-halftone "ghost" typography via background-clip:text (hero line 2, process numbers, footer
-wordmark), scrollytelling with a measuring-tape progress rail, broken grids, grain + texture.
+halftone "ghost" typography via background-clip:text (process numbers, footer wordmark; hero line 2
+is solid moss for readability), scrollytelling with a measuring-tape progress rail, broken grids, grain + texture.
 
 ## What's in it
 
@@ -77,7 +77,7 @@ facts. Code + copy are complete; the following still needs doing:
    Easiest path: build a small HTML card in `public/`, screenshot at 1200×630 with
    Playwright against `npm run dev -- complete-lawn-service-ms`, save, delete the card.
 2. **Screenshot verification pass** (desktop 1440 / tablet 834 / mobile 390): confirm the
-   halftone "EVERY EDGE." hero line, the two NEW service icons (string trimmer on card 02,
+   moss-green "EVERY EDGE." hero line, the two NEW service icons (string trimmer on card 02,
    edger on card 03 — hand-drawn this round, never rendered yet), the push mower added to
    the after-side of the B/A illustration (replaces an old sprinkler), the House Rules
    cards, footer wordmark "COMPLETE / LAWN SERVICE", and the stats band (2009 counter
