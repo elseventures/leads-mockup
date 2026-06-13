@@ -1465,11 +1465,14 @@ html.intro-done .hero__row.reveal-intro .hero__line {
   background: var(--ink);
   padding: 0.6rem 0.7rem calc(0.75rem + env(safe-area-inset-bottom, 0px));
   gap: 0.6rem;
-  transform: translateY(105%);
-  transition: transform 0.5s var(--ease);
+  /* --cb is the scroll progress (0 hidden → 1 fully shown), driven by JS.
+     Opacity tracks scroll directly so it appears the moment you scroll. */
+  opacity: var(--cb, 0);
+  transform: translateY(calc((1 - var(--cb, 0)) * 115%));
+  transition: opacity 0.14s linear, transform 0.28s var(--ease);
   box-shadow: 0 -8px 28px rgba(21, 33, 26, 0.35);
+  pointer-events: none;
 }
-.callbar.is-up { transform: translateY(0); }
 .callbar a {
   display: flex;
   align-items: center;
@@ -1535,6 +1538,26 @@ html.js .card[data-reveal].in:nth-child(3n + 2) { transform: translateY(2.4rem);
   .proof__log { grid-template-columns: 1fr; }
   .footer__cols { grid-template-columns: 1fr 1fr; }
   .hero__stamp { display: none; }
+
+  /* Touch has no hover — the card currently in view gets the desktop
+     hover treatment instead (border, lift, drawn circle + icon), driven
+     by scroll in main.js (.is-active). */
+  .card.is-active {
+    border-color: var(--ink);
+    background: var(--paper);
+    box-shadow: var(--shadow-hard);
+  }
+  .card.is-active .card__circle path { stroke-dashoffset: 0; }
+  .card.is-active .card__icon .draw { stroke-dashoffset: 0; }
+  html.js .card.is-active[data-reveal].in,
+  html.js .card.is-active[data-reveal].in:nth-child(3n + 2) { transform: translateY(-6px); }
+
+  /* footer wordmark reads solid on small screens, not halftone dots */
+  .footer__word > span:first-child {
+    color: var(--paper);
+    -webkit-text-fill-color: var(--paper);
+    background-image: none;
+  }
 }
 
 @media (max-width: 560px) {

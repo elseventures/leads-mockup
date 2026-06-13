@@ -404,28 +404,36 @@ html.classList.add("js");
 })();
 
 /* ------------------------------------------------------------
-   Mobile call bar — shows after the hero, steps aside
-   when the quote form or footer is on screen
+   Mobile call bar — fades in with scroll (invisible at the top,
+   fully shown by half a screen down), and steps aside when the
+   quote form or footer is on screen.
    ------------------------------------------------------------ */
 (() => {
   const bar = document.getElementById("callbar");
   if (!bar) return;
-  let pastHero = false;
   let nearForm = false;
+  let ticking = false;
 
-  const apply = () => bar.classList.toggle("is-up", pastHero && !nearForm);
+  const apply = () => {
+    ticking = false;
+    const mark = innerHeight * 0.5; /* fully visible by half a viewport */
+    let p = Math.min(1, Math.max(0, window.scrollY / mark));
+    if (nearForm) p = 0;
+    bar.style.setProperty("--cb", p.toFixed(3));
+    bar.style.pointerEvents = p > 0.05 ? "auto" : "none";
+  };
 
   addEventListener(
     "scroll",
     () => {
-      const next = window.scrollY > innerHeight * 0.72;
-      if (next !== pastHero) {
-        pastHero = next;
-        apply();
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(apply);
       }
     },
     { passive: true }
   );
+  addEventListener("resize", apply, { passive: true });
 
   if ("IntersectionObserver" in window) {
     const visible = new Map();
@@ -442,6 +450,61 @@ html.classList.add("js");
     quote && io.observe(quote);
     footer && io.observe(footer);
   }
+  apply();
+})();
+
+/* ------------------------------------------------------------
+   Service cards — on touch / narrow screens there is no hover, so
+   the card nearest the viewport centre becomes "active" as you
+   scroll (drawn circle + border + lift). Desktop keeps real hover.
+   ------------------------------------------------------------ */
+(() => {
+  const cards = [...document.querySelectorAll(".services__grid .card")];
+  if (!cards.length) return;
+  const mq = matchMedia("(max-width: 880px)");
+  let active = null;
+  let ticking = false;
+
+  const clear = () => {
+    if (active) active.classList.remove("is-active");
+    active = null;
+  };
+
+  const pick = () => {
+    ticking = false;
+    if (!mq.matches) return clear();
+    const mid = innerHeight / 2;
+    let best = null;
+    let bestD = Infinity;
+    for (const c of cards) {
+      const r = c.getBoundingClientRect();
+      if (r.bottom < 72 || r.top > innerHeight - 72) continue;
+      const d = Math.abs(r.top + r.height / 2 - mid);
+      if (d < bestD) {
+        bestD = d;
+        best = c;
+      }
+    }
+    if (best !== active) {
+      if (active) active.classList.remove("is-active");
+      if (best) best.classList.add("is-active");
+      active = best;
+    }
+  };
+
+  addEventListener(
+    "scroll",
+    () => {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(pick);
+      }
+    },
+    { passive: true }
+  );
+  addEventListener("resize", pick, { passive: true });
+  mq.addEventListener?.("change", pick);
+  pick();
 })();
 
 /* ------------------------------------------------------------
