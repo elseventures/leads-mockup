@@ -15,7 +15,8 @@ sites/
 tools/
   site.mjs                # standardized build / dev / deploy CLI for every site
 data/
-  source/                 # the AK Creative lead list (.xlsx) — the source of lead facts
+  leads.json              # parsed lead facts, grouped by archetype + per-lead status/branch
+  source/                 # the original AK Creative lead list (.xlsx)
 ```
 
 Every site is driven by the same three verbs (`build`, `dev`, `deploy`) via
@@ -31,7 +32,8 @@ An agent is normally spun up to do **exactly one of them, on its own branch.**
    whole industry — its concept, palette, type, motion, and component system. The
    first site built for an archetype becomes its **reference template**: the
    flagship lead's fully-built site that every later lead in that industry re-skins.
-   _Today: `home-services` → `buford-plumbing`, `construction` → `midstate-construction`._
+   _Today: `home-services` → `buford-plumbing`, `construction` → `midstate-construction`,
+   `outdoor-services` → `complete-lawn-service-ms`._
 
 2. **Per-lead mockup.** Take an *existing* archetype's reference template and
    instantiate it for a *specific* lead — swap the copy, branding, accent hue,
@@ -49,10 +51,12 @@ An agent is normally spun up to do **exactly one of them, on its own branch.**
   `"not_found_handling": "single-page-application"` and a current
   `compatibility_date` in `wrangler.jsonc`.
 - **Local preview.** `npm run dev -- <slug>` — see the CLI section below.
-- **Facts only.** Use a lead's *real, given* facts (the lead list in `data/source/`,
-  or the brief you're handed). Never invent reviews, ratings, awards, dates,
-  certifications, or claims — list the grounded facts you used (see each site's
-  `README.md` for the pattern).
+- **Facts only.** Pull your lead's *real* facts from `data/leads.json` (parsed,
+  grouped by archetype; carries per-lead `status`/`siteSlug`/`branch` and a
+  `branchKey` explaining what every branch is). It contains **no design direction**
+  on purpose — that's yours to invent. Never fabricate reviews, ratings, awards,
+  dates, certifications, or claims — list the grounded facts you used (see each
+  site's `README.md` for the pattern).
 - **One branch per piece of work, branched off `main`.** Name it
   `template/<archetype>` or `mockup/<lead-slug>`.
 - **Quality bar & skills.** Distinctive, hand-crafted, a *named* design concept,
@@ -76,26 +80,21 @@ its neighbor, **do not let other designs leak into yours:**
   **never off another design branch**, and don't merge sibling design work into
   yours. This keeps each agent's context clean by construction.
 
-## Archetypes
+## What's been built
 
-| Archetype | Lead | Design concept | Status |
-|---|---|---|---|
-| `home-services` | Buford Plumbing Company, Jackson MS (lead score 9) | "The Copper Standard" — heritage trade-craft: cream paper / pine ink / copper-pipe accents, Fraunces + Libre Franklin + IBM Plex Mono, scroll-driven copper pipe that fills with water, pressure-gauge scroll indicator, work-order testimonial tickets, hand-drawn SVG metro map | Built ✔ |
-| `construction` | Mid-State Construction, Jackson MS (lead score 9) | "The Working Drawing" — the whole site is art-directed as a set of construction documents: numbered sheets, drafting-paper palette, ink hairlines, safety-orange accents, self-drawing isometric buildings (30° geometry), pinned horizontal drawing-set scrub, rubber stamps with ink-bleed, CAD crosshair cursor. Has a generator step (`tools/build.mjs` + `tools/iso-art.mjs`). | Built ✔ |
-| `outdoor-services` | Complete Lawn Service MS, Jackson MS (lead score 9) | "Field-Built Organic Modernism" — bone paper / pine ink / marking-paint orange, survey & topographic motifs, film grain, Bricolage Grotesque + Instrument Serif + Spline Sans Mono, kinetic cursor-weighted hero type, halftone ghost typography, hand-illustrated SVG before/after yard slider dragged by a survey stake, measuring-tape scrollytelling, hand-drawn metro survey map, firefly footer, mower easter egg. | Built — see site README HANDOFF (og.png regen + screenshot pass pending) |
+Three archetype templates exist; each has only its flagship lead built so far.
+Design direction for each lives in that site's own `README.md`, not here.
 
-Each archetype is designed to re-skin for the other HOT leads in its category —
-swap the copy, service cards, map labels, and accent hue; the structure, motion,
-and component system carry over. (home-services → electrical, HVAC, pest control,
-roofing, lawn care…; construction → GCs, roofing, masonry, paving, concrete…)
+| Archetype | Reference template (built lead) | Status |
+|---|---|---|
+| `home-services` | `buford-plumbing` — Buford Plumbing Company, Inc., Jackson MS (lead score 9) | Template built ✔ |
+| `construction` | `midstate-construction` — Mid State Construction, Jackson MS (lead score 9) | Template built ✔ |
+| `outdoor-services` | `complete-lawn-service-ms` — Complete Lawn Service MS LLC, Jackson MS (lead score 9) | Template built ✔ |
 
-### Easter eggs (home-services)
-
-- Click the rubber duck in the footer waves — it squeaks (WebAudio, no assets).
-  Five squeaks summon the flotilla.
-- Type `leak` anywhere — it rains; check the console.
-- The pressure gauge (bottom right) tracks scroll PSI; clicking it vents
-  pressure and returns to top. It trembles at 100 PSI.
+Archetypes defined in `data/leads.json` but **not yet started**:
+`auto-services`, `restaurant`. Each archetype is meant to
+re-skin for the other HOT leads in its category (see `coversIndustries` in
+`data/leads.json`).
 
 ## Standardized workflow
 
