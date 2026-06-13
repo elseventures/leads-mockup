@@ -16,6 +16,10 @@
 
     "dev:midstate-construction": "node tools/site.mjs dev midstate-construction",
     "build:midstate-construction": "node tools/site.mjs build midstate-construction",
-    "deploy:midstate-construction": "node tools/site.mjs deploy midstate-construction"
+    "deploy:midstate-construction": "node tools/site.mjs deploy midstate-construction",
+
+    "dev:complete-lawn-service-ms": "node tools/site.mjs dev complete-lawn-service-ms",
+    "build:complete-lawn-service-ms": "node tools/site.mjs build complete-lawn-service-ms",
+    "deploy:complete-lawn-service-ms": "node tools/site.mjs deploy complete-lawn-service-ms"
   }
 }
