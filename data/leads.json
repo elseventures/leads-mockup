@@ -22,6 +22,7 @@
     "mockup/<lead-slug>": "Convention for a per-lead mockup instantiated from a finished archetype.",
     "fresh-start": "Pre-consolidation branch where the home-services reference template + the site.mjs CLI were built. Now folded into main; kept as backup.",
     "claude/loving-rubin-sn4iaf": "Pre-consolidation branch where the construction reference template (midstate-construction) was built. Now folded into main; kept as backup. (construction-template-mockup-1 is a duplicate of it.)",
+    "template/outdoor-services": "Branch where the outdoor-services reference template (complete-lawn-service-ms) was built. Now folded into main; kept as backup.",
     "archive/scaffold-generation": "TAG. The abandoned pre-\"fresh start\" generation: 53 scaffolded Tailwind/{{TOKEN}} mockups + scripts/scaffold.js, including a construction \"Site Plan\" redesign. Preserved for reference only — do NOT build from it (design isolation).",
     "archive/home-services-v1": "TAG. An earlier home-services design direction, superseded. Reference only.",
     "other-preserved": "Old auto-named branches (claude/vigilant-ride-9c43zu, claude/sharp-pasteur-43k2e1, claude/brave-fermat-scv4ws, add-claude-skills, home-services-template-v1, construction-template-mockup-2-site-plan) are preserved on the remote but superseded. Do not build from them."
@@ -698,7 +699,7 @@
       "referenceTemplate": {
         "leadSlug": "complete-lawn-service-ms",
         "siteSlug": "complete-lawn-service-ms",
-        "branch": "template/outdoor-services"
+        "branch": "main"
       },
       "leadCount": 8,
       "coversIndustries": [
@@ -726,7 +727,7 @@
           "painPoints": "WEBSITE REDESIGN: Current site is not mobile-friendly, outdated design, no SSL security — losing potential customers who visit and leave immediately | SOCIAL MEDIA: Accounts exist but are inactive/abandoned — needs consistent content strategy to stay visible to local customers | GOOGLE ADS + REVIEWS: With only 0 reviews, a Google Ads campaign would drive immediate calls while building review count to outrank competitors",
           "status": "built",
           "siteSlug": "complete-lawn-service-ms",
-          "branch": "template/outdoor-services"
+          "branch": "main"
         },
         {
           "slug": "roc-auto-spa-and-soft-washing",
