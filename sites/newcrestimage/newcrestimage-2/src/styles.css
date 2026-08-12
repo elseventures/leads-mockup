@@ -1,0 +1,182 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * NewcrestImage brand system.
+ * Palette: Navy / Deep Teal / Sage / Stone / Sand / Gold.
+ * Type: Cormorant Garamond (display serif) + Inter (body).
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-navy: var(--navy);
+  --color-teal: var(--teal);
+  --color-sage: var(--sage);
+  --color-stone: var(--stone);
+  --color-sand: var(--sand);
+  --color-gold: var(--gold);
+  --color-gold-soft: var(--gold-soft);
+
+  --font-serif: "Cormorant Garamond", "Canela", Georgia, serif;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+:root {
+  --radius: 0.25rem;
+
+  /* Brand palette converted to oklch */
+  --navy: oklch(0.22 0.035 240);          /* #0D1B2A */
+  --teal: oklch(0.31 0.035 175);          /* #1F3D3A */
+  --sage: oklch(0.55 0.025 150);          /* #6B7D6B */
+  --stone: oklch(0.86 0.008 90);          /* #D9D6CF */
+  --sand: oklch(0.95 0.012 85);           /* #F1EDE4 */
+  --gold: oklch(0.65 0.10 75);            /* #B5893C */
+  --gold-soft: oklch(0.75 0.08 80);
+
+  --background: var(--sand);
+  --foreground: var(--navy);
+  --card: oklch(0.98 0.006 85);
+  --card-foreground: var(--navy);
+  --popover: var(--card);
+  --popover-foreground: var(--navy);
+  --primary: var(--navy);
+  --primary-foreground: var(--sand);
+  --secondary: var(--stone);
+  --secondary-foreground: var(--navy);
+  --muted: var(--stone);
+  --muted-foreground: oklch(0.45 0.02 240);
+  --accent: var(--gold);
+  --accent-foreground: var(--sand);
+  --destructive: oklch(0.55 0.22 27);
+  --destructive-foreground: var(--sand);
+  --border: oklch(0.86 0.008 90 / 0.7);
+  --input: oklch(0.86 0.008 90);
+  --ring: var(--gold);
+}
+
+.dark {
+  --background: var(--navy);
+  --foreground: var(--sand);
+  --card: var(--teal);
+  --card-foreground: var(--sand);
+  --primary: var(--gold);
+  --primary-foreground: var(--navy);
+  --border: oklch(1 0 0 / 0.12);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, h4, h5 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+  }
+  .font-serif { font-family: var(--font-serif); }
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .rule {
+    height: 1px;
+    background: color-mix(in oklab, currentColor 25%, transparent);
+  }
+}
+
+@layer components {
+  .ni-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    transition: gap 200ms ease;
+  }
+  .ni-link:hover { gap: 0.9rem; }
+
+  .btn-gold {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: var(--gold);
+    color: var(--sand);
+    padding: 0.85rem 1.6rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: background 200ms ease, transform 200ms ease;
+  }
+  .btn-gold:hover {
+    background: color-mix(in oklab, var(--gold) 85%, black);
+  }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    border: 1px solid currentColor;
+    padding: 0.85rem 1.6rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: background 200ms ease;
+  }
+
+  .container-ni {
+    width: 100%;
+    max-width: 1400px;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .container-ni { padding-inline: 3rem; }
+  }
+}
