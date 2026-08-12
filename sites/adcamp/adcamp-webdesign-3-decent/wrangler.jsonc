@@ -3,7 +3,7 @@
   "name": "adcamp-webdesign-3-decent",
   "compatibility_date": "2026-08-12",
   "assets": {
-    "directory": "./public",
+    "directory": "./dist",
     "not_found_handling": "single-page-application"
   }
 }
