@@ -20,7 +20,9 @@ function NotFoundComponent() {
           The page you're looking for has moved or no longer exists.
         </p>
         <div className="mt-8">
-          <Link to="/" className="btn-gold">Return Home</Link>
+          <Link to="/" className="btn-gold">
+            Return Home
+          </Link>
         </div>
       </div>
     </div>
@@ -37,12 +39,17 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
         <p className="mt-3 text-navy/70">Something went wrong. Try again or return home.</p>
         <div className="mt-8 flex justify-center gap-3">
           <button
-            onClick={() => { router.invalidate(); reset(); }}
+            onClick={() => {
+              router.invalidate();
+              reset();
+            }}
             className="btn-gold"
           >
             Try again
           </button>
-          <a href="/" className="btn-ghost text-navy">Go home</a>
+          <a href="/" className="btn-ghost text-navy">
+            Go home
+          </a>
         </div>
       </div>
     </div>

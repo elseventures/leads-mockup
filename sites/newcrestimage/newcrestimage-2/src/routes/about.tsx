@@ -52,7 +52,8 @@ function AboutPage() {
         eyebrow="About Us"
         title={
           <>
-            Building ecosystems<br />
+            Building ecosystems
+            <br />
             <em>where people belong.</em>
           </>
         }
@@ -69,22 +70,19 @@ function AboutPage() {
           </div>
           <div className="md:col-span-7 md:col-start-6 space-y-6 text-navy/80 text-lg leading-relaxed">
             <p>
-              NewcrestImage was formed in early 2013 by combining two predecessor
-              firms: Newcrest Management, which Mehul Patel built after arriving
-              in the United States in 1990 and sold as a 20-hotel portfolio in
-              2008, and Image Hospitality.
+              NewcrestImage was formed in early 2013 by combining two predecessor firms: Newcrest
+              Management, which Mehul Patel built after arriving in the United States in 1990 and
+              sold as a 20-hotel portfolio in 2008, and Image Hospitality.
             </p>
             <p>
-              In the years since, the firm has transacted in nearly 300 hotels
-              for more than $3 billion across approximately 130 U.S. communities
-              — owning between 40 and 50 hotels at any given time and rotating
-              the portfolio with deliberate, cycle-aware patience.
+              In the years since, the firm has transacted in nearly 300 hotels for more than $3
+              billion across approximately 130 U.S. communities — owning between 40 and 50 hotels at
+              any given time and rotating the portfolio with deliberate, cycle-aware patience.
             </p>
             <p>
-              Today, NewcrestImage operates as a hospitality-led investment
-              platform: identifying complex or undervalued assets, acquiring
-              them — often in large portfolio transactions — improving them, and
-              redeploying capital with conviction.
+              Today, NewcrestImage operates as a hospitality-led investment platform: identifying
+              complex or undervalued assets, acquiring them — often in large portfolio transactions
+              — improving them, and redeploying capital with conviction.
             </p>
           </div>
         </div>
@@ -96,7 +94,9 @@ function AboutPage() {
           <div className="max-w-2xl mb-16">
             <p className="eyebrow text-gold mb-5">Core Principles</p>
             <h2 className="text-4xl md:text-5xl">
-              Four convictions, held<br /><em>across every cycle.</em>
+              Four convictions, held
+              <br />
+              <em>across every cycle.</em>
             </h2>
           </div>
           <div className="grid md:grid-cols-2 gap-x-16 gap-y-12">
@@ -119,9 +119,8 @@ function AboutPage() {
             More than 80 industry awards across our first decade.
           </h2>
           <p className="mt-6 text-navy/70 max-w-xl mx-auto">
-            Including AAHOA Outstanding Lifetime Achievement, Historic Hotels of
-            America Top 25 Adaptive Reuse, and recognition from the U.S. and
-            Texas hospitality industries.
+            Including AAHOA Outstanding Lifetime Achievement, Historic Hotels of America Top 25
+            Adaptive Reuse, and recognition from the U.S. and Texas hospitality industries.
           </p>
           <Link to="/about/leadership" className="ni-link mt-10 inline-flex">
             Meet Our Team <ArrowRight size={14} />

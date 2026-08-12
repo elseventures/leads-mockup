@@ -64,7 +64,8 @@ function Index() {
     const initToMiddle = () => {
       const cards = el.querySelectorAll<HTMLElement>("[data-card]");
       if (cards.length >= baseLen) {
-        el.scrollLeft = cards[baseLen].offsetLeft - parseFloat(getComputedStyle(el).paddingLeft || "0");
+        el.scrollLeft =
+          cards[baseLen].offsetLeft - parseFloat(getComputedStyle(el).paddingLeft || "0");
       }
     };
     initToMiddle();
@@ -119,7 +120,9 @@ function Index() {
       {/* Hero */}
       <section className="mx-auto max-w-[1600px] px-6 pt-16 md:px-12 md:pt-24">
         <h1 className="font-serif mt-6 max-w-[18ch] text-[clamp(2.75rem,7vw,7rem)] leading-[0.98] tracking-tight">
-          We invest in <em className="italic">who they are,</em><br />not just what they build.
+          We invest in <em className="italic">who they are,</em>
+          <br />
+          not just what they build.
         </h1>
       </section>
 
@@ -143,29 +146,30 @@ function Index() {
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-700 group-hover/card:scale-[1.03]"
                 />
-                {i !== rightmostIdx && (() => {
-                  const meta = portfolioItems.find((it) => it.name === p.name);
-                  if (!meta) return null;
-                  return (
-                    <Link
-                      to="/investments/$slug"
-                      params={{ slug: meta.slug }}
-                      aria-label={`Read more about ${p.name}`}
-                      className={`absolute inset-0 z-20 flex flex-col justify-between p-7 opacity-0 transition-opacity duration-300 ${isScrolling ? "pointer-events-none" : "group-hover/card:opacity-100"}`}
-                      style={{ backgroundColor: "var(--accent)" }}
-                    >
-                      <div className="text-foreground">
-                        <p className="font-serif text-2xl italic leading-tight">{p.name}.</p>
-                        <p className="eyebrow mt-3 text-balance leading-snug font-bold">
-                          {meta.tagline}
-                        </p>
-                      </div>
-                      <span className="eyebrow inline-flex w-fit items-center border-b border-foreground pb-1 text-foreground">
-                        Read more
-                      </span>
-                    </Link>
-                  );
-                })()}
+                {i !== rightmostIdx &&
+                  (() => {
+                    const meta = portfolioItems.find((it) => it.name === p.name);
+                    if (!meta) return null;
+                    return (
+                      <Link
+                        to="/investments/$slug"
+                        params={{ slug: meta.slug }}
+                        aria-label={`Read more about ${p.name}`}
+                        className={`absolute inset-0 z-20 flex flex-col justify-between p-7 opacity-0 transition-opacity duration-300 ${isScrolling ? "pointer-events-none" : "group-hover/card:opacity-100"}`}
+                        style={{ backgroundColor: "var(--accent)" }}
+                      >
+                        <div className="text-foreground">
+                          <p className="font-serif text-2xl italic leading-tight">{p.name}.</p>
+                          <p className="eyebrow mt-3 text-balance leading-snug font-bold">
+                            {meta.tagline}
+                          </p>
+                        </div>
+                        <span className="eyebrow inline-flex w-fit items-center border-b border-foreground pb-1 text-foreground">
+                          Read more
+                        </span>
+                      </Link>
+                    );
+                  })()}
                 {i === rightmostIdx && (
                   <button
                     type="button"
@@ -179,9 +183,7 @@ function Index() {
               </div>
               <figcaption className="mt-4 text-center">
                 <span className="eyebrow">{p.name}</span>{" "}
-                <span className="font-serif italic text-muted-foreground">
-                  {p.sector}
-                </span>
+                <span className="font-serif italic text-muted-foreground">{p.sector}</span>
               </figcaption>
             </figure>
           ))}
@@ -193,12 +195,15 @@ function Index() {
         <div className="max-w-3xl">
           <p className="font-serif text-2xl leading-[1.35] md:text-3xl">
             When it comes to the{" "}
-            <Link to="/about" className="underline decoration-accent decoration-1 underline-offset-4">
+            <Link
+              to="/about"
+              className="underline decoration-accent decoration-1 underline-offset-4"
+            >
               hotels and properties we build
             </Link>
-            , we look beyond the blueprint. NewcrestImage develops, owns, and operates
-            award-winning hospitality and real estate assets across the country &mdash;
-            because great places aren't just constructed, they're carefully imagined.
+            , we look beyond the blueprint. NewcrestImage develops, owns, and operates award-winning
+            hospitality and real estate assets across the country &mdash; because great places
+            aren't just constructed, they're carefully imagined.
           </p>
           <div className="mt-10">
             <Link

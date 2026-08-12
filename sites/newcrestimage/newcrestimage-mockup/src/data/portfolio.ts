@@ -48,7 +48,11 @@ export const portfolioItems: PortfolioItem[] = [
     sector: "Cloud Governance",
     tagline: "Multi-cloud operator. Governance pioneer. Enterprise scale.",
     img: "https://newcrestimage.com/wp-content/uploads/2022/01/CoreStack.jpg",
-    gallery: ["https://newcrestimage.com/wp-content/uploads/2022/01/CoreStack.jpg", corestack2, corestack3],
+    gallery: [
+      "https://newcrestimage.com/wp-content/uploads/2022/01/CoreStack.jpg",
+      corestack2,
+      corestack3,
+    ],
     description: [
       "CoreStack is a next-generation multi-cloud governance platform that empowers enterprises to rapidly achieve autonomous and continuous cloud governance and compliance at scale. CoreStack is used today by many leading global enterprises across multiple industries.",
     ],

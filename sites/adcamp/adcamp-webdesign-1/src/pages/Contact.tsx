@@ -24,19 +24,12 @@ const serviceOptions = [
 ];
 
 const Contact = () => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setIsSubmitting(false);
     setSubmitted(true);
-    toast.success("Quote request submitted! We'll be in touch within 24 hours.");
+    toast.info("Mockup complete — no information was sent.");
   };
 
   return (
@@ -157,17 +150,16 @@ const Contact = () => {
                       <CheckCircle className="h-10 w-10 text-accent" />
                     </div>
                     <h3 className="font-heading text-2xl text-foreground mb-4">
-                      Thank You!
+                      Mockup Complete
                     </h3>
                     <p className="text-muted-foreground mb-6">
-                      Your quote request has been submitted. A member of our team 
-                      will contact you within 24 hours.
+                      This is a design preview. Your quote request was not sent or stored.
                     </p>
                     <Button 
                       variant="outline" 
                       onClick={() => setSubmitted(false)}
                     >
-                      Submit Another Request
+                      Try the Demo Again
                     </Button>
                   </div>
                 ) : (
@@ -175,6 +167,9 @@ const Contact = () => {
                     <h2 className="font-heading text-2xl text-foreground mb-6">
                       Request a Free Quote
                     </h2>
+                    <p className="mb-6 text-sm text-muted-foreground" role="note">
+                      Demo form only — information entered here is not sent or stored.
+                    </p>
                     <form onSubmit={handleSubmit} className="space-y-6">
                       <div className="grid md:grid-cols-2 gap-6">
                         <div>
@@ -292,16 +287,9 @@ const Contact = () => {
                         variant="cta" 
                         size="xl" 
                         className="w-full"
-                        disabled={isSubmitting}
                       >
-                        {isSubmitting ? (
-                          "Submitting..."
-                        ) : (
-                          <>
-                            Submit Quote Request
-                            <Send className="ml-2 h-5 w-5" />
-                          </>
-                        )}
+                        Preview Quote Request
+                        <Send className="ml-2 h-5 w-5" />
                       </Button>
                     </form>
                   </>

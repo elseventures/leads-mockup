@@ -18,12 +18,14 @@ function run(command, args) {
 
 if (!existsSync(join(root, 'node_modules'))) {
   console.log('• maxlittlejohn: installing dependencies …');
-  // The upstream lockfile is not currently in sync with package.json.
-  // npm install refreshes it before the Vite build.
-  run('npm', ['install']);
+  run('npm', ['ci']);
 }
 
 console.log('• maxlittlejohn: building Vite app …');
+// `public/` is also the committed deploy target. Remove the previous generated
+// entry point and hashed bundle so Vite cannot copy stale output into the next build.
+rmSync(join(publicDir, 'assets'), { recursive: true, force: true });
+rmSync(join(publicDir, 'index.html'), { force: true });
 run('npm', ['run', 'build']);
 
 rmSync(publicDir, { recursive: true, force: true });

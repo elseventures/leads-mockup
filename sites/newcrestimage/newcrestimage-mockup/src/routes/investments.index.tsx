@@ -50,7 +50,9 @@ function Investments() {
             <div>
               <p className="eyebrow opacity-60">Portfolio</p>
               <h1 className="font-serif mt-6 text-[clamp(1.75rem,2.4vw,2.4rem)] leading-[1.05] tracking-tight">
-                <em className="italic" style={{ color: "var(--accent)" }}>{featured.name}.</em>{" "}
+                <em className="italic" style={{ color: "var(--accent)" }}>
+                  {featured.name}.
+                </em>{" "}
                 <span className="uppercase tracking-tight">{featured.tagline}</span>
               </h1>
             </div>
@@ -85,10 +87,7 @@ function Investments() {
           {/* Right: peek thumbs */}
           <div className="order-3 col-span-4 flex flex-col justify-center gap-3 md:col-span-2 md:justify-start md:gap-4">
             {peekImages.map((image: string, i: number) => (
-              <div
-                key={image}
-                className="aspect-[4/5] overflow-hidden bg-background/10"
-              >
+              <div key={image} className="aspect-[4/5] overflow-hidden bg-background/10">
                 <img
                   src={image}
                   alt={`${featured.name} thumbnail ${i + 2}`}
@@ -123,9 +122,14 @@ function Investments() {
             className="ml-4 grid h-9 w-9 place-items-center rounded-full border border-background/30 text-background/80 transition-colors hover:bg-background hover:text-foreground"
           >
             {playing ? (
-              <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><rect width="3" height="12" /><rect x="7" width="3" height="12" /></svg>
+              <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor">
+                <rect width="3" height="12" />
+                <rect x="7" width="3" height="12" />
+              </svg>
             ) : (
-              <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor"><polygon points="0,0 10,6 0,12" /></svg>
+              <svg width="10" height="12" viewBox="0 0 10 12" fill="currentColor">
+                <polygon points="0,0 10,6 0,12" />
+              </svg>
             )}
           </button>
         </div>

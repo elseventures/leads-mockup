@@ -133,7 +133,6 @@ const Navbar = () => {
   const useBlackTopLogo = !isHomePage && !isMobileMenuOpen;
   /** Home morphs when the mission block reaches the header; inner pages use a short scroll so the transition is not tied to viewport height. */
   const navMorphTransitionClass = isHomePage ? "duration-500" : "duration-200";
-  const navInlineLogoOpacityDelayClass = isHomePage ? "delay-[420ms]" : "delay-75";
 
   const handleEnter = (label: string) => {
     setHoveredSection(label);
@@ -394,8 +393,9 @@ const Navbar = () => {
               to="/"
               aria-label="ADCAMP Inc. home"
               className={`inline-flex w-[112px] shrink-0 items-center justify-start transition-opacity duration-150 ease-out ${
-                hasPassedHero ? `opacity-100 ${navInlineLogoOpacityDelayClass}` : "opacity-0 delay-0"
+                hasPassedHero ? "opacity-100" : "opacity-0"
               }`}
+              style={{ transitionDelay: hasPassedHero ? (isHomePage ? "420ms" : "75ms") : "0ms" }}
             >
               <img
                 src="/adcamp-logo-white-short.png"

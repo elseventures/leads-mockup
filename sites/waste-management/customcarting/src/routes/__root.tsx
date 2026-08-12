@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import socialImage from "@/assets/custom-carting-logo.png";
 
 function NotFoundComponent() {
   return (
@@ -73,17 +74,28 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "Custom Carting | Concierge Trash Service" },
-      { name: "description", content: "Island Trash Hero offers backdoor residential concierge trash pickup for Fripp Island properties." },
-      { name: "author", content: "Lovable" },
+      {
+        name: "description",
+        content:
+          "Island Trash Hero offers backdoor residential concierge trash pickup for Fripp Island properties.",
+      },
+      { name: "author", content: "Custom Carting" },
       { property: "og:title", content: "Custom Carting | Concierge Trash Service" },
-      { property: "og:description", content: "Island Trash Hero offers backdoor residential concierge trash pickup for Fripp Island properties." },
+      {
+        property: "og:description",
+        content:
+          "Island Trash Hero offers backdoor residential concierge trash pickup for Fripp Island properties.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
       { name: "twitter:title", content: "Custom Carting | Concierge Trash Service" },
-      { name: "twitter:description", content: "Island Trash Hero offers backdoor residential concierge trash pickup for Fripp Island properties." },
-      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/8Kq246ncAuQFRKizRVh6yYEfjPf2/social-images/social-1780022156648-logo.webp" },
-      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/8Kq246ncAuQFRKizRVh6yYEfjPf2/social-images/social-1780022156648-logo.webp" },
+      {
+        name: "twitter:description",
+        content:
+          "Island Trash Hero offers backdoor residential concierge trash pickup for Fripp Island properties.",
+      },
+      { property: "og:image", content: socialImage },
+      { name: "twitter:image", content: socialImage },
     ],
     links: [
       {

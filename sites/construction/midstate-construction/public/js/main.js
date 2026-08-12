@@ -397,7 +397,7 @@
     if (!form.checkValidity()) { form.reportValidity(); return; }
     $('#rfpDone strong').textContent = today;
     $('#rfpDone').hidden = false;
-    toast('RFP TRANSMITTED — STAMPED & RECEIVED');
+    toast('DEMO COMPLETE — NO INFORMATION WAS SENT');
   });
 
   /* ============================================================

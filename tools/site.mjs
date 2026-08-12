@@ -1,340 +1,309 @@
 #!/usr/bin/env node
-/**
- * site.mjs — one standardized CLI for every lead mockup.
- *
- * Convention: each site lives at  sites/<category>/<slug>/  and contains
- *   public/          the deployable static site (always)
- *   wrangler.jsonc   Cloudflare Workers static-assets config (for deploy)
- *   tools/build.mjs  optional — if present, `build` regenerates public/
- *
- * Commands:
- *   node tools/site.mjs list
- *   node tools/site.mjs build  [<slug> …]
- *   node tools/site.mjs dev    [<slug> …] [--port 8741]   # no slug → interactive picker
- *   node tools/site.mjs deploy [<slug> …]
- *
- * `dev` runs every selected site at once, each on its own port (8741, 8742, …),
- * in a single process. Ctrl+C stops them all.
- */
-import { readdirSync, statSync, existsSync } from 'node:fs';
-import { readFile as readFileAsync } from 'node:fs/promises';
+/** One command surface for every mockup in tools/sites.registry.mjs. */
+import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
+import { readFile, realpath } from 'node:fs/promises';
 import { createServer } from 'node:http';
-import { spawnSync } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import { networkInterfaces } from 'node:os';
-import { join, extname, resolve, dirname } from 'node:path';
+import { dirname, extname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { isWithinRoot, parsePort, resolveRequestPath, validateRegistry } from './site-lib.mjs';
+import { SITE_KINDS, sites } from './sites.registry.mjs';
 
 const REPO = resolve(dirname(fileURLToPath(import.meta.url)), '..');
-const SITES = join(REPO, 'sites');
 const DEFAULT_PORT = 8741;
+const WRANGLER = join(REPO, 'node_modules', 'wrangler', 'bin', 'wrangler.js');
 
 const MIME = {
-  '.html': 'text/html; charset=utf-8',
-  '.css': 'text/css; charset=utf-8',
-  '.js': 'text/javascript; charset=utf-8',
-  '.mjs': 'text/javascript; charset=utf-8',
-  '.json': 'application/json; charset=utf-8',
-  '.svg': 'image/svg+xml',
-  '.png': 'image/png',
-  '.jpg': 'image/jpeg',
-  '.jpeg': 'image/jpeg',
-  '.webp': 'image/webp',
-  '.gif': 'image/gif',
-  '.ico': 'image/x-icon',
-  '.woff2': 'font/woff2',
-  '.woff': 'font/woff',
-  '.txt': 'text/plain; charset=utf-8',
+  '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8',
+  '.js': 'text/javascript; charset=utf-8', '.mjs': 'text/javascript; charset=utf-8',
+  '.json': 'application/json; charset=utf-8', '.svg': 'image/svg+xml',
+  '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg',
+  '.webp': 'image/webp', '.gif': 'image/gif', '.ico': 'image/x-icon',
+  '.woff2': 'font/woff2', '.woff': 'font/woff', '.txt': 'text/plain; charset=utf-8',
 };
 
-/** Walk sites/<category>/<slug> and return every site that has a public/ dir. */
-function discoverSites() {
-  if (!existsSync(SITES)) return [];
-  const out = [];
-  for (const category of readdirSync(SITES)) {
-    const catDir = join(SITES, category);
-    if (!statSync(catDir).isDirectory()) continue;
-    for (const slug of readdirSync(catDir)) {
-      const dir = join(catDir, slug);
-      if (!statSync(dir).isDirectory()) continue;
-      if (!existsSync(join(dir, 'public'))) continue;
-      out.push({
-        slug,
-        category,
-        dir,
-        public: join(dir, 'public'),
-        hasBuild: existsSync(join(dir, 'tools', 'build.mjs')),
-        hasWrangler:
-          existsSync(join(dir, 'wrangler.jsonc')) ||
-          existsSync(join(dir, 'wrangler.json')) ||
-          existsSync(join(dir, 'wrangler.toml')),
-      });
-    }
-  }
-  return out.sort((a, b) => a.slug.localeCompare(b.slug));
-}
-
-function findSite(slug) {
-  const sites = discoverSites();
-  if (!slug) {
-    if (sites.length === 1) return sites[0];
-    fail(
-      `Multiple sites — specify a slug.\n` +
-        sites.map((s) => `  • ${s.slug}`).join('\n')
-    );
-  }
-  const match = sites.find((s) => s.slug === slug);
-  if (!match) {
-    fail(
-      `No site named "${slug}".\nKnown sites:\n` +
-        sites.map((s) => `  • ${s.slug}`).join('\n')
-    );
-  }
-  return match;
-}
-
-/** Resolve explicit slugs to sites; with none, fall back to the single-site rule. */
-function sitesFromSlugs(slugs) {
-  if (!slugs.length) return [findSite(undefined)];
-  return slugs.map((s) => findSite(s));
-}
-
-function fail(msg) {
-  console.error(`\n✖ ${msg}\n`);
+function fail(message) {
+  console.error(`\n✖ ${message}\n`);
   process.exit(1);
 }
 
+function findSite(slug) {
+  const match = sites.find((site) => site.slug === slug);
+  if (!match) fail(`No site named "${slug}".\nKnown sites:\n${sites.map((s) => `  • ${s.slug}`).join('\n')}`);
+  return match;
+}
+
+function selectedSites(slugs, { requireExplicit = false } = {}) {
+  if (!slugs.length) {
+    if (requireExplicit) fail('Specify at least one site slug for this command.');
+    return sites;
+  }
+  return slugs.map(findSite);
+}
+
+function absoluteSite(site) {
+  return { ...site, dir: resolve(REPO, site.dir), output: resolve(REPO, site.dir, site.output) };
+}
+
+function run(spec, label) {
+  const executable = spec.executable === 'node' ? process.execPath : spec.executable;
+  const result = spawnSync(executable, spec.args, {
+    cwd: resolve(REPO, spec.cwd), stdio: 'inherit', env: process.env,
+  });
+  if (result.error) fail(`${label}: could not run ${executable}: ${result.error.message}`);
+  if (result.status !== 0) fail(`${label} failed (exit ${result.status ?? 'unknown'})`);
+}
+
+function install(site) {
+  if (!site.install) return console.log(`• ${site.slug}: no dependencies.`);
+  console.log(`• ${site.slug}: installing dependencies …`);
+  run(site.install, `${site.slug} install`);
+}
+
+function build(site) {
+  if (!site.build) return console.log(`• ${site.slug}: static assets are ready.`);
+  console.log(`• ${site.slug}: building ${site.kind} …`);
+  run(site.build, `${site.slug} build`);
+  if (!existsSync(resolve(REPO, site.dir, site.output))) fail(`${site.slug}: build did not create ${site.output}`);
+}
+
+function quality(site, check) {
+  if (!site.quality) return console.log(`• ${site.slug}: no source project; skipping ${check}.`);
+  const cwd = resolve(REPO, site.quality.cwd);
+  const packageJson = JSON.parse(readFileSync(join(cwd, 'package.json'), 'utf8'));
+  let spec;
+  if (check === 'typecheck') {
+    const hasTypeScript = packageJson.dependencies?.typescript || packageJson.devDependencies?.typescript;
+    if (!hasTypeScript) return console.log(`• ${site.slug}: no TypeScript dependency; skipping typecheck.`);
+    spec = site.quality.manager === 'bun'
+      ? { cwd: site.quality.cwd, executable: 'bun', args: ['x', 'tsc', '--noEmit'] }
+      : { cwd: site.quality.cwd, executable: 'npm', args: ['exec', '--', 'tsc', '--noEmit'] };
+  } else {
+    if (!packageJson.scripts?.[check]) return console.log(`• ${site.slug}: no ${check} script; skipping.`);
+    spec = { cwd: site.quality.cwd, executable: site.quality.manager, args: ['run', check] };
+  }
+  console.log(`• ${site.slug}: running ${check} …`);
+  run(spec, `${site.slug} ${check}`);
+}
+
+function validate() {
+  const errors = validateRegistry(sites, REPO);
+  const registeredDirs = new Set(sites.map((site) => site.dir));
+  const sitesRoot = join(REPO, 'sites');
+  for (const category of readdirSync(sitesRoot)) {
+    const categoryDir = join(sitesRoot, category);
+    if (!statSync(categoryDir).isDirectory() || category.startsWith('.')) continue;
+    for (const slug of readdirSync(categoryDir)) {
+      const relativeDir = `sites/${category}/${slug}`;
+      if (statSync(join(categoryDir, slug)).isDirectory() && !registeredDirs.has(relativeDir)) {
+        errors.push(`unregistered site directory: ${relativeDir}`);
+      }
+    }
+  }
+  for (const site of sites) {
+    if (!SITE_KINDS.has(site.kind)) errors.push(`${site.slug}: unknown kind ${site.kind}`);
+    if (!existsSync(resolve(REPO, site.dir, site.deployConfig)) && site.kind !== 'tanstack-worker') {
+      errors.push(`${site.slug}: missing ${site.deployConfig}`);
+    }
+    if (site.dev.mode === 'static' && !existsSync(resolve(REPO, site.dir, site.output, 'index.html'))) {
+      errors.push(`${site.slug}: missing ${site.output}/index.html`);
+    }
+  }
+  if (sites.length !== 14) errors.push(`expected 14 registry entries, found ${sites.length}`);
+  if (errors.length) fail(`registry validation failed:\n${errors.map((e) => `  • ${e}`).join('\n')}`);
+  console.log(`✓ Registry contains 14 valid sites.`);
+}
+
 function lanAddress() {
-  for (const addrs of Object.values(networkInterfaces())) {
-    for (const a of addrs || []) {
-      if (a.family === 'IPv4' && !a.internal) return a.address;
+  for (const addresses of Object.values(networkInterfaces())) {
+    for (const address of addresses || []) {
+      if (address.family === 'IPv4' && !address.internal) return address.address;
     }
   }
   return null;
 }
 
-function build(site) {
-  if (!site.hasBuild) {
-    console.log(`• ${site.slug}: static site, no build step — public/ is ready as-is.`);
-    return;
+async function safeRead(root, candidate) {
+  const canonicalRoot = await realpath(root);
+  const canonicalCandidate = await realpath(candidate);
+  if (!isWithinRoot(canonicalRoot, canonicalCandidate)) {
+    const error = new Error('Forbidden');
+    error.code = 'EACCES';
+    throw error;
   }
-  console.log(`• ${site.slug}: building public/ from src/ …`);
-  const r = spawnSync(process.execPath, [join('tools', 'build.mjs')], {
-    cwd: site.dir,
-    stdio: 'inherit',
-  });
-  if (r.status !== 0) fail(`build failed for ${site.slug}`);
+  return readFile(canonicalCandidate);
 }
 
-/** Start one static server (with SPA fallback) for a site. Resolves to the server. */
-function startServer(site, port) {
+async function startStatic(site, port) {
   build(site);
-  const root = site.public;
+  const root = site.output;
   const indexPath = join(root, 'index.html');
   if (!existsSync(indexPath)) fail(`${site.slug}: ${indexPath} is missing.`);
 
   const server = createServer(async (req, res) => {
-    let p = decodeURIComponent(req.url.split('?')[0]);
-    if (p === '/' || p.endsWith('/')) p += 'index.html';
-    let filePath = join(root, p);
+    const resolved = resolveRequestPath(root, req.url);
+    if (resolved.error) {
+      res.writeHead(resolved.error, { 'content-type': 'text/plain; charset=utf-8' });
+      return res.end(resolved.message);
+    }
     try {
-      const buf = await readFileAsync(filePath);
-      res.writeHead(200, { 'content-type': MIME[extname(filePath)] || 'application/octet-stream' });
-      res.end(buf);
-    } catch {
-      // SPA fallback — mirrors wrangler "not_found_handling": "single-page-application"
+      const body = await safeRead(root, resolved.path);
+      res.writeHead(200, {
+        'content-type': MIME[extname(resolved.path)] || 'application/octet-stream',
+        'x-content-type-options': 'nosniff',
+      });
+      res.end(req.method === 'HEAD' ? undefined : body);
+    } catch (error) {
+      if (error.code === 'EACCES') {
+        res.writeHead(403, { 'content-type': 'text/plain; charset=utf-8' });
+        return res.end('Forbidden');
+      }
       try {
-        const buf = await readFileAsync(indexPath);
-        res.writeHead(200, { 'content-type': MIME['.html'] });
-        res.end(buf);
+        const body = await safeRead(root, indexPath);
+        res.writeHead(200, { 'content-type': MIME['.html'], 'x-content-type-options': 'nosniff' });
+        res.end(req.method === 'HEAD' ? undefined : body);
       } catch {
-        res.writeHead(404, { 'content-type': 'text/plain' });
+        res.writeHead(404, { 'content-type': 'text/plain; charset=utf-8' });
         res.end('404');
       }
     }
   });
-
-  return new Promise((resolveServer, rejectServer) => {
-    server.once('error', rejectServer);
-    server.listen(port, '0.0.0.0', () => resolveServer(server));
+  await new Promise((ok, reject) => {
+    server.once('error', reject);
+    server.listen(port, '0.0.0.0', ok);
   });
+  return { close: () => server.close(), process: null };
 }
 
-/** Run one or more sites concurrently, each on its own port starting at basePort. */
-async function dev(sites, basePort) {
-  const started = [];
-  let port = basePort;
-  for (const site of sites) {
-    try {
-      await startServer(site, port);
-    } catch (e) {
-      fail(`could not start ${site.slug} on port ${port}: ${e.message}` +
-        (e.code === 'EADDRINUSE' ? `  (try --port <free-port>)` : ''));
-    }
-    started.push({ site, port });
-    port++;
-  }
+async function startCommand(site, port) {
+  const executable = site.dev.executable;
+  const args = [...site.dev.args, '--host', '0.0.0.0', '--port', String(port), '--strictPort'];
+  const child = spawn(executable, args, { cwd: site.dir, stdio: 'inherit', env: process.env });
+  await new Promise((ok, reject) => {
+    const timer = setTimeout(ok, 750);
+    child.once('error', (error) => { clearTimeout(timer); reject(error); });
+    child.once('exit', (code) => {
+      clearTimeout(timer);
+      if (code !== 0) reject(new Error(`dev server exited with code ${code}`));
+      else ok();
+    });
+  });
+  return { close: () => child.kill('SIGTERM'), process: child };
+}
 
-  const lan = lanAddress();
-  const label = started.length === 1 ? 'site' : 'sites';
-  console.log(`\n  Serving ${started.length} ${label}:\n`);
-  for (const { site, port } of started) {
-    const local = `http://localhost:${port}`;
-    const net = lan ? `http://${lan}:${port}` : '';
-    console.log(`  ${site.slug.padEnd(24)} ${local.padEnd(26)} ${net}`);
+async function dev(chosen, basePort) {
+  parsePort(basePort, chosen.length);
+  const started = [];
+  for (let index = 0; index < chosen.length; index++) {
+    const site = absoluteSite(chosen[index]);
+    const port = basePort + index;
+    try {
+      const handle = site.dev.mode === 'static'
+        ? await startStatic(site, port)
+        : await startCommand(site, port);
+      started.push({ site, port, handle });
+    } catch (error) {
+      for (const entry of started) entry.handle.close();
+      fail(`could not start ${site.slug} on port ${port}: ${error.message}`);
+    }
   }
-  if (lan) {
-    console.log(`\n  Network URLs (right) open on a phone on the same Wi-Fi.`);
+  const lan = lanAddress();
+  console.log(`\n  Serving ${started.length} site${started.length === 1 ? '' : 's'}:\n`);
+  for (const { site, port } of started) {
+    console.log(`  ${site.slug.padEnd(28)} ${`http://localhost:${port}`.padEnd(26)} ${lan ? `http://${lan}:${port}` : ''}`);
   }
   console.log(`\n  Ctrl+C to stop${started.length > 1 ? ' all' : ''}.\n`);
+  const stop = () => { for (const entry of started) entry.handle.close(); };
+  process.once('SIGINT', () => { stop(); process.exit(0); });
+  process.once('SIGTERM', () => { stop(); process.exit(0); });
 }
 
-/** Interactive checkbox picker — arrow keys, Space toggle, a=all/none, Enter confirm. */
-async function pickSites(sites) {
+async function pickSites() {
   if (!process.stdin.isTTY) return sites;
-
-  return new Promise((resolve) => {
-    const selected = new Set(sites.map((_, i) => i));
+  return new Promise((done) => {
+    const selected = new Set(sites.map((_, index) => index));
     let cursor = 0;
-    let linesDrawn = 0;
-
-    function render(first = false) {
-      if (!first) {
-        process.stdout.write(`\x1b[${linesDrawn}A\x1b[0J`);
-      }
-      const rows = [
-        '',
-        '  Select sites to run  (↑↓ move · Space toggle · a all/none · Enter start)',
-        '',
-      ];
-      for (let i = 0; i < sites.length; i++) {
-        const on = selected.has(i);
-        const active = cursor === i;
-        const check = on ? '\x1b[32m◉\x1b[0m' : '\x1b[2m◯\x1b[0m';
-        const arrow = active ? '\x1b[36m›\x1b[0m' : ' ';
-        const slugPad = sites[i].slug.padEnd(28);
-        const label = active ? `\x1b[1m${slugPad}\x1b[0m` : `\x1b[2m${slugPad}\x1b[22m`;
-        rows.push(`  ${arrow} ${check}  ${label} \x1b[2m${sites[i].category}\x1b[0m`);
-      }
-      rows.push('');
-      const n = selected.size;
-      const hint = n === 0
-        ? '\x1b[2mNo sites selected — Enter starts all\x1b[0m'
-        : `\x1b[1m${n}\x1b[0m site${n > 1 ? 's' : ''} selected`;
-      rows.push(`  ${hint}`);
-      rows.push('');
-      const out = rows.join('\n') + '\n';
-      process.stdout.write(out);
-      linesDrawn = rows.length;
-    }
-
-    render(true);
-    process.stdin.setRawMode(true);
-    process.stdin.resume();
-    process.stdin.setEncoding('utf8');
-
-    function done(chosen) {
-      process.stdin.setRawMode(false);
-      process.stdin.pause();
-      process.stdout.write('\n');
-      resolve(chosen);
-    }
-
+    let lines = 0;
+    const render = (first = false) => {
+      if (!first) process.stdout.write(`\x1b[${lines}A\x1b[0J`);
+      const rows = ['', '  Select sites (↑↓ move · Space toggle · a all/none · Enter start)', ''];
+      sites.forEach((site, index) => rows.push(
+        `  ${cursor === index ? '›' : ' '} ${selected.has(index) ? '\x1b[32m◉\x1b[0m' : '\x1b[2m◯\x1b[0m'}  ${site.slug.padEnd(28)} \x1b[2m${site.category}\x1b[0m`
+      ));
+      rows.push('', `  ${selected.size || 'All'} site${selected.size === 1 ? '' : 's'} selected`, '');
+      process.stdout.write(rows.join('\n') + '\n');
+      lines = rows.length;
+    };
+    const finish = () => {
+      process.stdin.setRawMode(false); process.stdin.pause(); process.stdout.write('\n');
+      done(selected.size ? [...selected].sort((a, b) => a - b).map((i) => sites[i]) : sites);
+    };
+    render(true); process.stdin.setRawMode(true); process.stdin.resume(); process.stdin.setEncoding('utf8');
     process.stdin.on('data', (key) => {
-      switch (key) {
-        case '\r':
-        case '\n':
-          done(selected.size ? [...selected].sort((a, b) => a - b).map(i => sites[i]) : sites);
-          break;
-        case '\x03':
-          process.stdin.setRawMode(false);
-          process.stdin.pause();
-          process.exit(0);
-          break;
-        case '\x1b[A':
-          cursor = (cursor - 1 + sites.length) % sites.length;
-          render();
-          break;
-        case '\x1b[B':
-          cursor = (cursor + 1) % sites.length;
-          render();
-          break;
-        case ' ':
-          if (selected.has(cursor)) selected.delete(cursor);
-          else selected.add(cursor);
-          render();
-          break;
-        case 'a':
-        case 'A':
-          if (selected.size === sites.length) selected.clear();
-          else for (let i = 0; i < sites.length; i++) selected.add(i);
-          render();
-          break;
-      }
+      if (key === '\r' || key === '\n') return finish();
+      if (key === '\x03') { process.stdin.setRawMode(false); process.exit(0); }
+      if (key === '\x1b[A') cursor = (cursor - 1 + sites.length) % sites.length;
+      else if (key === '\x1b[B') cursor = (cursor + 1) % sites.length;
+      else if (key === ' ') selected.has(cursor) ? selected.delete(cursor) : selected.add(cursor);
+      else if (key.toLowerCase() === 'a') selected.size === sites.length ? selected.clear() : sites.forEach((_, i) => selected.add(i));
+      else return;
+      render();
     });
   });
 }
 
-
-function deploy(site) {
-  if (!site.hasWrangler) fail(`${site.slug}: no wrangler config — cannot deploy.`);
+function deploy(site, dryRun = false) {
+  if (!existsSync(WRANGLER)) fail('Wrangler is not installed. Run `npm ci` at the repository root.');
   build(site);
-  console.log(`• ${site.slug}: deploying to Cloudflare …`);
-  const r = spawnSync('npx', ['wrangler', 'deploy'], { cwd: site.dir, stdio: 'inherit' });
-  if (r.status !== 0) fail(`deploy failed for ${site.slug}`);
+  const config = resolve(REPO, site.dir, site.deployConfig);
+  if (!existsSync(config)) fail(`${site.slug}: build did not create ${site.deployConfig}`);
+  console.log(`• ${site.slug}: ${dryRun ? 'validating' : 'deploying'} with Cloudflare …`);
+  const args = [WRANGLER, 'deploy'];
+  if (site.deployEntry) args.push(site.deployEntry);
+  args.push('--config', config);
+  if (site.deployAssets) args.push('--assets', site.deployAssets);
+  if (dryRun) args.push('--dry-run');
+  const result = spawnSync(process.execPath, args, { cwd: resolve(REPO, site.dir), stdio: 'inherit' });
+  if (result.status !== 0) fail(`${site.slug} ${dryRun ? 'deploy check' : 'deploy'} failed`);
 }
 
 function list() {
-  const sites = discoverSites();
-  if (!sites.length) return console.log('No sites found under sites/.');
   console.log('\nSites:\n');
-  for (const s of sites) {
-    const flags = [s.hasBuild ? 'build' : 'static', s.hasWrangler ? 'deployable' : 'no-wrangler'];
-    console.log(`  ${s.slug.padEnd(28)} ${s.category.padEnd(16)} [${flags.join(', ')}]`);
-  }
+  for (const site of sites) console.log(`  ${site.slug.padEnd(28)} ${site.category.padEnd(18)} [${site.kind}]`);
   console.log('');
 }
 
-// --- arg parsing ---------------------------------------------------------
-const cmd = process.argv[2];
-const rest = process.argv.slice(3);
-let port = Number(process.env.PORT) || DEFAULT_PORT;
+const command = process.argv[2];
+const args = process.argv.slice(3);
 const slugs = [];
-for (let i = 0; i < rest.length; i++) {
-  const a = rest[i];
-  if (a === '--port' || a === '-p') {
-    port = Number(rest[++i]);
-    continue;
-  }
-  if (a.startsWith('-')) continue;
-  slugs.push(a);
+let rawPort = process.env.PORT ?? DEFAULT_PORT;
+for (let index = 0; index < args.length; index++) {
+  if (args[index] === '--port' || args[index] === '-p') {
+    if (index + 1 >= args.length) fail(`${args[index]} requires a value`);
+    rawPort = args[++index];
+  } else if (args[index].startsWith('-')) fail(`Unknown option: ${args[index]}`);
+  else slugs.push(args[index]);
 }
 
-const usage =
-  `Usage:\n` +
-  `  node tools/site.mjs list\n` +
-  `  node tools/site.mjs build  [<slug> …]\n` +
-  `  node tools/site.mjs dev    [<slug> …] [--port ${DEFAULT_PORT}]   (no slug → picker)\n` +
-  `  node tools/site.mjs deploy [<slug> …]\n`;
+const usage = `Usage:\n  node tools/site.mjs list\n  node tools/site.mjs validate\n  node tools/site.mjs install [<slug> …]\n  node tools/site.mjs lint|typecheck|test [<slug> …]\n  node tools/site.mjs build [<slug> …]\n  node tools/site.mjs dev [<slug> …] [--port ${DEFAULT_PORT}]\n  node tools/site.mjs deploy <slug> …\n  node tools/site.mjs deploy-check [<slug> …]\n`;
 
-switch (cmd) {
-  case 'list':
-    list();
+switch (command) {
+  case 'list': list(); break;
+  case 'validate': validate(); break;
+  case 'install': for (const site of selectedSites(slugs)) install(site); break;
+  case 'lint': case 'typecheck': case 'test':
+    for (const site of selectedSites(slugs)) quality(site, command);
     break;
-  case 'build':
-    for (const s of sitesFromSlugs(slugs)) build(s);
-    break;
-  case 'dev':
-  case 'serve': {
-    const all = discoverSites();
-    if (!all.length) fail('No sites found under sites/.');
-    const chosen = slugs.length ? slugs.map((s) => findSite(s)) : await pickSites(all);
+  case 'build': for (const site of selectedSites(slugs)) build(site); break;
+  case 'dev': case 'serve': {
+    const chosen = slugs.length ? slugs.map(findSite) : await pickSites();
+    let port;
+    try { port = parsePort(rawPort, chosen.length); } catch (error) { fail(error.message); }
     await dev(chosen, port);
     break;
   }
-  case 'deploy':
-    for (const s of sitesFromSlugs(slugs)) deploy(s);
-    break;
-  default:
-    console.log(usage);
-    process.exit(cmd ? 1 : 0);
+  case 'deploy': for (const site of selectedSites(slugs, { requireExplicit: true })) deploy(site); break;
+  case 'deploy-check': for (const site of selectedSites(slugs)) deploy(site, true); break;
+  default: console.log(usage); process.exit(command ? 1 : 0);
 }

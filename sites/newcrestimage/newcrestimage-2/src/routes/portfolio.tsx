@@ -18,7 +18,10 @@ export const Route = createFileRoute("/portfolio")({
           "Featured properties from the NewcrestImage portfolio — historic adaptive reuse, modern boutique hotels, and mixed-use hospitality campuses across the United States.",
       },
       { property: "og:title", content: "Portfolio — NewcrestImage" },
-      { property: "og:description", content: "Historic adaptive reuse and modern hospitality across 130 U.S. communities." },
+      {
+        property: "og:description",
+        content: "Historic adaptive reuse and modern hospitality across 130 U.S. communities.",
+      },
       { property: "og:url", content: "/portfolio" },
       { property: "og:image", content: magnolia },
     ],
@@ -72,7 +75,9 @@ function PortfolioPage() {
         eyebrow="Portfolio"
         title={
           <>
-            Places worth<br /><em>returning to.</em>
+            Places worth
+            <br />
+            <em>returning to.</em>
           </>
         }
         intro="Nearly 300 hotels transacted across 130 U.S. communities. A selection of the properties that define our work."
@@ -101,12 +106,8 @@ function PortfolioPage() {
               <div className="md:col-span-5 md:px-4">
                 <p className="eyebrow text-gold mb-4">{p.type}</p>
                 <h2 className="font-serif text-4xl md:text-5xl">{p.name}</h2>
-                <p className="text-navy/60 mt-2 text-sm tracking-wide uppercase">
-                  {p.location}
-                </p>
-                <p className="mt-6 text-lg text-navy/80 leading-relaxed">
-                  {p.body}
-                </p>
+                <p className="text-navy/60 mt-2 text-sm tracking-wide uppercase">{p.location}</p>
+                <p className="mt-6 text-lg text-navy/80 leading-relaxed">{p.body}</p>
               </div>
             </article>
           ))}

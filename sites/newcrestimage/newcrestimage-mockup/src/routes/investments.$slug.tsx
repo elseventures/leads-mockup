@@ -39,7 +39,9 @@ export const Route = createFileRoute("/investments/$slug")({
       <div className="mx-auto max-w-3xl px-6 py-32 text-center">
         <h1 className="font-serif text-4xl">Something went wrong</h1>
         <p className="mt-4 text-muted-foreground">{error.message}</p>
-        <button onClick={reset} className="eyebrow mt-6 underline">Retry</button>
+        <button onClick={reset} className="eyebrow mt-6 underline">
+          Retry
+        </button>
       </div>
       <SiteFooter />
     </div>
@@ -72,11 +74,7 @@ function PortfolioDetail() {
 
           <div className="col-span-12 md:col-span-7">
             <div className="relative aspect-[4/5] w-full overflow-hidden bg-background/10">
-              <img
-                src={item.gallery[0]}
-                alt={item.name}
-                className="h-full w-full object-cover"
-              />
+              <img src={item.gallery[0]} alt={item.name} className="h-full w-full object-cover" />
               <div
                 className="absolute bottom-0 left-0 h-1 w-full"
                 style={{ backgroundColor: "var(--accent)" }}

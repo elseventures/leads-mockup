@@ -3,12 +3,22 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
+  "packageManager": "npm@11.9.0",
+  "engines": {
+    "node": ">=22.9"
+  },
   "description": "Website mockups for hot leads — one folder per lead, standardized build/dev/deploy across all sites.",
   "scripts": {
     "sites": "node tools/site.mjs list",
     "dev": "node tools/site.mjs dev",
     "build": "node tools/site.mjs build",
     "deploy": "node tools/site.mjs deploy",
+    "deploy:check": "node tools/site.mjs deploy-check",
+    "install:sites": "node tools/site.mjs install",
+    "check": "node tools/site.mjs validate && node --test tools/site.test.mjs",
+    "lint": "node tools/site.mjs lint",
+    "typecheck": "node tools/site.mjs typecheck",
+    "test": "node tools/site.mjs test",
 
     "dev:buford-plumbing": "node tools/site.mjs dev buford-plumbing",
     "build:buford-plumbing": "node tools/site.mjs build buford-plumbing",
@@ -25,5 +35,8 @@
     "dev:new-orleans-grill": "node tools/site.mjs dev new-orleans-grill",
     "build:new-orleans-grill": "node tools/site.mjs build new-orleans-grill",
     "deploy:new-orleans-grill": "node tools/site.mjs deploy new-orleans-grill"
+  },
+  "devDependencies": {
+    "wrangler": "4.120.1"
   }
 }

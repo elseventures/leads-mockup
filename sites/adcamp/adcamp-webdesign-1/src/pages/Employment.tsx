@@ -66,18 +66,12 @@ const positions = [
 ];
 
 const Employment = () => {
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setIsSubmitting(true);
-    
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
-    setIsSubmitting(false);
     setSubmitted(true);
-    toast.success("Application submitted! We'll review it and get back to you soon.");
+    toast.info("Mockup complete — no information was sent.");
   };
 
   return (
@@ -171,17 +165,16 @@ const Employment = () => {
                     <CheckCircle className="h-10 w-10 text-accent" />
                   </div>
                   <h3 className="font-heading text-2xl text-foreground mb-4">
-                    Application Received!
+                    Mockup Complete
                   </h3>
                   <p className="text-muted-foreground mb-6">
-                    Thank you for your interest in joining Adcamp. Our team will review 
-                    your application and contact you if there's a good fit.
+                    This is a design preview. Your application was not sent or stored.
                   </p>
                   <Button 
                     variant="outline" 
                     onClick={() => setSubmitted(false)}
                   >
-                    Submit Another Application
+                    Try the Demo Again
                   </Button>
                 </div>
               ) : (
@@ -191,7 +184,7 @@ const Employment = () => {
                       Apply Now
                     </h2>
                     <p className="text-muted-foreground text-sm">
-                      Fill out the form below to apply for a position
+                      Demo form only — information entered here is not sent or stored.
                     </p>
                   </div>
                   <form onSubmit={handleSubmit} className="space-y-6">
@@ -291,16 +284,9 @@ const Employment = () => {
                       variant="cta" 
                       size="xl" 
                       className="w-full"
-                      disabled={isSubmitting}
                     >
-                      {isSubmitting ? (
-                        "Submitting..."
-                      ) : (
-                        <>
-                          Submit Application
-                          <Send className="ml-2 h-5 w-5" />
-                        </>
-                      )}
+                      Preview Application
+                      <Send className="ml-2 h-5 w-5" />
                     </Button>
                   </form>
                 </>

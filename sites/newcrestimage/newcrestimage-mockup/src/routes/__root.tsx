@@ -9,6 +9,7 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
+import socialImage from "@/assets/newcrest-logo.png";
 
 function NotFoundComponent() {
   return (
@@ -73,17 +74,29 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "NewcrestImage — A family office invested in people" },
-      { name: "description", content: "NewcrestImage is a privately held family office based in Dallas, Texas, with a diversified portfolio of real estate and alternative investments." },
+      {
+        name: "description",
+        content:
+          "NewcrestImage is a privately held family office based in Dallas, Texas, with a diversified portfolio of real estate and alternative investments.",
+      },
       { name: "author", content: "NewcrestImage" },
       { property: "og:title", content: "NewcrestImage — A family office invested in people" },
-      { property: "og:description", content: "NewcrestImage is a privately held family office based in Dallas, Texas, with a diversified portfolio of real estate and alternative investments." },
+      {
+        property: "og:description",
+        content:
+          "NewcrestImage is a privately held family office based in Dallas, Texas, with a diversified portfolio of real estate and alternative investments.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@NewcrestImage" },
       { name: "twitter:title", content: "NewcrestImage — A family office invested in people" },
-      { name: "twitter:description", content: "NewcrestImage is a privately held family office based in Dallas, Texas, with a diversified portfolio of real estate and alternative investments." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d913b5ed-4c62-4e32-839f-6696b8f729d3/id-preview-658e79a6--97de3bfa-182b-4fc5-b08d-f69945ae9208.lovable.app-1779773524382.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/d913b5ed-4c62-4e32-839f-6696b8f729d3/id-preview-658e79a6--97de3bfa-182b-4fc5-b08d-f69945ae9208.lovable.app-1779773524382.png" },
+      {
+        name: "twitter:description",
+        content:
+          "NewcrestImage is a privately held family office based in Dallas, Texas, with a diversified portfolio of real estate and alternative investments.",
+      },
+      { property: "og:image", content: socialImage },
+      { name: "twitter:image", content: socialImage },
     ],
     links: [
       {

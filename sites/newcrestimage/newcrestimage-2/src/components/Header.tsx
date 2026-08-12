@@ -27,13 +27,11 @@ export function Header({ overlay = false }: { overlay?: boolean }) {
   const bg = scrolled
     ? "bg-sand/95 backdrop-blur border-b border-stone/60"
     : overlay
-    ? "bg-transparent"
-    : "bg-sand border-b border-stone/60";
+      ? "bg-transparent"
+      : "bg-sand border-b border-stone/60";
 
   return (
-    <header
-      className={`fixed top-0 inset-x-0 z-50 transition-colors duration-300 ${bg}`}
-    >
+    <header className={`fixed top-0 inset-x-0 z-50 transition-colors duration-300 ${bg}`}>
       <div className="container-ni flex items-center justify-between h-20">
         <Link to="/" className="shrink-0">
           <Logo variant={showLight ? "light" : "dark"} />

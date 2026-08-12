@@ -30,11 +30,12 @@ function ContactPage() {
         <div className="container-ni py-24 md:py-32">
           <p className="eyebrow text-gold mb-6">Contact</p>
           <h1 className="text-5xl md:text-7xl max-w-4xl">
-            Let's begin a<br /><em>long conversation.</em>
+            Let's begin a<br />
+            <em>long conversation.</em>
           </h1>
           <p className="mt-6 max-w-xl text-navy/70 text-lg leading-relaxed">
-            For investment inquiries, partnership opportunities, or media
-            requests, reach out below or contact us directly.
+            For investment inquiries, partnership opportunities, or media requests, reach out below
+            or contact us directly.
           </p>
         </div>
       </section>
@@ -48,18 +49,17 @@ function ContactPage() {
               <p className="flex gap-3 text-navy/85 leading-relaxed">
                 <MapPin size={20} className="shrink-0 mt-1 text-navy/50" />
                 <span>
-                  1785 State Hwy 26, Suite 400<br />
-                  Grapevine, TX 76051<br />
+                  1785 State Hwy 26, Suite 400
+                  <br />
+                  Grapevine, TX 76051
+                  <br />
                   United States
                 </span>
               </p>
             </div>
             <div>
               <p className="eyebrow text-gold mb-3">Phone</p>
-              <a
-                href="tel:2147744650"
-                className="flex gap-3 text-navy/85 hover:text-gold"
-              >
+              <a href="tel:2147744650" className="flex gap-3 text-navy/85 hover:text-gold">
                 <Phone size={20} className="text-navy/50" /> 214-774-4650
               </a>
             </div>
@@ -78,10 +78,10 @@ function ContactPage() {
           <div className="md:col-span-7">
             {sent ? (
               <div className="bg-sand p-10 text-center">
-                <p className="eyebrow text-gold mb-4">Message Received</p>
-                <h2 className="font-serif text-3xl">Thank you — we'll be in touch.</h2>
+                <p className="eyebrow text-gold mb-4">Demo complete</p>
+                <h2 className="font-serif text-3xl">Thanks for trying the form.</h2>
                 <p className="mt-4 text-navy/70">
-                  A member of our team will respond to your inquiry shortly.
+                  This is a mockup. Your information was not sent or saved.
                 </p>
               </div>
             ) : (
@@ -101,9 +101,7 @@ function ContactPage() {
                   <Field label="Phone" name="phone" type="tel" />
                 </div>
                 <div>
-                  <label className="eyebrow text-navy/60 block mb-2">
-                    Inquiry Type
-                  </label>
+                  <label className="eyebrow text-navy/60 block mb-2">Inquiry Type</label>
                   <select
                     name="type"
                     className="w-full bg-transparent border-b border-navy/30 py-3 focus:outline-none focus:border-gold"
@@ -116,9 +114,7 @@ function ContactPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="eyebrow text-navy/60 block mb-2">
-                    Message
-                  </label>
+                  <label className="eyebrow text-navy/60 block mb-2">Message</label>
                   <textarea
                     name="message"
                     rows={5}
@@ -127,8 +123,9 @@ function ContactPage() {
                   />
                 </div>
                 <button type="submit" className="btn-gold">
-                  Send Message
+                  Preview submission
                 </button>
+                <p className="text-sm text-navy/60">Demo only — entries are not sent or saved.</p>
               </form>
             )}
           </div>

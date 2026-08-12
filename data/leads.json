@@ -918,7 +918,7 @@
       "referenceTemplate": {
         "leadSlug": "new-orleans-grill",
         "siteSlug": "new-orleans-grill",
-        "branch": "template/restaurant"
+        "branch": "main"
       },
       "leadCount": 6,
       "coversIndustries": [
@@ -942,7 +942,7 @@
           "painPoints": "WEBSITE REDESIGN: Current site is outdated design, using a free template — losing potential customers who visit and leave immediately | SOCIAL MEDIA: Needs professional social media management to build brand awareness and generate leads through Facebook and Instagram | GOOGLE ADS: Competitors are running ads in their category — needs a targeted campaign to capture high-intent local searchers",
           "status": "built",
           "siteSlug": "new-orleans-grill",
-          "branch": "template/restaurant"
+          "branch": "main"
         },
         {
           "slug": "cafe-azteca",

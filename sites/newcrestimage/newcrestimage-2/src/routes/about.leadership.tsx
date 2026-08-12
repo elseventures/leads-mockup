@@ -13,7 +13,10 @@ export const Route = createFileRoute("/about/leadership")({
           "Meet the leadership team behind NewcrestImage, led by founder and CEO Mehul Patel.",
       },
       { property: "og:title", content: "Leadership — NewcrestImage" },
-      { property: "og:description", content: "Meet the team behind three decades of hospitality investment." },
+      {
+        property: "og:description",
+        content: "Meet the team behind three decades of hospitality investment.",
+      },
       { property: "og:url", content: "/about/leadership" },
       { property: "og:image", content: heroImg },
     ],
@@ -47,7 +50,9 @@ function LeadershipPage() {
         eyebrow="Our Team"
         title={
           <>
-            Operators first.<br /><em>Investors always.</em>
+            Operators first.
+            <br />
+            <em>Investors always.</em>
           </>
         }
         intro="Three decades of hospitality leadership inform every investment we make."

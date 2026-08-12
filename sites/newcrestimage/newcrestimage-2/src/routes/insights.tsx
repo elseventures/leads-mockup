@@ -96,7 +96,9 @@ function InsightsPage() {
         eyebrow="Insights"
         title={
           <>
-            Perspectives from<br /><em>three decades in.</em>
+            Perspectives from
+            <br />
+            <em>three decades in.</em>
           </>
         }
         intro="Press coverage, transaction announcements, and the long view on hospitality investment."
@@ -111,9 +113,7 @@ function InsightsPage() {
                 key={c}
                 onClick={() => setFilter(c)}
                 className={`eyebrow px-4 py-2 transition-colors ${
-                  filter === c
-                    ? "bg-navy text-sand"
-                    : "text-navy/60 hover:text-navy"
+                  filter === c ? "bg-navy text-sand" : "text-navy/60 hover:text-navy"
                 }`}
               >
                 {c}

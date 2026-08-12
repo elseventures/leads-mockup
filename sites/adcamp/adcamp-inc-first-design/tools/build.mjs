@@ -23,7 +23,7 @@ function run(cmd, args) {
 
 if (!existsSync(join(app, 'node_modules'))) {
   console.log('• adcamp-inc-first-design: installing app/ dependencies …');
-  run('npm', ['install']);
+  run('npm', ['ci']);
 }
 
 console.log('• adcamp-inc-first-design: building app/ with Vite …');

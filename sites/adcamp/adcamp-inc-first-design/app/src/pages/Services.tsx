@@ -167,10 +167,11 @@ const Services = () => {
 
   useEffect(() => {
     const TALLY_WIDGET_URL = "https://tally.so/widgets/embed.js";
+    const tally = () => (window as Window & { Tally?: { loadEmbeds: () => void } }).Tally;
 
     const loadEmbeds = () => {
-      if (typeof (window as any).Tally !== "undefined") {
-        (window as any).Tally.loadEmbeds();
+      if (tally()) {
+        tally()?.loadEmbeds();
       } else {
         document
           .querySelectorAll<HTMLIFrameElement>("iframe[data-tally-src]:not([src])")
@@ -180,7 +181,7 @@ const Services = () => {
       }
     };
 
-    if (typeof (window as any).Tally !== "undefined") {
+    if (tally()) {
       loadEmbeds();
       return;
     }

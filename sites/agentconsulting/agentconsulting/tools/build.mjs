@@ -23,7 +23,7 @@ function run(cmd, args) {
 
 if (!existsSync(join(app, 'node_modules'))) {
   console.log('• agentconsulting: installing app/ dependencies …');
-  run('npm', ['install']);
+  run('npm', ['ci']);
 }
 
 console.log('• agentconsulting: building app/ with Vite …');

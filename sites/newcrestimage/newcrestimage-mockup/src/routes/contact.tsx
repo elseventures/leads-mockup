@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useState } from "react";
 import { SiteHeader } from "@/components/site/SiteHeader";
 import { SiteFooter } from "@/components/site/SiteFooter";
 
@@ -19,6 +20,8 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactPage() {
+  const [submitted, setSubmitted] = useState(false);
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -58,20 +61,26 @@ function ContactPage() {
           className="space-y-6"
           onSubmit={(e) => {
             e.preventDefault();
+            setSubmitted(true);
+            e.currentTarget.reset();
           }}
         >
           <div className="grid gap-6 sm:grid-cols-2">
             <label className="block">
               <span className="eyebrow text-muted-foreground">Name</span>
               <input
+                name="name"
                 type="text"
+                required
                 className="mt-2 w-full border-b border-foreground/30 bg-transparent py-3 font-serif text-xl outline-none focus:border-accent"
               />
             </label>
             <label className="block">
               <span className="eyebrow text-muted-foreground">Email</span>
               <input
+                name="email"
                 type="email"
+                required
                 className="mt-2 w-full border-b border-foreground/30 bg-transparent py-3 font-serif text-xl outline-none focus:border-accent"
               />
             </label>
@@ -79,7 +88,9 @@ function ContactPage() {
           <label className="block">
             <span className="eyebrow text-muted-foreground">Message</span>
             <textarea
+              name="message"
               rows={5}
+              required
               className="mt-2 w-full border-b border-foreground/30 bg-transparent py-3 font-serif text-xl outline-none focus:border-accent"
             />
           </label>
@@ -87,8 +98,13 @@ function ContactPage() {
             type="submit"
             className="inline-flex items-center gap-2 rounded-full bg-foreground px-7 py-3 text-sm text-background hover:bg-accent"
           >
-            Send message →
+            Preview submission →
           </button>
+          <p className="text-sm text-muted-foreground" aria-live="polite">
+            {submitted
+              ? "Demo complete — your information was not sent or saved."
+              : "Demo only — entries are not sent or saved."}
+          </p>
         </form>
       </section>
 

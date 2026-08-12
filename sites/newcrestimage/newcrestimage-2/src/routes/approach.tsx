@@ -13,7 +13,10 @@ export const Route = createFileRoute("/approach")({
           "Sourcing, underwriting, capital, operations, and exit — a disciplined five-stage process across hotel real estate, private credit, real assets, and direct investments.",
       },
       { property: "og:title", content: "Investment Approach — NewcrestImage" },
-      { property: "og:description", content: "How we identify, underwrite, and rotate capital across cycles." },
+      {
+        property: "og:description",
+        content: "How we identify, underwrite, and rotate capital across cycles.",
+      },
       { property: "og:url", content: "/approach" },
       { property: "og:image", content: heroImg },
     ],
@@ -51,10 +54,22 @@ const STAGES = [
 ];
 
 const ALLOCATION = [
-  { class: "Hotel Real Estate (Direct)", pct: "~40%", note: "Active owned portfolio of 40–50 hotels" },
-  { class: "Private Credit & Structured", pct: "~25%", note: "Flexible capital supporting growth and transformation" },
+  {
+    class: "Hotel Real Estate (Direct)",
+    pct: "~40%",
+    note: "Active owned portfolio of 40–50 hotels",
+  },
+  {
+    class: "Private Credit & Structured",
+    pct: "~25%",
+    note: "Flexible capital supporting growth and transformation",
+  },
   { class: "Real Assets", pct: "~20%", note: "High-quality assets with durable cash flows" },
-  { class: "Direct Investments", pct: "~15%", note: "Proprietary opportunities, including ghost-kitchen and adjacent platforms" },
+  {
+    class: "Direct Investments",
+    pct: "~15%",
+    note: "Proprietary opportunities, including ghost-kitchen and adjacent platforms",
+  },
 ];
 
 function ApproachPage() {
@@ -78,15 +93,14 @@ function ApproachPage() {
           <div className="max-w-2xl mb-16">
             <p className="eyebrow text-gold mb-5">The Process</p>
             <h2 className="text-4xl md:text-5xl">
-              Five stages, executed<br /><em>with conviction.</em>
+              Five stages, executed
+              <br />
+              <em>with conviction.</em>
             </h2>
           </div>
           <div className="space-y-px bg-stone">
             {STAGES.map((s) => (
-              <div
-                key={s.n}
-                className="bg-sand grid md:grid-cols-12 gap-8 py-10 md:py-12 px-2"
-              >
+              <div key={s.n} className="bg-sand grid md:grid-cols-12 gap-8 py-10 md:py-12 px-2">
                 <p className="md:col-span-1 font-serif text-3xl text-gold">{s.n}</p>
                 <h3 className="md:col-span-3 font-serif text-3xl">{s.title}</h3>
                 <p className="md:col-span-7 md:col-start-6 text-navy/75 text-lg leading-relaxed">
@@ -104,7 +118,9 @@ function ApproachPage() {
           <div className="max-w-2xl mb-12">
             <p className="eyebrow text-gold mb-5">Asset Allocation</p>
             <h2 className="text-4xl md:text-5xl">
-              A mix built for<br /><em>every market cycle.</em>
+              A mix built for
+              <br />
+              <em>every market cycle.</em>
             </h2>
           </div>
           <div className="border-t border-sand/15">

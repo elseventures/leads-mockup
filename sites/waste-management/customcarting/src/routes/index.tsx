@@ -89,14 +89,35 @@ function Index() {
 
   const audiences = [
     { tag: "For Homeowners", body: "Avoid moving cans and tracking strict island pickup days." },
-    { tag: "For Seasonal Owners", body: "Keep trash handled and properties tidy when you are off-island." },
-    { tag: "For Rental Owners", body: "Reduce guest confusion and checkout problems during peak season." },
-    { tag: "For Property Managers", body: "Keep estates cleaner with professional, reliable collection." },
+    {
+      tag: "For Seasonal Owners",
+      body: "Keep trash handled and properties tidy when you are off-island.",
+    },
+    {
+      tag: "For Rental Owners",
+      body: "Reduce guest confusion and checkout problems during peak season.",
+    },
+    {
+      tag: "For Property Managers",
+      body: "Keep estates cleaner with professional, reliable collection.",
+    },
   ];
   const steps = [
-    { n: "01", t: "Connect", b: "Call or email us with your address and property type. We'll confirm availability immediately." },
-    { n: "02", t: "Confirm", b: "We establish access requirements, pickup locations, and set your seasonal schedule." },
-    { n: "03", t: "Relax", b: "Our team collects from your backdoor or receptacle area. You never think about trash day again." },
+    {
+      n: "01",
+      t: "Connect",
+      b: "Call or email us with your address and property type. We'll confirm availability immediately.",
+    },
+    {
+      n: "02",
+      t: "Confirm",
+      b: "We establish access requirements, pickup locations, and set your seasonal schedule.",
+    },
+    {
+      n: "03",
+      t: "Relax",
+      b: "Our team collects from your backdoor or receptacle area. You never think about trash day again.",
+    },
   ];
   const faqs = [
     {
@@ -224,7 +245,10 @@ function Index() {
         </div>
       )}
 
-      <header id="top" className="relative overflow-hidden bg-brand-sand pt-32 pb-20 lg:pt-44 lg:pb-32">
+      <header
+        id="top"
+        className="relative overflow-hidden bg-brand-sand pt-32 pb-20 lg:pt-44 lg:pb-32"
+      >
         <div className="mx-auto max-w-7xl px-6 lg:flex lg:items-center lg:gap-12">
           <div className="max-w-2xl">
             <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-brand-accent">
@@ -267,15 +291,19 @@ function Index() {
 
       <section id="advantage" className="bg-white py-24">
         <div className="mx-auto max-w-7xl px-6 text-center">
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">The Backdoor Residential</h2>
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            The Backdoor Residential
+          </h2>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-brand-navy/60">
-            No more dragging heavy cans to the curb or hoping guests remembered trash day. We handle everything from your
-            designated receptacle area.
+            No more dragging heavy cans to the curb or hoping guests remembered trash day. We handle
+            everything from your designated receptacle area.
           </p>
           <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
             {audiences.map((c) => (
               <div key={c.tag} className="rounded-2xl bg-brand-sand p-8 text-left">
-                <div className="mb-4 text-xs font-bold uppercase tracking-widest text-brand-accent">{c.tag}</div>
+                <div className="mb-4 text-xs font-bold uppercase tracking-widest text-brand-accent">
+                  {c.tag}
+                </div>
                 <p className="font-semibold text-brand-navy">{c.body}</p>
               </div>
             ))}
@@ -290,13 +318,15 @@ function Index() {
           </h2>
           <div className="mt-8 space-y-6 text-lg leading-relaxed text-brand-navy/70">
             <p>
-              Fripp Island properties need clean, convenient, and consistent trash handling. Guests may not know the
-              pickup routine, owners may not be nearby, and receptacles left in the wrong place can create unnecessary
-              problems. With backdoor concierge pickup, your trash is handled from the approved location and your
-              property keeps a cleaner appearance.
+              Fripp Island properties need clean, convenient, and consistent trash handling. Guests
+              may not know the pickup routine, owners may not be nearby, and receptacles left in the
+              wrong place can create unnecessary problems. With backdoor concierge pickup, your
+              trash is handled from the approved location and your property keeps a cleaner
+              appearance.
             </p>
             <p>
-              This is a practical service for island living: quiet, local, direct, and designed around Fripp Island homes.
+              This is a practical service for island living: quiet, local, direct, and designed
+              around Fripp Island homes.
             </p>
           </div>
         </div>
@@ -307,9 +337,13 @@ function Index() {
           <div className="mb-16 flex flex-col items-start justify-between gap-4 lg:flex-row lg:items-end">
             <div className="max-w-xl text-left">
               <h2 className="text-4xl font-bold">Simple Island Living</h2>
-              <p className="mt-4 text-white/60">Setting up service is as quiet and direct as our pickup route.</p>
+              <p className="mt-4 text-white/60">
+                Setting up service is as quiet and direct as our pickup route.
+              </p>
             </div>
-            <div className="text-sm italic text-white/40">Serving all established Fripp Island routes.</div>
+            <div className="text-sm italic text-white/40">
+              Serving all established Fripp Island routes.
+            </div>
           </div>
           <div className="grid grid-cols-1 gap-12 md:grid-cols-3">
             {steps.map((s) => (
@@ -321,10 +355,13 @@ function Index() {
             ))}
           </div>
           <div className="mt-16 rounded-2xl border border-white/10 bg-white/5 p-8">
-            <h4 className="mb-3 text-xs font-bold uppercase tracking-widest text-brand-accent">Seasonal Note</h4>
+            <h4 className="mb-3 text-xs font-bold uppercase tracking-widest text-brand-accent">
+              Seasonal Note
+            </h4>
             <p className="italic text-white/80">
-              Seasonal twice-weekly pickup is available on established Fripp Island routes during the busy season. Call to
-              confirm current Monday and Thursday availability for your address.
+              Seasonal twice-weekly pickup is available on established Fripp Island routes during
+              the busy season. Call to confirm current Monday and Thursday availability for your
+              address.
             </p>
           </div>
         </div>
@@ -359,7 +396,9 @@ function Index() {
                 📞
               </div>
               <div>
-                <div className="text-[10px] font-bold uppercase tracking-widest text-brand-navy/40">Call</div>
+                <div className="text-[10px] font-bold uppercase tracking-widest text-brand-navy/40">
+                  Call
+                </div>
                 <div className="text-sm font-bold">843-441-7804</div>
               </div>
             </a>
@@ -371,18 +410,20 @@ function Index() {
                 ✉️
               </div>
               <div className="min-w-0">
-                <div className="text-[10px] font-bold uppercase tracking-widest text-brand-navy/40">Email</div>
+                <div className="text-[10px] font-bold uppercase tracking-widest text-brand-navy/40">
+                  Email
+                </div>
                 <div className="truncate text-sm font-bold">CustomCarting@gmail.com</div>
               </div>
             </a>
-            <div
-              className="flex items-center gap-3 rounded-2xl border border-black/5 bg-white p-4 shadow-sm"
-            >
+            <div className="flex items-center gap-3 rounded-2xl border border-black/5 bg-white p-4 shadow-sm">
               <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-brand-accent/10 text-brand-accent">
                 📍
               </div>
               <div className="min-w-0">
-                <div className="text-[10px] font-bold uppercase tracking-widest text-brand-navy/40">Address</div>
+                <div className="text-[10px] font-bold uppercase tracking-widest text-brand-navy/40">
+                  Address
+                </div>
                 <div className="text-sm font-bold">308 Charles St, Beaufort, SC 29902</div>
               </div>
             </div>
@@ -399,7 +440,15 @@ function Index() {
             © {new Date().getFullYear()} Custom Carting. Serving Fripp Island, SC.
           </p>
           <p className="text-sm text-brand-navy/40">
-            Mockup created by <a href="https://akcreativeco.com/" target="_blank" rel="noopener noreferrer" className="underline hover:text-brand-accent">AK Creative Co.</a>
+            Mockup created by{" "}
+            <a
+              href="https://akcreativeco.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-brand-accent"
+            >
+              AK Creative Co.
+            </a>
           </p>
         </div>
       </footer>
