@@ -124,7 +124,10 @@ export function Footer() {
       <div className="border-t border-primary-foreground/10">
         <div className="container-wide py-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-primary-foreground/60">
           <p>© {new Date().getFullYear()} Adcamp Inc. All rights reserved.</p>
-          <p>Serving Mississippi with pride since 1989</p>
+          <p>
+            Mockup created by{" "}
+            <a href="https://akcreativeco.com/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-accent transition-colors">AK Creative Co.</a>
+          </p>
         </div>
       </div>
     </footer>

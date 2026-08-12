@@ -41,7 +41,7 @@ export function Footer() {
         <div className="rule mt-16 mb-6" />
         <div className="flex flex-col md:flex-row justify-between gap-4 text-xs text-sand/50 tracking-wider uppercase">
           <p>© {new Date().getFullYear()} NewcrestImage. All rights reserved.</p>
-          <p>Long-term thinking. Lasting impact.</p>
+          <p>Mockup created by <a href="https://akcreativeco.com/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-gold">AK Creative Co.</a></p>
         </div>
       </div>
     </footer>

@@ -146,7 +146,10 @@ const Concept1 = () => {
       </section>
 
       <footer className="border-t border-border/20 px-6 md:px-16 py-8">
-        <p className="text-xs text-cream-dim font-mono-alt">© {new Date().getFullYear()} Maximillian Littlejohn</p>
+        <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-cream-dim font-mono-alt">
+          <p>© {new Date().getFullYear()} Maximillian Littlejohn</p>
+          <p>Mockup created by <a href="https://akcreativeco.com/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-gold transition-colors">AK Creative Co.</a></p>
+        </div>
       </footer>
     </div>
   );

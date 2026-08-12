@@ -77,7 +77,8 @@ const Footer = () => {
           <p className="text-white/40 text-sm">
             © {new Date().getFullYear()} Adcamp Inc. All rights reserved.
           </p>
-          <div className="flex items-center gap-6">
+          <div className="flex flex-wrap items-center justify-center gap-x-6 gap-y-2">
+            <span className="text-white/40 text-sm">Mockup created by <a href="https://akcreativeco.com/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-white/70 transition-colors">AK Creative Co.</a></span>
             <a href="#" className="text-white/40 hover:text-white/60 text-sm transition-colors">
               Privacy Policy
             </a>

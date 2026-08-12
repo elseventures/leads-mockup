@@ -29,7 +29,7 @@ export function SiteFooter() {
         </div>
         <div className="mt-16 flex flex-col items-start justify-between gap-3 border-t border-border/60 pt-6 text-xs text-muted-foreground md:flex-row md:items-center">
           <p>© {new Date().getFullYear()} NewcrestImage. All rights reserved.</p>
-          <p className="font-serif italic">Dallas, Texas</p>
+          <p>Mockup created by <a href="https://akcreativeco.com/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-foreground">AK Creative Co.</a></p>
         </div>
       </div>
     </footer>

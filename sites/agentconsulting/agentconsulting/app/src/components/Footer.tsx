@@ -56,6 +56,10 @@ const Footer = () => {
           <p className="font-body text-cream/30 text-sm">
             © {new Date().getFullYear()} Agent Consulting. All rights reserved.
           </p>
+          <p className="mt-2 font-body text-xs text-cream/30">
+            Mockup created by{" "}
+            <a href="https://akcreativeco.com/" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 transition-colors hover:text-gold">AK Creative Co.</a>
+          </p>
         </div>
       </div>
     </footer>

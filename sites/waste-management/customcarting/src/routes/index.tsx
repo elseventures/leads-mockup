@@ -399,7 +399,7 @@ function Index() {
             © {new Date().getFullYear()} Custom Carting. Serving Fripp Island, SC.
           </p>
           <p className="text-sm text-brand-navy/40">
-            Powered by <a href="https://akcreativeco.com" target="_blank" rel="noopener noreferrer" className="underline hover:text-brand-accent">AK Creative Co.</a>
+            Mockup created by <a href="https://akcreativeco.com/" target="_blank" rel="noopener noreferrer" className="underline hover:text-brand-accent">AK Creative Co.</a>
           </p>
         </div>
       </footer>

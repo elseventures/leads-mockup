@@ -77,7 +77,7 @@ const Footer = () => {
                 </div>
                 <p className="row-start-2 col-start-2 self-end text-left text-[10px] font-normal normal-case tracking-normal text-white/35 desktop:text-[11px] mt-8 desktop:mt-0">
                   <span className="inline desktop:hidden">Website </span>
-                  Powered by{" "}
+                  Mockup created by{" "}
                   <a
                     href="https://akcreativeco.com/"
                     target="_blank"
