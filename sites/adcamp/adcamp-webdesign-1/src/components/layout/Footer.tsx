@@ -26,11 +26,13 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Company Info */}
           <div className="space-y-4">
-            <img 
-              src={adcampLogo} 
-              alt="Adcamp Inc" 
-              className="h-16 w-auto brightness-0 invert"
-            />
+            <div className="inline-flex w-fit rounded-sm bg-primary-foreground px-3 py-2 shadow-md">
+              <img 
+                src={adcampLogo} 
+                alt="Adcamp Inc — Asphalt Construction" 
+                className="h-14 w-auto"
+              />
+            </div>
             <p className="text-primary-foreground/80 text-sm leading-relaxed">
               Mississippi's trusted asphalt and concrete contractor since 1989. 
               Quality workmanship for residential, commercial, and government projects.
