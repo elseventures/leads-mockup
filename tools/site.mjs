@@ -19,7 +19,6 @@
 import { readdirSync, statSync, existsSync } from 'node:fs';
 import { readFile as readFileAsync } from 'node:fs/promises';
 import { createServer } from 'node:http';
-import { createInterface } from 'node:readline';
 import { spawnSync } from 'node:child_process';
 import { networkInterfaces } from 'node:os';
 import { join, extname, resolve, dirname } from 'node:path';
@@ -189,52 +188,92 @@ async function dev(sites, basePort) {
   console.log(`\n  Ctrl+C to stop${started.length > 1 ? ' all' : ''}.\n`);
 }
 
-/** Interactive picker when `dev` is run with no slugs. Returns chosen sites. */
+/** Interactive checkbox picker — arrow keys, Space toggle, a=all/none, Enter confirm. */
 async function pickSites(sites) {
-  console.log(`\n  Which site(s) do you want to run?\n`);
-  sites.forEach((s, i) => {
-    console.log(`  ${String(i + 1).padStart(2)}.  ${s.slug.padEnd(24)} ${s.category}`);
+  if (!process.stdin.isTTY) return sites;
+
+  return new Promise((resolve) => {
+    const selected = new Set(sites.map((_, i) => i));
+    let cursor = 0;
+    let linesDrawn = 0;
+
+    function render(first = false) {
+      if (!first) {
+        process.stdout.write(`\x1b[${linesDrawn}A\x1b[0J`);
+      }
+      const rows = [
+        '',
+        '  Select sites to run  (↑↓ move · Space toggle · a all/none · Enter start)',
+        '',
+      ];
+      for (let i = 0; i < sites.length; i++) {
+        const on = selected.has(i);
+        const active = cursor === i;
+        const check = on ? '\x1b[32m◉\x1b[0m' : '\x1b[2m◯\x1b[0m';
+        const arrow = active ? '\x1b[36m›\x1b[0m' : ' ';
+        const slugPad = sites[i].slug.padEnd(28);
+        const label = active ? `\x1b[1m${slugPad}\x1b[0m` : `\x1b[2m${slugPad}\x1b[22m`;
+        rows.push(`  ${arrow} ${check}  ${label} \x1b[2m${sites[i].category}\x1b[0m`);
+      }
+      rows.push('');
+      const n = selected.size;
+      const hint = n === 0
+        ? '\x1b[2mNo sites selected — Enter starts all\x1b[0m'
+        : `\x1b[1m${n}\x1b[0m site${n > 1 ? 's' : ''} selected`;
+      rows.push(`  ${hint}`);
+      rows.push('');
+      const out = rows.join('\n') + '\n';
+      process.stdout.write(out);
+      linesDrawn = rows.length;
+    }
+
+    render(true);
+    process.stdin.setRawMode(true);
+    process.stdin.resume();
+    process.stdin.setEncoding('utf8');
+
+    function done(chosen) {
+      process.stdin.setRawMode(false);
+      process.stdin.pause();
+      process.stdout.write('\n');
+      resolve(chosen);
+    }
+
+    process.stdin.on('data', (key) => {
+      switch (key) {
+        case '\r':
+        case '\n':
+          done(selected.size ? [...selected].sort((a, b) => a - b).map(i => sites[i]) : sites);
+          break;
+        case '\x03':
+          process.stdin.setRawMode(false);
+          process.stdin.pause();
+          process.exit(0);
+          break;
+        case '\x1b[A':
+          cursor = (cursor - 1 + sites.length) % sites.length;
+          render();
+          break;
+        case '\x1b[B':
+          cursor = (cursor + 1) % sites.length;
+          render();
+          break;
+        case ' ':
+          if (selected.has(cursor)) selected.delete(cursor);
+          else selected.add(cursor);
+          render();
+          break;
+        case 'a':
+        case 'A':
+          if (selected.size === sites.length) selected.clear();
+          else for (let i = 0; i < sites.length; i++) selected.add(i);
+          render();
+          break;
+      }
+    });
   });
-  console.log(
-    `\n  Enter numbers ("1 3"), a range ("1-2"), names, or "all".` +
-      `  Empty = all.\n`
-  );
-  const rl = createInterface({ input: process.stdin, output: process.stdout });
-  const answer = await new Promise((res) =>
-    rl.question('  > ', (a) => {
-      rl.close();
-      res(a.trim());
-    })
-  );
-  return resolveSelection(answer, sites);
 }
 
-/** Parse a picker/CLI selection string into a de-duped, ordered site list. */
-function resolveSelection(input, sites) {
-  if (!input || input.toLowerCase() === 'all') return sites;
-  const picked = new Map();
-  for (const tok of input.split(/[\s,]+/).filter(Boolean)) {
-    const range = tok.match(/^(\d+)-(\d+)$/);
-    if (range) {
-      let [a, b] = [Number(range[1]), Number(range[2])];
-      if (a > b) [a, b] = [b, a];
-      for (let i = a; i <= b; i++) {
-        const s = sites[i - 1];
-        if (s) picked.set(s.slug, s);
-      }
-    } else if (/^\d+$/.test(tok)) {
-      const s = sites[Number(tok) - 1];
-      if (!s) fail(`No site #${tok}.`);
-      picked.set(s.slug, s);
-    } else {
-      const s = sites.find((x) => x.slug === tok);
-      if (!s) fail(`No site named "${tok}".`);
-      picked.set(s.slug, s);
-    }
-  }
-  if (!picked.size) fail('No sites selected.');
-  return [...picked.values()];
-}
 
 function deploy(site) {
   if (!site.hasWrangler) fail(`${site.slug}: no wrangler config — cannot deploy.`);

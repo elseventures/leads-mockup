@@ -1,0 +1,10 @@
+{
+  // NewcrestImage mockup — ported from ELSE-Ventures-LLC/newcrestimage-mockup.
+  // TanStack Start SSR app (not a static site) — deploy from this directory:
+  //   bun install && npx wrangler deploy
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "newcrestimage-mockup",
+  "compatibility_date": "2026-08-12",
+  "compatibility_flags": ["nodejs_compat"],
+  "main": "src/server.ts",
+}

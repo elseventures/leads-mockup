@@ -20,6 +20,10 @@
 
     "dev:complete-lawn-service-ms": "node tools/site.mjs dev complete-lawn-service-ms",
     "build:complete-lawn-service-ms": "node tools/site.mjs build complete-lawn-service-ms",
-    "deploy:complete-lawn-service-ms": "node tools/site.mjs deploy complete-lawn-service-ms"
+    "deploy:complete-lawn-service-ms": "node tools/site.mjs deploy complete-lawn-service-ms",
+
+    "dev:new-orleans-grill": "node tools/site.mjs dev new-orleans-grill",
+    "build:new-orleans-grill": "node tools/site.mjs build new-orleans-grill",
+    "deploy:new-orleans-grill": "node tools/site.mjs deploy new-orleans-grill"
   }
 }

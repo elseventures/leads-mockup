@@ -914,8 +914,12 @@
       ]
     },
     "restaurant": {
-      "status": "not-started",
-      "referenceTemplate": null,
+      "status": "template-built",
+      "referenceTemplate": {
+        "leadSlug": "new-orleans-grill",
+        "siteSlug": "new-orleans-grill",
+        "branch": "template/restaurant"
+      },
       "leadCount": 6,
       "coversIndustries": [
         "Catering",
@@ -936,9 +940,9 @@
           "googleRating": "3.7 stars",
           "googleReviews": "87",
           "painPoints": "WEBSITE REDESIGN: Current site is outdated design, using a free template — losing potential customers who visit and leave immediately | SOCIAL MEDIA: Needs professional social media management to build brand awareness and generate leads through Facebook and Instagram | GOOGLE ADS: Competitors are running ads in their category — needs a targeted campaign to capture high-intent local searchers",
-          "status": "not-started",
-          "siteSlug": null,
-          "branch": null
+          "status": "built",
+          "siteSlug": "new-orleans-grill",
+          "branch": "template/restaurant"
         },
         {
           "slug": "cafe-azteca",
@@ -955,7 +959,8 @@
           "painPoints": "WEBSITE REDESIGN: Current site is outdated design, using a free template — losing potential customers who visit and leave immediately | SOCIAL MEDIA: Accounts exist but are inactive/abandoned — needs consistent content strategy to stay visible to local customers | GOOGLE ADS: Competitors are running ads in their category — needs a targeted campaign to capture high-intent local searchers",
           "status": "not-started",
           "siteSlug": null,
-          "branch": null
+          "branch": null,
+          "note": "Appears PERMANENTLY CLOSED as of mid-2026 (Yelp listing marked CLOSED May 2026; local Facebook post reports sign down and paper \"Closed\" notice for 2+ months). Verified 2026-07-02. Do not build a mockup or pitch this lead without re-verifying."
         },
         {
           "slug": "the-good-guys-mobile-kitchen",

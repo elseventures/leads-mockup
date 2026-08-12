@@ -90,11 +90,17 @@ Design direction for each lives in that site's own `README.md`, not here.
 | `home-services` | `buford-plumbing` — Buford Plumbing Company, Inc., Jackson MS (lead score 9) | Template built ✔ |
 | `construction` | `midstate-construction` — Mid State Construction, Jackson MS (lead score 9) | Template built ✔ |
 | `outdoor-services` | `complete-lawn-service-ms` — Complete Lawn Service MS LLC, Jackson MS (lead score 9) | Template built ✔ |
+| `restaurant` | `new-orleans-grill` — New Orleans Grill, Clinton MS (lead score 9) | Template built ✔ |
 
 Archetypes defined in `data/leads.json` but **not yet started**:
-`auto-services`, `restaurant`. Each archetype is meant to
+`auto-services`. Each archetype is meant to
 re-skin for the other HOT leads in its category (see `coversIndustries` in
 `data/leads.json`).
+
+> Note: the restaurant archetype's originally highest-value lead, Cafe Azteca
+> (Brandon MS), appears **permanently closed** as of mid-2026 — see
+> `sites/restaurant/new-orleans-grill/README.md` for details. New Orleans Grill
+> was made flagship instead.
 
 ## Standardized workflow
 
