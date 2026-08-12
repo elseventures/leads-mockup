@@ -1,0 +1,202 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Open+Sans:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    /* Asphalt-inspired dark tones */
+    --background: 40 20% 97%;
+    --foreground: 220 15% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 15% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 15% 15%;
+
+    /* Deep charcoal - like fresh asphalt */
+    --primary: 220 15% 18%;
+    --primary-foreground: 40 20% 97%;
+
+    /* Warm concrete gray */
+    --secondary: 40 10% 90%;
+    --secondary-foreground: 220 15% 18%;
+
+    /* Muted surfaces */
+    --muted: 40 10% 94%;
+    --muted-foreground: 220 10% 45%;
+
+    /* Construction orange accent */
+    --accent: 25 95% 53%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 10% 88%;
+    --input: 220 10% 88%;
+    --ring: 25 95% 53%;
+
+    --radius: 0.5rem;
+
+    /* Custom brand colors */
+    --asphalt: 220 15% 18%;
+    --asphalt-light: 220 12% 28%;
+    --concrete: 40 8% 75%;
+    --safety-orange: 25 95% 53%;
+    --safety-orange-dark: 25 95% 45%;
+    --road-yellow: 45 95% 55%;
+    --steel: 220 10% 55%;
+    --cream: 40 25% 96%;
+
+    /* Gradients */
+    --gradient-hero: linear-gradient(135deg, hsl(220 15% 18%) 0%, hsl(220 12% 28%) 100%);
+    --gradient-cta: linear-gradient(135deg, hsl(25 95% 53%) 0%, hsl(25 95% 45%) 100%);
+    --gradient-overlay: linear-gradient(180deg, hsla(220, 15%, 18%, 0.85) 0%, hsla(220, 15%, 18%, 0.95) 100%);
+
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 hsla(220, 15%, 18%, 0.05);
+    --shadow-md: 0 4px 6px -1px hsla(220, 15%, 18%, 0.1), 0 2px 4px -2px hsla(220, 15%, 18%, 0.1);
+    --shadow-lg: 0 10px 15px -3px hsla(220, 15%, 18%, 0.1), 0 4px 6px -4px hsla(220, 15%, 18%, 0.1);
+    --shadow-cta: 0 4px 14px 0 hsla(25, 95%, 53%, 0.35);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 25 95% 53%;
+  }
+
+  .dark {
+    --background: 220 15% 10%;
+    --foreground: 40 20% 97%;
+
+    --card: 220 15% 13%;
+    --card-foreground: 40 20% 97%;
+
+    --popover: 220 15% 13%;
+    --popover-foreground: 40 20% 97%;
+
+    --primary: 40 20% 97%;
+    --primary-foreground: 220 15% 18%;
+
+    --secondary: 220 12% 20%;
+    --secondary-foreground: 40 20% 97%;
+
+    --muted: 220 12% 18%;
+    --muted-foreground: 220 10% 65%;
+
+    --accent: 25 95% 53%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 40 20% 97%;
+
+    --border: 220 12% 20%;
+    --input: 220 12% 20%;
+    --ring: 25 95% 53%;
+
+    --sidebar-background: 220 15% 10%;
+    --sidebar-foreground: 40 20% 97%;
+    --sidebar-primary: 25 95% 53%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 12% 18%;
+    --sidebar-accent-foreground: 40 20% 97%;
+    --sidebar-border: 220 12% 18%;
+    --sidebar-ring: 25 95% 53%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading font-bold tracking-tight;
+  }
+}
+
+@layer components {
+  .container-wide {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .gradient-cta {
+    background: var(--gradient-cta);
+  }
+
+  .gradient-overlay {
+    background: var(--gradient-overlay);
+  }
+
+  .shadow-cta {
+    box-shadow: var(--shadow-cta);
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out forwards;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+
+  .animate-slide-in-right {
+    animation: slideInRight 0.5s ease-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  @keyframes slideUp {
+    from { 
+      opacity: 0; 
+      transform: translateY(20px); 
+    }
+    to { 
+      opacity: 1; 
+      transform: translateY(0); 
+    }
+  }
+
+  @keyframes slideInRight {
+    from { 
+      opacity: 0; 
+      transform: translateX(-20px); 
+    }
+    to { 
+      opacity: 1; 
+      transform: translateX(0); 
+    }
+  }
+}
