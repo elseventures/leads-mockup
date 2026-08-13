@@ -12,9 +12,11 @@ const CTASection = () => {
           Get a free, no-obligation estimate for your next project. 
           Our team is ready to help bring your vision to life.
         </p>
-        <Button variant="hero" size="lg" className="gap-2">
-          Request Estimate
-          <ArrowRight className="h-5 w-5" />
+        <Button asChild variant="hero" size="lg" className="gap-2">
+          <a href="#contact">
+            Request Estimate
+            <ArrowRight className="h-5 w-5" />
+          </a>
         </Button>
       </div>
     </section>

@@ -23,11 +23,12 @@ convention).
 ## Local preview
 
 ```sh
-npm run dev -- brandoncomer-typographic-minimal
+npm run dev -- typographic-minimal
 ```
 
 ## Deploy
 
 ```sh
-npm run deploy -- brandoncomer-typographic-minimal
+npm run deploy:check -- typographic-minimal
+npm run deploy -- typographic-minimal
 ```

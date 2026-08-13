@@ -50,22 +50,25 @@ skip link, semantic landmarks, native cursor preserved on touch / coarse pointer
 ## Files
 
 ```
-public/         deploy this folder (Cloudflare Pages-ready: _headers, 404.html, favicon)
+public/         deploy this folder as Cloudflare Worker static assets
 src/            index.template.html — edit content here, not in public/index.html
 tools/
   iso-art.mjs   isometric drawing generator (exact 30° projection, true drafting style)
   build.mjs     injects generated SVG into the template → public/index.html
 ```
 
-Edit content → `npm run build:midstate` from the repo root. All colors live in CSS custom
+Edit content → `npm run build -- midstate-construction` from the repo root. All colors live in CSS custom
 properties at the top of `public/css/main.css` (`:root` + `:root.blueprint`).
 
 ## Deploy
 
-```bash
-npx wrangler login
-npm run deploy:midstate   # → https://midstate-construction-mockup.pages.dev
+```sh
+npm run deploy:check -- midstate-construction
+npm run deploy -- midstate-construction
 ```
+
+The deployment target is the `midstate-construction` Cloudflare Worker. Wrangler
+authentication is needed only for the real deployment command.
 
 Fonts are self-hosted (Archivo variable + JetBrains Mono variable, ~173 KB total).
 No frameworks, no trackers, no build dependencies at runtime — one HTML, one CSS, one JS.

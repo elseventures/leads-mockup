@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 /** One command surface for every mockup in tools/sites.registry.mjs. */
-import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { readFile, realpath } from 'node:fs/promises';
 import { createServer } from 'node:http';
 import { spawn, spawnSync } from 'node:child_process';
 import { networkInterfaces } from 'node:os';
 import { dirname, extname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { isWithinRoot, parsePort, resolveRequestPath, validateRegistry } from './site-lib.mjs';
+import { findUnregisteredSiteDirs, isWithinRoot, parsePort, resolveRequestPath, validateRegistry } from './site-lib.mjs';
 import { SITE_KINDS, sites } from './sites.registry.mjs';
 
 const REPO = resolve(dirname(fileURLToPath(import.meta.url)), '..');
@@ -89,18 +89,7 @@ function quality(site, check) {
 
 function validate() {
   const errors = validateRegistry(sites, REPO);
-  const registeredDirs = new Set(sites.map((site) => site.dir));
-  const sitesRoot = join(REPO, 'sites');
-  for (const category of readdirSync(sitesRoot)) {
-    const categoryDir = join(sitesRoot, category);
-    if (!statSync(categoryDir).isDirectory() || category.startsWith('.')) continue;
-    for (const slug of readdirSync(categoryDir)) {
-      const relativeDir = `sites/${category}/${slug}`;
-      if (statSync(join(categoryDir, slug)).isDirectory() && !registeredDirs.has(relativeDir)) {
-        errors.push(`unregistered site directory: ${relativeDir}`);
-      }
-    }
-  }
+  for (const dir of findUnregisteredSiteDirs(sites, REPO)) errors.push(`unregistered site directory: ${dir}`);
   for (const site of sites) {
     if (!SITE_KINDS.has(site.kind)) errors.push(`${site.slug}: unknown kind ${site.kind}`);
     if (!existsSync(resolve(REPO, site.dir, site.deployConfig)) && site.kind !== 'tanstack-worker') {
@@ -110,9 +99,8 @@ function validate() {
       errors.push(`${site.slug}: missing ${site.output}/index.html`);
     }
   }
-  if (sites.length !== 14) errors.push(`expected 14 registry entries, found ${sites.length}`);
   if (errors.length) fail(`registry validation failed:\n${errors.map((e) => `  • ${e}`).join('\n')}`);
-  console.log(`✓ Registry contains 14 valid sites.`);
+  console.log(`✓ Registry contains ${sites.length} valid sites and covers every site directory.`);
 }
 
 function lanAddress() {
@@ -253,9 +241,9 @@ async function pickSites() {
   });
 }
 
-function deploy(site, dryRun = false) {
+function deploy(site, dryRun = false, { buildFirst = true } = {}) {
   if (!existsSync(WRANGLER)) fail('Wrangler is not installed. Run `npm ci` at the repository root.');
-  build(site);
+  if (buildFirst) build(site);
   const config = resolve(REPO, site.dir, site.deployConfig);
   if (!existsSync(config)) fail(`${site.slug}: build did not create ${site.deployConfig}`);
   console.log(`• ${site.slug}: ${dryRun ? 'validating' : 'deploying'} with Cloudflare …`);
@@ -266,6 +254,19 @@ function deploy(site, dryRun = false) {
   if (dryRun) args.push('--dry-run');
   const result = spawnSync(process.execPath, args, { cwd: resolve(REPO, site.dir), stdio: 'inherit' });
   if (result.status !== 0) fail(`${site.slug} ${dryRun ? 'deploy check' : 'deploy'} failed`);
+}
+
+function checkGeneratedOutput() {
+  const paths = sites.filter((site) => site.trackedOutput).map((site) => join(site.dir, site.output));
+  const result = spawnSync('git', ['status', '--porcelain=v1', '--', ...paths], {
+    cwd: REPO, encoding: 'utf8', env: process.env,
+  });
+  if (result.error) fail(`could not inspect generated output: ${result.error.message}`);
+  if (result.status !== 0) fail(`git status failed while inspecting generated output (exit ${result.status ?? 'unknown'})`);
+  if (result.stdout.trim()) {
+    fail(`generated output is stale; rebuild and commit these paths:\n${result.stdout.trimEnd()}`);
+  }
+  console.log(`✓ ${paths.length} tracked build outputs match their committed snapshots.`);
 }
 
 function list() {
@@ -286,7 +287,7 @@ for (let index = 0; index < args.length; index++) {
   else slugs.push(args[index]);
 }
 
-const usage = `Usage:\n  node tools/site.mjs list\n  node tools/site.mjs validate\n  node tools/site.mjs install [<slug> …]\n  node tools/site.mjs lint|typecheck|test [<slug> …]\n  node tools/site.mjs build [<slug> …]\n  node tools/site.mjs dev [<slug> …] [--port ${DEFAULT_PORT}]\n  node tools/site.mjs deploy <slug> …\n  node tools/site.mjs deploy-check [<slug> …]\n`;
+const usage = `Usage:\n  node tools/site.mjs list\n  node tools/site.mjs validate\n  node tools/site.mjs install [<slug> …]\n  node tools/site.mjs lint|typecheck|test [<slug> …]\n  node tools/site.mjs build [<slug> …]\n  node tools/site.mjs generated-check\n  node tools/site.mjs dev [<slug> …] [--port ${DEFAULT_PORT}]\n  node tools/site.mjs deploy <slug> …\n  node tools/site.mjs deploy-check [<slug> …]\n  node tools/site.mjs deploy-check-built [<slug> …]\n`;
 
 switch (command) {
   case 'list': list(); break;
@@ -296,6 +297,10 @@ switch (command) {
     for (const site of selectedSites(slugs)) quality(site, command);
     break;
   case 'build': for (const site of selectedSites(slugs)) build(site); break;
+  case 'generated-check':
+    if (slugs.length) fail('generated-check does not accept site slugs.');
+    checkGeneratedOutput();
+    break;
   case 'dev': case 'serve': {
     const chosen = slugs.length ? slugs.map(findSite) : await pickSites();
     let port;
@@ -305,5 +310,6 @@ switch (command) {
   }
   case 'deploy': for (const site of selectedSites(slugs, { requireExplicit: true })) deploy(site); break;
   case 'deploy-check': for (const site of selectedSites(slugs)) deploy(site, true); break;
+  case 'deploy-check-built': for (const site of selectedSites(slugs)) deploy(site, true, { buildFirst: false }); break;
   default: console.log(usage); process.exit(command ? 1 : 0);
 }

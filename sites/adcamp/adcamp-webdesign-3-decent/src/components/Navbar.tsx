@@ -35,9 +35,11 @@ const Navbar = () => {
 
           {/* CTA Button */}
           <div className="hidden md:flex items-center gap-4">
-            <Button variant="cta" size="default" className="gap-2">
-              <Phone className="h-4 w-4" />
-              Call Us
+            <Button asChild variant="cta" size="default" className="gap-2">
+              <a href="tel:+16015551234">
+                <Phone className="h-4 w-4" />
+                Call Us
+              </a>
             </Button>
           </div>
 
@@ -65,9 +67,11 @@ const Navbar = () => {
                   {link.name}
                 </a>
               ))}
-              <Button variant="cta" size="default" className="gap-2 mt-2 w-full">
-                <Phone className="h-4 w-4" />
-                Call Us
+              <Button asChild variant="cta" size="default" className="gap-2 mt-2 w-full">
+                <a href="tel:+16015551234">
+                  <Phone className="h-4 w-4" />
+                  Call Us
+                </a>
               </Button>
             </div>
           </div>

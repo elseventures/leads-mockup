@@ -14,6 +14,8 @@
     "build": "node tools/site.mjs build",
     "deploy": "node tools/site.mjs deploy",
     "deploy:check": "node tools/site.mjs deploy-check",
+    "deploy:check:built": "node tools/site.mjs deploy-check-built",
+    "generated:check": "node tools/site.mjs generated-check",
     "install:sites": "node tools/site.mjs install",
     "check": "node tools/site.mjs validate && node --test tools/site.test.mjs",
     "lint": "node tools/site.mjs lint",

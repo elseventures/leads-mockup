@@ -35,3 +35,7 @@ jobs:
         run: npm test
       - name: Build all sites from registry
         run: npm run build
+      - name: Verify committed generated snapshots
+        run: npm run generated:check
+      - name: Validate Cloudflare deployment bundles
+        run: npm run deploy:check:built

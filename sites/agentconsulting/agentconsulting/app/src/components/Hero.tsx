@@ -48,17 +48,17 @@ const Hero = () => {
 
             {/* CTA Buttons */}
             <div className="opacity-0 animate-fade-in-up animation-delay-600 flex flex-col sm:flex-row justify-center gap-3 sm:gap-4 mt-8 sm:mt-12">
-              <a href="#contact">
-                <Button variant="hero-primary" size="xl" className="group text-sm sm:text-base">
+              <Button asChild variant="hero-primary" size="xl" className="group text-sm sm:text-base">
+                <a href="#contact">
                   Contact Us
                   <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </a>
-              <a href="#services">
-                <Button variant="hero-secondary" size="xl" className="text-sm sm:text-base">
+                </a>
+              </Button>
+              <Button asChild variant="hero-secondary" size="xl" className="text-sm sm:text-base">
+                <a href="#services">
                   Learn Our Process
-                </Button>
-              </a>
+                </a>
+              </Button>
             </div>
           </div>
         </div>

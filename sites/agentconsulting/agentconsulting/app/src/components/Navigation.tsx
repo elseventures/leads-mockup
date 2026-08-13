@@ -35,11 +35,11 @@ const Navigation = () => {
                 {link.label}
               </a>
             ))}
-            <a href="#contact">
-              <Button variant="gold" size="sm">
+            <Button asChild variant="gold" size="sm">
+              <a href="#contact">
                 Contact Us
-              </Button>
-            </a>
+              </a>
+            </Button>
           </div>
 
           {/* Mobile/Tablet Menu Button */}
@@ -66,11 +66,11 @@ const Navigation = () => {
                   {link.label}
                 </a>
               ))}
-              <a href="#contact" onClick={() => setIsOpen(false)}>
-                <Button variant="gold" size="sm" className="w-fit mt-2">
+              <Button asChild variant="gold" size="sm" className="w-fit mt-2">
+                <a href="#contact" onClick={() => setIsOpen(false)}>
                   Contact Us
-                </Button>
-              </a>
+                </a>
+              </Button>
             </div>
           </div>
         )}

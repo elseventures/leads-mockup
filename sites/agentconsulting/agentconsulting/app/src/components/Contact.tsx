@@ -25,12 +25,15 @@ const Contact = () => {
               we're here to provide confidential, expert guidance every step of the way.
             </p>
             <Button
+              asChild
               variant="gold"
               size="xl"
               className="group w-full sm:w-auto whitespace-normal text-center leading-snug h-auto py-4 px-6 sm:px-10 text-sm sm:text-base"
             >
-              Schedule a Confidential Discussion
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              <a href="mailto:info@agentconsulting.com?subject=Confidential%20discussion%20request">
+                Schedule a Confidential Discussion
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+              </a>
             </Button>
           </div>
 

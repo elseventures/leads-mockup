@@ -71,6 +71,7 @@ of choosing an installer ad hoc.
 npm run sites
 npm run check
 npm run build
+npm run generated:check
 
 npm run dev -- <slug> [<slug> ...]
 npm run deploy:check -- <slug> [<slug> ...]
@@ -80,6 +81,8 @@ npm run deploy -- <slug> [<slug> ...]
 - `dev` runs static sites with the contained local server and framework sites
   with their native dev command. With no slug in a terminal, it opens a picker.
 - `deploy:check` builds and runs Wrangler's non-publishing dry run.
+- `generated:check` verifies that tracked deploy snapshots still match their
+  source builds. CI runs it immediately after the full build.
 - `deploy` requires at least one explicit slug so a broad deployment cannot happen
   accidentally.
 - Use `--port 9000` to select another preview base port. Multiple selected sites
@@ -122,5 +125,6 @@ states. A real submission backend is outside this repository's scope.
   control instead of depending on temporary editor-hosted URLs.
 
 GitHub Actions installs dependencies from their lockfiles, validates the registry
-and preview path handling, and builds the full inventory on pushes and pull
-requests.
+and preview path handling, builds the full inventory, rejects stale committed
+snapshots, and runs a non-publishing Wrangler deployment check for every site on
+pushes and pull requests.

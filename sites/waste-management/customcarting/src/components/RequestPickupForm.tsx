@@ -68,29 +68,49 @@ export function RequestPickupForm() {
         <label className="block text-sm font-semibold text-brand-navy">
           Name
           <input
+            id="name"
             name="name"
             type="text"
             required
             maxLength={100}
             className={inputCls}
             placeholder="Your name"
+            aria-invalid={Boolean(errors.name)}
+            aria-describedby={errors.name ? "name-error" : undefined}
           />
           {errors.name && (
-            <span className="mt-1 block text-xs font-medium text-red-600">{errors.name}</span>
+            <span
+              id="name-error"
+              role="alert"
+              aria-live="polite"
+              className="mt-1 block text-xs font-medium text-red-600"
+            >
+              {errors.name}
+            </span>
           )}
         </label>
         <label className="block text-sm font-semibold text-brand-navy">
           Phone
           <input
+            id="phone"
             name="phone"
             type="tel"
             required
             maxLength={30}
             className={inputCls}
             placeholder="(843) 555-0123"
+            aria-invalid={Boolean(errors.phone)}
+            aria-describedby={errors.phone ? "phone-error" : undefined}
           />
           {errors.phone && (
-            <span className="mt-1 block text-xs font-medium text-red-600">{errors.phone}</span>
+            <span
+              id="phone-error"
+              role="alert"
+              aria-live="polite"
+              className="mt-1 block text-xs font-medium text-red-600"
+            >
+              {errors.phone}
+            </span>
           )}
         </label>
       </div>
@@ -98,21 +118,37 @@ export function RequestPickupForm() {
       <label className="block text-sm font-semibold text-brand-navy">
         Email
         <input
+          id="email"
           name="email"
           type="email"
           required
           maxLength={255}
           className={inputCls}
           placeholder="you@example.com"
+          aria-invalid={Boolean(errors.email)}
+          aria-describedby={errors.email ? "email-error" : undefined}
         />
         {errors.email && (
-          <span className="mt-1 block text-xs font-medium text-red-600">{errors.email}</span>
+          <span
+            id="email-error"
+            role="alert"
+            aria-live="polite"
+            className="mt-1 block text-xs font-medium text-red-600"
+          >
+            {errors.email}
+          </span>
         )}
       </label>
 
       <label className="block text-sm font-semibold text-brand-navy">
         Property type
-        <select name="property-type" required className={inputCls} defaultValue="Homeowner">
+        <select
+          id="property-type"
+          name="property-type"
+          required
+          className={inputCls}
+          defaultValue="Homeowner"
+        >
           <option>Homeowner</option>
           <option>Seasonal Owner</option>
           <option>Rental Owner</option>
@@ -123,15 +159,25 @@ export function RequestPickupForm() {
       <label className="block text-sm font-semibold text-brand-navy">
         Message
         <textarea
+          id="message"
           name="message"
           rows={4}
           required
           maxLength={1000}
           className={inputCls}
           placeholder="Address, gate code, preferred pickup location, etc."
+          aria-invalid={Boolean(errors.message)}
+          aria-describedby={errors.message ? "message-error" : undefined}
         />
         {errors.message && (
-          <span className="mt-1 block text-xs font-medium text-red-600">{errors.message}</span>
+          <span
+            id="message-error"
+            role="alert"
+            aria-live="polite"
+            className="mt-1 block text-xs font-medium text-red-600"
+          >
+            {errors.message}
+          </span>
         )}
       </label>
 

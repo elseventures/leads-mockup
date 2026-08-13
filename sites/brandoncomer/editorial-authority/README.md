@@ -22,11 +22,12 @@ properties (zero build step, zero npm deps, per this repo's convention).
 ## Local preview
 
 ```sh
-npm run dev -- brandoncomer-editorial-authority
+npm run dev -- editorial-authority
 ```
 
 ## Deploy
 
 ```sh
-npm run deploy -- brandoncomer-editorial-authority
+npm run deploy:check -- editorial-authority
+npm run deploy -- editorial-authority
 ```

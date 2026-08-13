@@ -101,8 +101,11 @@ function ContactPage() {
                   <Field label="Phone" name="phone" type="tel" />
                 </div>
                 <div>
-                  <label className="eyebrow text-navy/60 block mb-2">Inquiry Type</label>
+                  <label htmlFor="type" className="eyebrow text-navy/60 block mb-2">
+                    Inquiry Type
+                  </label>
                   <select
+                    id="type"
                     name="type"
                     className="w-full bg-transparent border-b border-navy/30 py-3 focus:outline-none focus:border-gold"
                     defaultValue="Investment"
@@ -114,8 +117,11 @@ function ContactPage() {
                   </select>
                 </div>
                 <div>
-                  <label className="eyebrow text-navy/60 block mb-2">Message</label>
+                  <label htmlFor="message" className="eyebrow text-navy/60 block mb-2">
+                    Message
+                  </label>
                   <textarea
+                    id="message"
                     name="message"
                     rows={5}
                     required
@@ -148,8 +154,11 @@ function Field({
 }) {
   return (
     <div>
-      <label className="eyebrow text-navy/60 block mb-2">{label}</label>
+      <label htmlFor={name} className="eyebrow text-navy/60 block mb-2">
+        {label}
+      </label>
       <input
+        id={name}
         name={name}
         type={type}
         required={required}

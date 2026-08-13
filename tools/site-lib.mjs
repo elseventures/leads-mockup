@@ -1,4 +1,4 @@
-import { existsSync, statSync } from 'node:fs';
+import { existsSync, readdirSync, statSync } from 'node:fs';
 import { resolve, sep } from 'node:path';
 
 export function parsePort(value, count = 1) {
@@ -65,4 +65,21 @@ export function validateRegistry(sites, repo) {
     }
   }
   return errors;
+}
+
+/** Find second-level site directories that are missing from the explicit registry. */
+export function findUnregisteredSiteDirs(sites, repo) {
+  const registeredDirs = new Set(sites.map((site) => site.dir));
+  const sitesRoot = resolve(repo, 'sites');
+  const unregistered = [];
+  for (const category of readdirSync(sitesRoot, { withFileTypes: true })) {
+    if (!category.isDirectory() || category.name.startsWith('.')) continue;
+    const categoryDir = resolve(sitesRoot, category.name);
+    for (const candidate of readdirSync(categoryDir, { withFileTypes: true })) {
+      if (!candidate.isDirectory() || candidate.name.startsWith('.')) continue;
+      const relativeDir = `sites/${category.name}/${candidate.name}`;
+      if (!registeredDirs.has(relativeDir)) unregistered.push(relativeDir);
+    }
+  }
+  return unregistered.sort();
 }

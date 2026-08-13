@@ -63,35 +63,13 @@ public/             deploy this folder (index.html + css/ + js/ + assets/fonts/ 
 wrangler.jsonc      Cloudflare Workers static assets ("name" = complete-lawn-service-ms)
 ```
 
-No build step — plain static. `npm run dev -- complete-lawn-service-ms` from the repo root.
+No build step — plain static. Run the shared workflow from the repository root:
 
-## HANDOFF — remaining work for the next agent
+```sh
+npm run dev -- complete-lawn-service-ms
+npm run deploy:check -- complete-lawn-service-ms
+npm run deploy -- complete-lawn-service-ms
+```
 
-The site was ported from an earlier standalone branch and re-grounded onto this lead's real
-facts. Code + copy are complete; the following still needs doing:
-
-1. **Regenerate `public/og.png`** — it still shows the old placeholder brand ("Magnolia
-   Grounds Co."). Recreate at 1200×630 in the site's design language with the headline
-   "EVERY BLADE. / EVERY season." + "COMPLETE LAWN SERVICE MS — JACKSON, MS" (ink bg, topo
-   lines, halftone first line, orange grass-blade strip at the bottom, self-hosted fonts).
-   Easiest path: build a small HTML card in `public/`, screenshot at 1200×630 with
-   Playwright against `npm run dev -- complete-lawn-service-ms`, save, delete the card.
-2. **Screenshot verification pass** (desktop 1440 / tablet 834 / mobile 390): confirm the
-   moss-green "EVERY EDGE." hero line, the two NEW service icons (string trimmer on card 02,
-   edger on card 03 — hand-drawn this round, never rendered yet), the push mower added to
-   the after-side of the B/A illustration (replaces an old sprinkler), the House Rules
-   cards, footer wordmark "COMPLETE / LAWN SERVICE", and the stats band (2009 counter
-   starts at 1992 via `data-from`). Fix any geometry that looks off.
-3. **Functional re-test**: mobile menu open/close, call bar show/hide (hidden over
-   quote/footer), B/A drag, form success stamp, mower egg, reduced-motion.
-4. **Update the Archetypes table** in the root `README.md` — row is added; verify wording
-   and flip status if anything changes.
-5. **Deploy** once verified: `npm run deploy -- complete-lawn-service-ms` (needs
-   `npx wrangler login`), then smoke-test the `*.workers.dev` URL.
-6. **Branch hygiene**: two superseded branches hold the pre-port standalone version
-   (`outdoor-services-template-v1`, `claude/exciting-newton-tutdn4` — Vite-based, fictional
-   "Magnolia Grounds Co." brand, invented reviews/stats that violate the facts-only rule).
-   Delete them after confirming this branch (`template/outdoor-services`) has everything.
-7. Optional polish ideas, in keeping with the concept: orange highlight for the two *named*
-   service cities (Jackson, Ridgeland) on the map; `_headers` file with long-cache for
-   `/assets/fonts/*`.
+The quote form is a browser-only presentation mockup. It does not transmit or
+retain submitted information.

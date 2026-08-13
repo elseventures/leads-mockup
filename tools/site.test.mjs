@@ -3,7 +3,7 @@ import { mkdtempSync, mkdirSync, realpathSync, rmSync, symlinkSync, writeFileSyn
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
-import { isWithinRoot, parsePort, resolveRequestPath } from './site-lib.mjs';
+import { findUnregisteredSiteDirs, isWithinRoot, parsePort, resolveRequestPath } from './site-lib.mjs';
 
 test('parsePort accepts valid ranges and rejects malformed or overflowing values', () => {
   assert.equal(parsePort('8741', 14), 8741);
@@ -34,6 +34,19 @@ test('isWithinRoot rejects sibling paths and symlink targets can be detected can
     assert.equal(isWithinRoot(root, join(root, 'index.html')), true);
     assert.equal(isWithinRoot(root, outside), false);
     assert.equal(isWithinRoot(realpathSync(root), realpathSync(join(root, 'link'))), false);
+  } finally {
+    rmSync(base, { recursive: true, force: true });
+  }
+});
+
+test('findUnregisteredSiteDirs checks repository contents instead of a fixed site count', () => {
+  const base = mkdtempSync(join(tmpdir(), 'site-registry-test-'));
+  try {
+    mkdirSync(join(base, 'sites', 'category', 'registered'), { recursive: true });
+    mkdirSync(join(base, 'sites', 'category', 'new-site'));
+    mkdirSync(join(base, 'sites', '.ignored', 'not-a-site'), { recursive: true });
+    const registered = [{ dir: 'sites/category/registered' }];
+    assert.deepEqual(findUnregisteredSiteDirs(registered, base), ['sites/category/new-site']);
   } finally {
     rmSync(base, { recursive: true, force: true });
   }

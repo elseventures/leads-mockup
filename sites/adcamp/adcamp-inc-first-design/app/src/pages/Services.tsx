@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import Navbar, { MAIN_TOP_PADDING_FOR_FIXED_NAV } from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import LocalContactForm from "@/components/LocalContactForm";
 import { typography } from "@/lib/typography";
 import {
   Accordion,
@@ -164,38 +165,6 @@ const Services = () => {
     const t = window.setTimeout(() => setAttentionSectionId(null), ATTENTION_ANIMATION_MS);
     return () => window.clearTimeout(t);
   }, [hash, pathname]);
-
-  useEffect(() => {
-    const TALLY_WIDGET_URL = "https://tally.so/widgets/embed.js";
-    const tally = () => (window as Window & { Tally?: { loadEmbeds: () => void } }).Tally;
-
-    const loadEmbeds = () => {
-      if (tally()) {
-        tally()?.loadEmbeds();
-      } else {
-        document
-          .querySelectorAll<HTMLIFrameElement>("iframe[data-tally-src]:not([src])")
-          .forEach((el) => {
-            el.src = el.dataset.tallySrc!;
-          });
-      }
-    };
-
-    if (tally()) {
-      loadEmbeds();
-      return;
-    }
-
-    if (!document.querySelector(`script[src="${TALLY_WIDGET_URL}"]`)) {
-      const script = document.createElement("script");
-      script.src = TALLY_WIDGET_URL;
-      script.onload = loadEmbeds;
-      script.onerror = loadEmbeds;
-      document.body.appendChild(script);
-    } else {
-      loadEmbeds();
-    }
-  }, []);
 
   return (
     <div className="min-h-screen bg-white">
@@ -363,18 +332,12 @@ const Services = () => {
                       Send a message
                     </h2>
                     <p className="mt-2 font-sans text-sm leading-relaxed text-neutral-600">
-                      We will respond as soon as possible.
+                      Preview the project details you would send to our team.
                     </p>
-                    <div id="services-contact-form" className="mt-6 min-h-[18rem]">
-                      <iframe
-                        data-tally-src="https://tally.so/embed/VLMdYv?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1"
-                        loading="lazy"
-                        width="100%"
-                        height="276"
-                        frameBorder="0"
-                        marginHeight={0}
-                        marginWidth={0}
-                        title="Adcamp Inc. - Contact Us form"
+                    <div id="services-contact-form" className="mt-6">
+                      <LocalContactForm
+                        idPrefix="services-contact"
+                        labelledBy="services-form-heading"
                       />
                     </div>
                   </div>

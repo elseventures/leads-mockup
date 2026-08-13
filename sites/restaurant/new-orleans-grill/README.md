@@ -85,3 +85,15 @@ a local Facebook community post describes the sign down and a paper
 "Closed" notice in the window for 2+ months). New Orleans Grill was
 substituted as flagship — active, still receiving recent reviews as of
 June 2026.
+
+## Local preview and deployment
+
+Run the shared workflow from the repository root:
+
+```sh
+npm run dev -- new-orleans-grill
+npm run deploy:check -- new-orleans-grill
+npm run deploy -- new-orleans-grill
+```
+
+This is a static site with no dependency installation or build step.

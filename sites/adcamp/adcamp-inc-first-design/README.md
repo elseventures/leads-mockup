@@ -26,7 +26,7 @@ Lovable). It's vendored **as-is** under `app/`:
 ```
 app/            the vendored Vite/React project (own package.json, src/, etc.)
 public/         BUILD OUTPUT — generated from app/dist by tools/build.mjs, committed
-tools/build.mjs npm install + vite build in app/, then syncs app/dist/ → ../public/
+tools/build.mjs runs the Vite build in app/, then syncs app/dist/ → ../public/
 wrangler.jsonc  Cloudflare Workers static-assets config, same shape as every other site
 ```
 
@@ -35,6 +35,7 @@ It still plugs into the standard repo-wide CLI:
 ```sh
 npm run dev    -- adcamp-inc-first-design
 npm run build  -- adcamp-inc-first-design
+npm run deploy:check -- adcamp-inc-first-design
 npm run deploy -- adcamp-inc-first-design
 ```
 

@@ -134,39 +134,19 @@ Before publishing, confirm the current pickup schedule, whether Monday and Thurs
 [2]: https://www.frippislandresort.com/faqs "Fripp Island Resort FAQs"  
 [3]: https://frippislandstay.com/wp-content/uploads/2023/12/Rules-Regs_November-27-2023.pdf "Fripp Island Property Owners Association Rules and Regulations"
 
-This project was built with [Lovable](https://lovable.dev).
-
-## ELSE Ventures Cloudflare deployment
+## Development and deployment
 
 This design is deployed as the `customcarting` Cloudflare Worker in the ELSE
 Ventures account. It uses the official Cloudflare Vite plugin to produce the
 Worker and client-asset bundle.
 
 ```sh
-bun install --frozen-lockfile
-bun run build
-bunx wrangler deploy
+npm run dev -- customcarting
+npm run build -- customcarting
+npm run deploy:check -- customcarting
+npm run deploy -- customcarting
 ```
 
-Live: https://customcarting.elseventures.workers.dev
-
-**Live app**: https://customcarting.lovable.app
-
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/bc374bb6-c8fc-47a3-baa2-1ba449087045).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
+Run those commands from the repository root. The root workflow installs this
+project from its committed Bun lockfile. Forms are visual mockups and do not
+transmit or retain submitted information.

@@ -28,12 +28,14 @@ const Hero = () => {
             Delivering excellence for over 35 years.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 animate-fade-in" style={{ animationDelay: "0.4s" }}>
-            <Button variant="hero" size="lg" className="gap-2">
-              Request Free Estimate
-              <ArrowRight className="h-5 w-5" />
+            <Button asChild variant="hero" size="lg" className="gap-2">
+              <a href="#contact">
+                Request Free Estimate
+                <ArrowRight className="h-5 w-5" />
+              </a>
             </Button>
-            <Button variant="heroOutline" size="lg">
-              View Our Services
+            <Button asChild variant="heroOutline" size="lg">
+              <a href="#services">View Our Services</a>
             </Button>
           </div>
         </div>
